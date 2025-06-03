@@ -1,0 +1,709 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NinjaTrader>
+  <GlobalDrawingTools>
+    <Ray xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <IsVisible>true</IsVisible>
+      <IsAutoScale>false</IsAutoScale>
+      <MaxValue>-1.7976931348623157E+308</MaxValue>
+      <MinValue>1.7976931348623157E+308</MinValue>
+      <ZOrder>20006</ZOrder>
+      <AttachedTo>
+        <InstrumentSerialize>CL 08-22</InstrumentSerialize>
+      </AttachedTo>
+      <ScaleJustification>Right</ScaleJustification>
+      <DrawingState>Normal</DrawingState>
+      <DisplayOnChartsMenus>true</DisplayOnChartsMenus>
+      <GlobalLastSeenSerialize>638418216165127185</GlobalLastSeenSerialize>
+      <GlobalWorkspace>Untitled 5</GlobalWorkspace>
+      <Id>7b006cb3729a4cad9506a6a2195097d4</Id>
+      <IsLocked>false</IsLocked>
+      <PanelIndex>0</PanelIndex>
+      <Tag>@Ray 18</Tag>
+      <ZOrderType>Normal</ZOrderType>
+      <EndAnchor>
+        <SlotIndex>4246</SlotIndex>
+        <DisplayName>End</DisplayName>
+        <IsBrowsable>true</IsBrowsable>
+        <Time>2022-06-21T10:37:05.492</Time>
+        <Price>111.29370926275993</Price>
+      </EndAnchor>
+      <StartAnchor>
+        <SlotIndex>4246</SlotIndex>
+        <DisplayName>Start</DisplayName>
+        <IsBrowsable>true</IsBrowsable>
+        <Time>2022-06-21T10:37:05.492</Time>
+        <Price>110.74594669187145</Price>
+      </StartAnchor>
+      <Stroke>
+        <IsOpacityVisible>true</IsOpacityVisible>
+        <BrushSerialize>&lt;SolidColorBrush Color="#FF00CED1" Opacity="0.89999997615814209" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" /&gt;</BrushSerialize>
+        <DashStyleHelper>Dash</DashStyleHelper>
+        <Opacity>90</Opacity>
+        <Width>2</Width>
+      </Stroke>
+      <FullTypeName>NinjaTrader.NinjaScript.DrawingTools.Ray</FullTypeName>
+      <IsGlobalDrawingObjectDefault>true</IsGlobalDrawingObjectDefault>
+      <IsOwnerVisible>true</IsOwnerVisible>
+    </Ray>
+    <Ray xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <IsVisible>true</IsVisible>
+      <IsAutoScale>false</IsAutoScale>
+      <MaxValue>-1.7976931348623157E+308</MaxValue>
+      <MinValue>1.7976931348623157E+308</MinValue>
+      <ZOrder>20006</ZOrder>
+      <AttachedTo>
+        <InstrumentSerialize>CL 08-22</InstrumentSerialize>
+      </AttachedTo>
+      <ScaleJustification>Right</ScaleJustification>
+      <DrawingState>Normal</DrawingState>
+      <DisplayOnChartsMenus>true</DisplayOnChartsMenus>
+      <GlobalLastSeenSerialize>638418216165127185</GlobalLastSeenSerialize>
+      <GlobalWorkspace>Untitled 5</GlobalWorkspace>
+      <Id>4e8cbfe25f794a3bb0d0a8c974090d35</Id>
+      <IsLocked>false</IsLocked>
+      <PanelIndex>0</PanelIndex>
+      <Tag>@Ray 19</Tag>
+      <ZOrderType>Normal</ZOrderType>
+      <EndAnchor>
+        <SlotIndex>4251</SlotIndex>
+        <DisplayName>End</DisplayName>
+        <IsBrowsable>true</IsBrowsable>
+        <Time>2022-06-21T10:42:51.356</Time>
+        <Price>109.88815634933836</Price>
+      </EndAnchor>
+      <StartAnchor>
+        <SlotIndex>4251</SlotIndex>
+        <DisplayName>Start</DisplayName>
+        <IsBrowsable>true</IsBrowsable>
+        <Time>2022-06-21T10:42:51.356</Time>
+        <Price>110.85163158563326</Price>
+      </StartAnchor>
+      <Stroke>
+        <IsOpacityVisible>true</IsOpacityVisible>
+        <BrushSerialize>&lt;SolidColorBrush Color="#FF00CED1" Opacity="0.89999997615814209" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" /&gt;</BrushSerialize>
+        <DashStyleHelper>Dash</DashStyleHelper>
+        <Opacity>90</Opacity>
+        <Width>2</Width>
+      </Stroke>
+      <FullTypeName>NinjaTrader.NinjaScript.DrawingTools.Ray</FullTypeName>
+      <IsGlobalDrawingObjectDefault>true</IsGlobalDrawingObjectDefault>
+      <IsOwnerVisible>true</IsOwnerVisible>
+    </Ray>
+    <Ray xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <IsVisible>true</IsVisible>
+      <IsAutoScale>false</IsAutoScale>
+      <MaxValue>-1.7976931348623157E+308</MaxValue>
+      <MinValue>1.7976931348623157E+308</MinValue>
+      <ZOrder>20007</ZOrder>
+      <AttachedTo>
+        <InstrumentSerialize>CL 08-22</InstrumentSerialize>
+      </AttachedTo>
+      <ScaleJustification>Right</ScaleJustification>
+      <DrawingState>Normal</DrawingState>
+      <DisplayOnChartsMenus>true</DisplayOnChartsMenus>
+      <GlobalLastSeenSerialize>638418216165127185</GlobalLastSeenSerialize>
+      <GlobalWorkspace>Untitled 5</GlobalWorkspace>
+      <Id>c043c55496c5401bba59216f2456c6c2</Id>
+      <IsLocked>false</IsLocked>
+      <PanelIndex>0</PanelIndex>
+      <Tag>@Ray 20</Tag>
+      <ZOrderType>Normal</ZOrderType>
+      <EndAnchor>
+        <SlotIndex>4261</SlotIndex>
+        <DisplayName>End</DisplayName>
+        <IsBrowsable>true</IsBrowsable>
+        <Time>2022-06-21T11:10:28.46</Time>
+        <Price>109.19234259458098</Price>
+      </EndAnchor>
+      <StartAnchor>
+        <SlotIndex>4261</SlotIndex>
+        <DisplayName>Start</DisplayName>
+        <IsBrowsable>true</IsBrowsable>
+        <Time>2022-06-21T11:10:28.46</Time>
+        <Price>110.00420497643353</Price>
+      </StartAnchor>
+      <Stroke>
+        <IsOpacityVisible>true</IsOpacityVisible>
+        <BrushSerialize>&lt;SolidColorBrush Color="#FF00CED1" Opacity="0.89999997615814209" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" /&gt;</BrushSerialize>
+        <DashStyleHelper>Dash</DashStyleHelper>
+        <Opacity>90</Opacity>
+        <Width>2</Width>
+      </Stroke>
+      <FullTypeName>NinjaTrader.NinjaScript.DrawingTools.Ray</FullTypeName>
+      <IsGlobalDrawingObjectDefault>true</IsGlobalDrawingObjectDefault>
+      <IsOwnerVisible>true</IsOwnerVisible>
+    </Ray>
+    <Ray xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <IsVisible>true</IsVisible>
+      <IsAutoScale>false</IsAutoScale>
+      <MaxValue>-1.7976931348623157E+308</MaxValue>
+      <MinValue>1.7976931348623157E+308</MinValue>
+      <ZOrder>20009</ZOrder>
+      <AttachedTo>
+        <InstrumentSerialize>CL 08-22</InstrumentSerialize>
+      </AttachedTo>
+      <ScaleJustification>Right</ScaleJustification>
+      <DrawingState>Normal</DrawingState>
+      <DisplayOnChartsMenus>true</DisplayOnChartsMenus>
+      <GlobalLastSeenSerialize>638418216165127185</GlobalLastSeenSerialize>
+      <GlobalWorkspace>Untitled 5</GlobalWorkspace>
+      <Id>f06554741512465f8265a39d957d6adc</Id>
+      <IsLocked>false</IsLocked>
+      <PanelIndex>0</PanelIndex>
+      <Tag>@Ray 21</Tag>
+      <ZOrderType>Normal</ZOrderType>
+      <EndAnchor>
+        <SlotIndex>4268</SlotIndex>
+        <DisplayName>End</DisplayName>
+        <IsBrowsable>true</IsBrowsable>
+        <Time>2022-06-21T11:28:39.776</Time>
+        <Price>109.15645708884688</Price>
+      </EndAnchor>
+      <StartAnchor>
+        <SlotIndex>4268</SlotIndex>
+        <DisplayName>Start</DisplayName>
+        <IsBrowsable>true</IsBrowsable>
+        <Time>2022-06-21T11:28:39.776</Time>
+        <Price>109.68954744801512</Price>
+      </StartAnchor>
+      <Stroke>
+        <IsOpacityVisible>true</IsOpacityVisible>
+        <BrushSerialize>&lt;SolidColorBrush Color="#FF00CED1" Opacity="0.89999997615814209" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" /&gt;</BrushSerialize>
+        <DashStyleHelper>Dash</DashStyleHelper>
+        <Opacity>90</Opacity>
+        <Width>2</Width>
+      </Stroke>
+      <FullTypeName>NinjaTrader.NinjaScript.DrawingTools.Ray</FullTypeName>
+      <IsGlobalDrawingObjectDefault>true</IsGlobalDrawingObjectDefault>
+      <IsOwnerVisible>true</IsOwnerVisible>
+    </Ray>
+    <Ray xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <IsVisible>true</IsVisible>
+      <IsAutoScale>false</IsAutoScale>
+      <MaxValue>-1.7976931348623157E+308</MaxValue>
+      <MinValue>1.7976931348623157E+308</MinValue>
+      <ZOrder>20010</ZOrder>
+      <AttachedTo>
+        <InstrumentSerialize>CL 08-22</InstrumentSerialize>
+      </AttachedTo>
+      <ScaleJustification>Right</ScaleJustification>
+      <DrawingState>Normal</DrawingState>
+      <DisplayOnChartsMenus>true</DisplayOnChartsMenus>
+      <GlobalLastSeenSerialize>638418216165127185</GlobalLastSeenSerialize>
+      <GlobalWorkspace>Untitled 5</GlobalWorkspace>
+      <Id>e49e5cb49fe043b297b8ef57da2815f1</Id>
+      <IsLocked>false</IsLocked>
+      <PanelIndex>0</PanelIndex>
+      <Tag>@Ray 22</Tag>
+      <ZOrderType>Normal</ZOrderType>
+      <EndAnchor>
+        <SlotIndex>4278</SlotIndex>
+        <DisplayName>End</DisplayName>
+        <IsBrowsable>true</IsBrowsable>
+        <Time>2022-06-21T11:47:34.484</Time>
+        <Price>108.77987032136106</Price>
+      </EndAnchor>
+      <StartAnchor>
+        <SlotIndex>4278</SlotIndex>
+        <DisplayName>Start</DisplayName>
+        <IsBrowsable>true</IsBrowsable>
+        <Time>2022-06-21T11:47:34.484</Time>
+        <Price>108.94126465028356</Price>
+      </StartAnchor>
+      <Stroke>
+        <IsOpacityVisible>true</IsOpacityVisible>
+        <BrushSerialize>&lt;SolidColorBrush Color="#FF00CED1" Opacity="0.89999997615814209" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" /&gt;</BrushSerialize>
+        <DashStyleHelper>Dash</DashStyleHelper>
+        <Opacity>90</Opacity>
+        <Width>2</Width>
+      </Stroke>
+      <FullTypeName>NinjaTrader.NinjaScript.DrawingTools.Ray</FullTypeName>
+      <IsGlobalDrawingObjectDefault>true</IsGlobalDrawingObjectDefault>
+      <IsOwnerVisible>true</IsOwnerVisible>
+    </Ray>
+    <Ray xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <IsVisible>true</IsVisible>
+      <IsAutoScale>false</IsAutoScale>
+      <MaxValue>-1.7976931348623157E+308</MaxValue>
+      <MinValue>1.7976931348623157E+308</MinValue>
+      <ZOrder>20011</ZOrder>
+      <AttachedTo>
+        <InstrumentSerialize>CL 08-22</InstrumentSerialize>
+      </AttachedTo>
+      <ScaleJustification>Right</ScaleJustification>
+      <DrawingState>Normal</DrawingState>
+      <DisplayOnChartsMenus>true</DisplayOnChartsMenus>
+      <GlobalLastSeenSerialize>638418216165127185</GlobalLastSeenSerialize>
+      <GlobalWorkspace>Untitled 5</GlobalWorkspace>
+      <Id>45c87bc89ef64489826cb12669e53d77</Id>
+      <IsLocked>false</IsLocked>
+      <PanelIndex>0</PanelIndex>
+      <Tag>@Ray 23</Tag>
+      <ZOrderType>Normal</ZOrderType>
+      <EndAnchor>
+        <SlotIndex>4240</SlotIndex>
+        <DisplayName>End</DisplayName>
+        <IsBrowsable>true</IsBrowsable>
+        <Time>2022-06-21T10:22:01.004</Time>
+        <Price>110.77349451795841</Price>
+      </EndAnchor>
+      <StartAnchor>
+        <SlotIndex>4240</SlotIndex>
+        <DisplayName>Start</DisplayName>
+        <IsBrowsable>true</IsBrowsable>
+        <Time>2022-06-21T10:22:01.004</Time>
+        <Price>110.34660302457466</Price>
+      </StartAnchor>
+      <Stroke>
+        <IsOpacityVisible>true</IsOpacityVisible>
+        <BrushSerialize>&lt;SolidColorBrush Color="#FF00CED1" Opacity="0.89999997615814209" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" /&gt;</BrushSerialize>
+        <DashStyleHelper>Dash</DashStyleHelper>
+        <Opacity>90</Opacity>
+        <Width>2</Width>
+      </Stroke>
+      <FullTypeName>NinjaTrader.NinjaScript.DrawingTools.Ray</FullTypeName>
+      <IsGlobalDrawingObjectDefault>true</IsGlobalDrawingObjectDefault>
+      <IsOwnerVisible>true</IsOwnerVisible>
+    </Ray>
+    <Ray xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <IsVisible>true</IsVisible>
+      <IsAutoScale>false</IsAutoScale>
+      <MaxValue>-1.7976931348623157E+308</MaxValue>
+      <MinValue>1.7976931348623157E+308</MinValue>
+      <ZOrder>20012</ZOrder>
+      <AttachedTo>
+        <InstrumentSerialize>CL 08-22</InstrumentSerialize>
+      </AttachedTo>
+      <ScaleJustification>Right</ScaleJustification>
+      <DrawingState>Normal</DrawingState>
+      <DisplayOnChartsMenus>true</DisplayOnChartsMenus>
+      <GlobalLastSeenSerialize>638418216165127185</GlobalLastSeenSerialize>
+      <GlobalWorkspace>Untitled 5</GlobalWorkspace>
+      <Id>2fa28f09a7c14ca08818320003eaa7e7</Id>
+      <IsLocked>false</IsLocked>
+      <PanelIndex>0</PanelIndex>
+      <Tag>@Ray 24</Tag>
+      <ZOrderType>Normal</ZOrderType>
+      <EndAnchor>
+        <SlotIndex>4109</SlotIndex>
+        <DisplayName>End</DisplayName>
+        <IsBrowsable>true</IsBrowsable>
+        <Time>2022-06-20T11:51:04.852</Time>
+        <Price>107.53360604914933</Price>
+      </EndAnchor>
+      <StartAnchor>
+        <SlotIndex>4109</SlotIndex>
+        <DisplayName>Start</DisplayName>
+        <IsBrowsable>true</IsBrowsable>
+        <Time>2022-06-20T11:51:04.852</Time>
+        <Price>108.16974064272212</Price>
+      </StartAnchor>
+      <Stroke>
+        <IsOpacityVisible>true</IsOpacityVisible>
+        <BrushSerialize>&lt;SolidColorBrush Color="#FF00CED1" Opacity="0.89999997615814209" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" /&gt;</BrushSerialize>
+        <DashStyleHelper>Dash</DashStyleHelper>
+        <Opacity>90</Opacity>
+        <Width>2</Width>
+      </Stroke>
+      <FullTypeName>NinjaTrader.NinjaScript.DrawingTools.Ray</FullTypeName>
+      <IsGlobalDrawingObjectDefault>true</IsGlobalDrawingObjectDefault>
+      <IsOwnerVisible>true</IsOwnerVisible>
+    </Ray>
+    <Ray xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <IsVisible>true</IsVisible>
+      <IsAutoScale>false</IsAutoScale>
+      <MaxValue>-1.7976931348623157E+308</MaxValue>
+      <MinValue>1.7976931348623157E+308</MinValue>
+      <ZOrder>20013</ZOrder>
+      <AttachedTo>
+        <InstrumentSerialize>CL 08-22</InstrumentSerialize>
+      </AttachedTo>
+      <ScaleJustification>Right</ScaleJustification>
+      <DrawingState>Normal</DrawingState>
+      <DisplayOnChartsMenus>true</DisplayOnChartsMenus>
+      <GlobalLastSeenSerialize>638418216165127185</GlobalLastSeenSerialize>
+      <GlobalWorkspace>Untitled 5</GlobalWorkspace>
+      <Id>a0557d94dcf94845bd4654869d371bc3</Id>
+      <IsLocked>false</IsLocked>
+      <PanelIndex>0</PanelIndex>
+      <Tag>@Ray 25</Tag>
+      <ZOrderType>Normal</ZOrderType>
+      <EndAnchor>
+        <SlotIndex>4101</SlotIndex>
+        <DisplayName>End</DisplayName>
+        <IsBrowsable>true</IsBrowsable>
+        <Time>2022-06-20T11:17:59.132</Time>
+        <Price>109.18908884688091</Price>
+      </EndAnchor>
+      <StartAnchor>
+        <SlotIndex>4101</SlotIndex>
+        <DisplayName>Start</DisplayName>
+        <IsBrowsable>true</IsBrowsable>
+        <Time>2022-06-20T11:17:59.132</Time>
+        <Price>108.4303258979206</Price>
+      </StartAnchor>
+      <Stroke>
+        <IsOpacityVisible>true</IsOpacityVisible>
+        <BrushSerialize>&lt;SolidColorBrush Color="#FF00CED1" Opacity="0.89999997615814209" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" /&gt;</BrushSerialize>
+        <DashStyleHelper>Dash</DashStyleHelper>
+        <Opacity>90</Opacity>
+        <Width>2</Width>
+      </Stroke>
+      <FullTypeName>NinjaTrader.NinjaScript.DrawingTools.Ray</FullTypeName>
+      <IsGlobalDrawingObjectDefault>true</IsGlobalDrawingObjectDefault>
+      <IsOwnerVisible>true</IsOwnerVisible>
+    </Ray>
+    <Ray xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <IsVisible>true</IsVisible>
+      <IsAutoScale>false</IsAutoScale>
+      <MaxValue>-1.7976931348623157E+308</MaxValue>
+      <MinValue>1.7976931348623157E+308</MinValue>
+      <ZOrder>20014</ZOrder>
+      <AttachedTo>
+        <InstrumentSerialize>CL 08-22</InstrumentSerialize>
+      </AttachedTo>
+      <ScaleJustification>Right</ScaleJustification>
+      <DrawingState>Normal</DrawingState>
+      <DisplayOnChartsMenus>true</DisplayOnChartsMenus>
+      <GlobalLastSeenSerialize>638418216165127185</GlobalLastSeenSerialize>
+      <GlobalWorkspace>Untitled 5</GlobalWorkspace>
+      <Id>0ee5f18b0791486385b8ba9a6e117ec7</Id>
+      <IsLocked>false</IsLocked>
+      <PanelIndex>0</PanelIndex>
+      <Tag>@Ray 26</Tag>
+      <ZOrderType>Normal</ZOrderType>
+      <EndAnchor>
+        <SlotIndex>3901</SlotIndex>
+        <DisplayName>End</DisplayName>
+        <IsBrowsable>true</IsBrowsable>
+        <Time>2022-06-17T11:40:59.62</Time>
+        <Price>109.58755992438564</Price>
+      </EndAnchor>
+      <StartAnchor>
+        <SlotIndex>3901</SlotIndex>
+        <DisplayName>Start</DisplayName>
+        <IsBrowsable>true</IsBrowsable>
+        <Time>2022-06-17T11:40:59.62</Time>
+        <Price>109.33264877126655</Price>
+      </StartAnchor>
+      <Stroke>
+        <IsOpacityVisible>true</IsOpacityVisible>
+        <BrushSerialize>&lt;SolidColorBrush Color="#FF00CED1" Opacity="0.89999997615814209" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" /&gt;</BrushSerialize>
+        <DashStyleHelper>Dash</DashStyleHelper>
+        <Opacity>90</Opacity>
+        <Width>2</Width>
+      </Stroke>
+      <FullTypeName>NinjaTrader.NinjaScript.DrawingTools.Ray</FullTypeName>
+      <IsGlobalDrawingObjectDefault>true</IsGlobalDrawingObjectDefault>
+      <IsOwnerVisible>true</IsOwnerVisible>
+    </Ray>
+    <Ray xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <IsVisible>true</IsVisible>
+      <IsAutoScale>false</IsAutoScale>
+      <MaxValue>-1.7976931348623157E+308</MaxValue>
+      <MinValue>1.7976931348623157E+308</MinValue>
+      <ZOrder>20015</ZOrder>
+      <AttachedTo>
+        <InstrumentSerialize>CL 08-22</InstrumentSerialize>
+      </AttachedTo>
+      <ScaleJustification>Right</ScaleJustification>
+      <DrawingState>Normal</DrawingState>
+      <DisplayOnChartsMenus>true</DisplayOnChartsMenus>
+      <GlobalLastSeenSerialize>638418216165127185</GlobalLastSeenSerialize>
+      <GlobalWorkspace>Untitled 5</GlobalWorkspace>
+      <Id>5f25c01d947e440dbe2766ad56f53509</Id>
+      <IsLocked>false</IsLocked>
+      <PanelIndex>0</PanelIndex>
+      <Tag>@Ray 27</Tag>
+      <ZOrderType>Normal</ZOrderType>
+      <EndAnchor>
+        <SlotIndex>3892</SlotIndex>
+        <DisplayName>End</DisplayName>
+        <IsBrowsable>true</IsBrowsable>
+        <Time>2022-06-17T11:29:04.672</Time>
+        <Price>109.32536559546314</Price>
+      </EndAnchor>
+      <StartAnchor>
+        <SlotIndex>3892</SlotIndex>
+        <DisplayName>Start</DisplayName>
+        <IsBrowsable>true</IsBrowsable>
+        <Time>2022-06-17T11:29:04.672</Time>
+        <Price>108.91750775047259</Price>
+      </StartAnchor>
+      <Stroke>
+        <IsOpacityVisible>true</IsOpacityVisible>
+        <BrushSerialize>&lt;SolidColorBrush Color="#FF00CED1" Opacity="0.89999997615814209" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" /&gt;</BrushSerialize>
+        <DashStyleHelper>Dash</DashStyleHelper>
+        <Opacity>90</Opacity>
+        <Width>2</Width>
+      </Stroke>
+      <FullTypeName>NinjaTrader.NinjaScript.DrawingTools.Ray</FullTypeName>
+      <IsGlobalDrawingObjectDefault>true</IsGlobalDrawingObjectDefault>
+      <IsOwnerVisible>true</IsOwnerVisible>
+    </Ray>
+    <Ray xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <IsVisible>true</IsVisible>
+      <IsAutoScale>false</IsAutoScale>
+      <MaxValue>-1.7976931348623157E+308</MaxValue>
+      <MinValue>1.7976931348623157E+308</MinValue>
+      <ZOrder>20016</ZOrder>
+      <AttachedTo>
+        <InstrumentSerialize>CL 08-22</InstrumentSerialize>
+      </AttachedTo>
+      <ScaleJustification>Right</ScaleJustification>
+      <DrawingState>Normal</DrawingState>
+      <DisplayOnChartsMenus>true</DisplayOnChartsMenus>
+      <GlobalLastSeenSerialize>638418216165127185</GlobalLastSeenSerialize>
+      <GlobalWorkspace>Untitled 5</GlobalWorkspace>
+      <Id>70255e6cb5c84156ba53f1645159ad5a</Id>
+      <IsLocked>false</IsLocked>
+      <PanelIndex>0</PanelIndex>
+      <Tag>@Ray 28</Tag>
+      <ZOrderType>Normal</ZOrderType>
+      <EndAnchor>
+        <SlotIndex>3882</SlotIndex>
+        <DisplayName>End</DisplayName>
+        <IsBrowsable>true</IsBrowsable>
+        <Time>2022-06-17T11:15:39.728</Time>
+        <Price>109.42004688090738</Price>
+      </EndAnchor>
+      <StartAnchor>
+        <SlotIndex>3882</SlotIndex>
+        <DisplayName>Start</DisplayName>
+        <IsBrowsable>true</IsBrowsable>
+        <Time>2022-06-17T11:15:39.728</Time>
+        <Price>108.81554328922496</Price>
+      </StartAnchor>
+      <Stroke>
+        <IsOpacityVisible>true</IsOpacityVisible>
+        <BrushSerialize>&lt;SolidColorBrush Color="#FF00CED1" Opacity="0.89999997615814209" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" /&gt;</BrushSerialize>
+        <DashStyleHelper>Dash</DashStyleHelper>
+        <Opacity>90</Opacity>
+        <Width>2</Width>
+      </Stroke>
+      <FullTypeName>NinjaTrader.NinjaScript.DrawingTools.Ray</FullTypeName>
+      <IsGlobalDrawingObjectDefault>true</IsGlobalDrawingObjectDefault>
+      <IsOwnerVisible>true</IsOwnerVisible>
+    </Ray>
+    <Ray xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <IsVisible>true</IsVisible>
+      <IsAutoScale>false</IsAutoScale>
+      <MaxValue>-1.7976931348623157E+308</MaxValue>
+      <MinValue>1.7976931348623157E+308</MinValue>
+      <ZOrder>20017</ZOrder>
+      <AttachedTo>
+        <InstrumentSerialize>CL 08-22</InstrumentSerialize>
+      </AttachedTo>
+      <ScaleJustification>Right</ScaleJustification>
+      <DrawingState>Normal</DrawingState>
+      <DisplayOnChartsMenus>true</DisplayOnChartsMenus>
+      <GlobalLastSeenSerialize>638418216165127185</GlobalLastSeenSerialize>
+      <GlobalWorkspace>Untitled 5</GlobalWorkspace>
+      <Id>8d84bc4b0e7b4b2eafa75df29f9165f8</Id>
+      <IsLocked>false</IsLocked>
+      <PanelIndex>0</PanelIndex>
+      <Tag>@Ray 29</Tag>
+      <ZOrderType>Normal</ZOrderType>
+      <EndAnchor>
+        <SlotIndex>3861</SlotIndex>
+        <DisplayName>End</DisplayName>
+        <IsBrowsable>true</IsBrowsable>
+        <Time>2022-06-17T10:57:00.844</Time>
+        <Price>110.1822899810964</Price>
+      </EndAnchor>
+      <StartAnchor>
+        <SlotIndex>3861</SlotIndex>
+        <DisplayName>Start</DisplayName>
+        <IsBrowsable>true</IsBrowsable>
+        <Time>2022-06-17T10:57:00.844</Time>
+        <Price>109.58661512287334</Price>
+      </StartAnchor>
+      <Stroke>
+        <IsOpacityVisible>true</IsOpacityVisible>
+        <BrushSerialize>&lt;SolidColorBrush Color="#FF00CED1" Opacity="0.89999997615814209" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" /&gt;</BrushSerialize>
+        <DashStyleHelper>Dash</DashStyleHelper>
+        <Opacity>90</Opacity>
+        <Width>2</Width>
+      </Stroke>
+      <FullTypeName>NinjaTrader.NinjaScript.DrawingTools.Ray</FullTypeName>
+      <IsGlobalDrawingObjectDefault>true</IsGlobalDrawingObjectDefault>
+      <IsOwnerVisible>true</IsOwnerVisible>
+    </Ray>
+    <Ray xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <IsVisible>true</IsVisible>
+      <IsAutoScale>false</IsAutoScale>
+      <MaxValue>-1.7976931348623157E+308</MaxValue>
+      <MinValue>1.7976931348623157E+308</MinValue>
+      <ZOrder>20018</ZOrder>
+      <AttachedTo>
+        <InstrumentSerialize>CL 08-22</InstrumentSerialize>
+      </AttachedTo>
+      <ScaleJustification>Right</ScaleJustification>
+      <DrawingState>Normal</DrawingState>
+      <DisplayOnChartsMenus>true</DisplayOnChartsMenus>
+      <GlobalLastSeenSerialize>638418216165127185</GlobalLastSeenSerialize>
+      <GlobalWorkspace>Untitled 5</GlobalWorkspace>
+      <Id>7c43bb3522024962a51ce630138f5d62</Id>
+      <IsLocked>false</IsLocked>
+      <PanelIndex>0</PanelIndex>
+      <Tag>@Ray 30</Tag>
+      <ZOrderType>Normal</ZOrderType>
+      <EndAnchor>
+        <SlotIndex>3856</SlotIndex>
+        <DisplayName>End</DisplayName>
+        <IsBrowsable>true</IsBrowsable>
+        <Time>2022-06-17T10:54:21.184</Time>
+        <Price>109.88795652173913</Price>
+      </EndAnchor>
+      <StartAnchor>
+        <SlotIndex>3856</SlotIndex>
+        <DisplayName>Start</DisplayName>
+        <IsBrowsable>true</IsBrowsable>
+        <Time>2022-06-17T10:54:21.184</Time>
+        <Price>108.98393232514178</Price>
+      </StartAnchor>
+      <Stroke>
+        <IsOpacityVisible>true</IsOpacityVisible>
+        <BrushSerialize>&lt;SolidColorBrush Color="#FF00CED1" Opacity="0.89999997615814209" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" /&gt;</BrushSerialize>
+        <DashStyleHelper>Dash</DashStyleHelper>
+        <Opacity>90</Opacity>
+        <Width>2</Width>
+      </Stroke>
+      <FullTypeName>NinjaTrader.NinjaScript.DrawingTools.Ray</FullTypeName>
+      <IsGlobalDrawingObjectDefault>true</IsGlobalDrawingObjectDefault>
+      <IsOwnerVisible>true</IsOwnerVisible>
+    </Ray>
+    <Ray xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <IsVisible>true</IsVisible>
+      <IsAutoScale>false</IsAutoScale>
+      <MaxValue>-1.7976931348623157E+308</MaxValue>
+      <MinValue>1.7976931348623157E+308</MinValue>
+      <ZOrder>20019</ZOrder>
+      <AttachedTo>
+        <InstrumentSerialize>CL 08-22</InstrumentSerialize>
+      </AttachedTo>
+      <ScaleJustification>Right</ScaleJustification>
+      <DrawingState>Normal</DrawingState>
+      <DisplayOnChartsMenus>true</DisplayOnChartsMenus>
+      <GlobalLastSeenSerialize>638418216165127185</GlobalLastSeenSerialize>
+      <GlobalWorkspace>Untitled 5</GlobalWorkspace>
+      <Id>be9fc76b634343b985a02a04ed9d72c8</Id>
+      <IsLocked>false</IsLocked>
+      <PanelIndex>0</PanelIndex>
+      <Tag>@Ray 31</Tag>
+      <ZOrderType>Normal</ZOrderType>
+      <EndAnchor>
+        <SlotIndex>3847</SlotIndex>
+        <DisplayName>End</DisplayName>
+        <IsBrowsable>true</IsBrowsable>
+        <Time>2022-06-17T10:47:44.476</Time>
+        <Price>108.52841625708885</Price>
+      </EndAnchor>
+      <StartAnchor>
+        <SlotIndex>3847</SlotIndex>
+        <DisplayName>Start</DisplayName>
+        <IsBrowsable>true</IsBrowsable>
+        <Time>2022-06-17T10:47:44.476</Time>
+        <Price>109.29228166351606</Price>
+      </StartAnchor>
+      <Stroke>
+        <IsOpacityVisible>true</IsOpacityVisible>
+        <BrushSerialize>&lt;SolidColorBrush Color="#FF00CED1" Opacity="0.89999997615814209" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" /&gt;</BrushSerialize>
+        <DashStyleHelper>Dash</DashStyleHelper>
+        <Opacity>90</Opacity>
+        <Width>2</Width>
+      </Stroke>
+      <FullTypeName>NinjaTrader.NinjaScript.DrawingTools.Ray</FullTypeName>
+      <IsGlobalDrawingObjectDefault>true</IsGlobalDrawingObjectDefault>
+      <IsOwnerVisible>true</IsOwnerVisible>
+    </Ray>
+    <Ray xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <IsVisible>true</IsVisible>
+      <IsAutoScale>false</IsAutoScale>
+      <MaxValue>-1.7976931348623157E+308</MaxValue>
+      <MinValue>1.7976931348623157E+308</MinValue>
+      <ZOrder>20020</ZOrder>
+      <AttachedTo>
+        <InstrumentSerialize>CL 08-22</InstrumentSerialize>
+      </AttachedTo>
+      <ScaleJustification>Right</ScaleJustification>
+      <DrawingState>Normal</DrawingState>
+      <DisplayOnChartsMenus>true</DisplayOnChartsMenus>
+      <GlobalLastSeenSerialize>638418216165127185</GlobalLastSeenSerialize>
+      <GlobalWorkspace>Untitled 5</GlobalWorkspace>
+      <Id>2dd0fd7707d74b47a77bd692a884ba18</Id>
+      <IsLocked>false</IsLocked>
+      <PanelIndex>0</PanelIndex>
+      <Tag>@Ray 32</Tag>
+      <ZOrderType>Normal</ZOrderType>
+      <EndAnchor>
+        <SlotIndex>3827</SlotIndex>
+        <DisplayName>End</DisplayName>
+        <IsBrowsable>true</IsBrowsable>
+        <Time>2022-06-17T10:25:33.456</Time>
+        <Price>111.70321020793949</Price>
+      </EndAnchor>
+      <StartAnchor>
+        <SlotIndex>3827</SlotIndex>
+        <DisplayName>Start</DisplayName>
+        <IsBrowsable>true</IsBrowsable>
+        <Time>2022-06-17T10:25:33.456</Time>
+        <Price>111.11492438563326</Price>
+      </StartAnchor>
+      <Stroke>
+        <IsOpacityVisible>true</IsOpacityVisible>
+        <BrushSerialize>&lt;SolidColorBrush Color="#FF00CED1" Opacity="0.89999997615814209" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" /&gt;</BrushSerialize>
+        <DashStyleHelper>Dash</DashStyleHelper>
+        <Opacity>90</Opacity>
+        <Width>2</Width>
+      </Stroke>
+      <FullTypeName>NinjaTrader.NinjaScript.DrawingTools.Ray</FullTypeName>
+      <IsGlobalDrawingObjectDefault>true</IsGlobalDrawingObjectDefault>
+      <IsOwnerVisible>true</IsOwnerVisible>
+    </Ray>
+    <Ray xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <IsVisible>true</IsVisible>
+      <IsAutoScale>false</IsAutoScale>
+      <MaxValue>-1.7976931348623157E+308</MaxValue>
+      <MinValue>1.7976931348623157E+308</MinValue>
+      <ZOrder>20020</ZOrder>
+      <AttachedTo>
+        <InstrumentSerialize>CL 08-22</InstrumentSerialize>
+      </AttachedTo>
+      <ScaleJustification>Right</ScaleJustification>
+      <DrawingState>Normal</DrawingState>
+      <DisplayOnChartsMenus>true</DisplayOnChartsMenus>
+      <GlobalLastSeenSerialize>638418216165127185</GlobalLastSeenSerialize>
+      <GlobalWorkspace>Untitled 5</GlobalWorkspace>
+      <Id>dfcb56d746b548ae892c3c08d9bfb9a3</Id>
+      <IsLocked>false</IsLocked>
+      <PanelIndex>0</PanelIndex>
+      <Tag>@Ray 33</Tag>
+      <ZOrderType>Normal</ZOrderType>
+      <EndAnchor>
+        <SlotIndex>3828</SlotIndex>
+        <DisplayName>End</DisplayName>
+        <IsBrowsable>true</IsBrowsable>
+        <Time>2022-06-17T10:27:21.548</Time>
+        <Price>110.06984997202268</Price>
+      </EndAnchor>
+      <StartAnchor>
+        <SlotIndex>3828</SlotIndex>
+        <DisplayName>Start</DisplayName>
+        <IsBrowsable>true</IsBrowsable>
+        <Time>2022-06-17T10:27:21.548</Time>
+        <Price>110.71161632362949</Price>
+      </StartAnchor>
+      <Stroke>
+        <IsOpacityVisible>true</IsOpacityVisible>
+        <BrushSerialize>&lt;SolidColorBrush Color="#FF00CED1" Opacity="0.89999997615814209" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" /&gt;</BrushSerialize>
+        <DashStyleHelper>Dash</DashStyleHelper>
+        <Opacity>90</Opacity>
+        <Width>2</Width>
+      </Stroke>
+      <FullTypeName>NinjaTrader.NinjaScript.DrawingTools.Ray</FullTypeName>
+      <IsGlobalDrawingObjectDefault>true</IsGlobalDrawingObjectDefault>
+      <IsOwnerVisible>true</IsOwnerVisible>
+    </Ray>
+  </GlobalDrawingTools>
+</NinjaTrader>

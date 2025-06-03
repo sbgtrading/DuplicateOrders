@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NinjaTrader>
+  <Rectangle xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <IsAutoScale>false</IsAutoScale>
+    <MaxValue>-1.7976931348623157E+308</MaxValue>
+    <MinValue>1.7976931348623157E+308</MinValue>
+    <DisplayOnChartsMenus>true</DisplayOnChartsMenus>
+    <GlobalLastSeenSerialize>0</GlobalLastSeenSerialize>
+    <GlobalWorkspace>aa current 2</GlobalWorkspace>
+    <IsLocked>false</IsLocked>
+    <PanelIndex>0</PanelIndex>
+    <ZOrderType>Normal</ZOrderType>
+    <AreaBrushSerialize>&lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;#FF6495ED&lt;/SolidColorBrush&gt;</AreaBrushSerialize>
+    <AreaOpacity>20</AreaOpacity>
+    <OutlineStroke>
+      <IsOpacityVisible>true</IsOpacityVisible>
+      <BrushSerialize>&lt;SolidColorBrush Color="#FF6495ED" Opacity="0" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" /&gt;</BrushSerialize>
+      <DashStyleHelper>Solid</DashStyleHelper>
+      <Opacity>0</Opacity>
+      <Width>2</Width>
+    </OutlineStroke>
+    <EndAnchor>
+      <SlotIndex>21254</SlotIndex>
+      <DisplayName>End</DisplayName>
+      <IsBrowsable>true</IsBrowsable>
+      <Time>2023-05-12T17:55:00</Time>
+      <Price>4142.5918992490615</Price>
+    </EndAnchor>
+    <MiddleAnchor>
+      <SlotIndex>38551</SlotIndex>
+      <DisplayName>Middle</DisplayName>
+      <IsBrowsable>false</IsBrowsable>
+      <Time>2023-05-12T10:25:00</Time>
+      <Price>4145.8503160200253</Price>
+    </MiddleAnchor>
+    <StartAnchor>
+      <SlotIndex>18566</SlotIndex>
+      <DisplayName>Start</DisplayName>
+      <IsBrowsable>true</IsBrowsable>
+      <Time>2023-05-12T10:25:00</Time>
+      <Price>4145.8503160200253</Price>
+    </StartAnchor>
+    <FullTypeName>NinjaTrader.NinjaScript.DrawingTools.Rectangle</FullTypeName>
+    <IsGlobalDrawingObjectDefault>true</IsGlobalDrawingObjectDefault>
+    <IsOwnerVisible>true</IsOwnerVisible>
+  </Rectangle>
+</NinjaTrader>

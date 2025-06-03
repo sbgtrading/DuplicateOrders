@@ -1,0 +1,1870 @@
+#define FLUX_INVESTOR
+
+#region Using declarations
+using System;
+using System.ComponentModel;
+using System.Diagnostics;
+//using System.Drawing;
+//using System.Drawing.Drawing2D;
+using System.Xml.Serialization;
+using System.Collections.Generic;
+using NinjaTrader.Cbi;
+using NinjaTrader.Data;
+using NinjaTrader.Gui.Chart;
+#endregion
+
+using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
+using System.Windows.Media;
+using NinjaTrader.Gui;
+using NinjaTrader.Gui.Tools;
+using NinjaTrader.NinjaScript;
+using NinjaTrader.Core.FloatingPoint;
+using SharpDX.DirectWrite;
+using NinjaTrader.NinjaScript.DrawingTools;
+// This namespace holds all indicators and is required. Do not change it.
+namespace NinjaTrader.NinjaScript.Indicators
+{
+    //v2.4:  Feb 20, 2012
+	//	Added the HH and LL line output ability
+	//  Added the printout of the HH-LL result to the output table
+	//
+	//v2.4b  Dec 31, 2012
+	//  Reversed (removed) the add from Feb 20, 2012
+
+    [Description("")]
+	public class FluxReverseRadar : Indicator
+    {
+		internal struct OHLC_input {
+			public DateTime DT;
+			public double O;
+			public double H;
+			public double L;
+			public double C;
+		}
+		internal struct CellDef {
+			public System.Drawing.Font Font;
+			public string Value;
+			public string Format;
+			public Brush TextColor;
+			public Brush FillColor;
+			public int Justification;
+			public bool PermitTextOverlap;
+			public float Width;
+			public float Height;
+			public CellDef(string val, NinjaTrader.Gui.Tools.SimpleFont f, int justify, string format, Brush txtcolor, Brush fillcolor, float width, float height, bool permitTextOverlap){this.Value=val; this.Font= new NinjaTrader.Gui.Tools.SimpleFont(f.FontFamily,f.Size); this.Justification=justify; this.Format=format; this.TextColor=txtcolor; this.FillColor=fillcolor; this.Width = width; this.Height=height; this.PermitTextOverlap = permitTextOverlap;}
+		}
+		internal class TableDef {
+			public float ScaleFactor=1.0f;
+			public int Rows=0;
+			public int Columns=0;
+			public int TopLeftX=0, TopLeftY=0;
+			public int BottomRightX=0, BottomRightY=0;
+			public Graphics graphics;
+			public CellDef[,] Cells;
+			public float TableWidth;
+			public float TableHeight;
+			public float[] ColWidth;
+			public float[] RowHeight;
+			public TableDef(int rows, int cols, int topleftx, int toplefty){this.Rows=rows; this.Columns=cols; this.TopLeftX=topleftx; this.TopLeftY=toplefty; this.Cells = new CellDef[rows,cols]; this.RowHeight=new float[rows]; this.ColWidth=new float[cols]; this.graphics=null; this.TableHeight=0; this.TableWidth=0;}
+			public void ChangeCell(int row, int col, string val, NinjaTrader.Gui.Tools.SimpleFont f, int justify, string format, Brush txtColor, Brush fillColor, bool permitTextOverlap){
+//  				SizeF s = new SizeF(0,0);
+				if(this.graphics!=null) s = this.graphics.MeasureString(val, f);
+				this.Cells[row,col]=new CellDef(val, f, justify, format, txtColor, fillColor, (permitTextOverlap?0:s.Width), s.Height, permitTextOverlap);
+			}
+//  			public void ChangeValue(int row, int col, string val) {this.Cells[row,col].Value=val; SizeF s = graphics.MeasureString(val, this.Cells[row,col].Font); this.Cells[row,col].Width = (Cells[row,col].PermitTextOverlap?0:s.Width);}
+			public float CalcColWidth(int col){this.ColWidth[col]=0; for(int i = 0; i<this.Rows; i++) {this.ColWidth[col]=Math.Max(this.ColWidth[col],this.Cells[i,col].Width);} return(this.ColWidth[col]);}
+			public float CalcRowHeight(int row){this.RowHeight[row]=0; for(int i = 0; i<this.Columns; i++) {this.RowHeight[row]=Math.Max(this.RowHeight[row],this.Cells[row,i].Height);} return(this.RowHeight[row]);}
+			public void RecalcTableSize() {
+				//System.Text.StringBuilder result = new System.Text.StringBuilder();
+				try{
+//  					SizeF s = new SizeF(0,0);
+					if(this.graphics!=null) {
+						for(int r = 0; r<this.Rows; r++) {
+							for(int c = 0; c<this.Columns; c++) {
+								s = this.graphics.MeasureString(this.Cells[r,c].Value, this.Cells[r,c].Font);
+								this.Cells[r,c].Width = (Cells[r,c].PermitTextOverlap?0:s.Width);
+								this.Cells[r,c].Height = s.Height;
+								//result = result.Append(s.Width.ToString("0")).Append("-").Append(s.Height.ToString("0")).Append("\t");
+							}
+							//result = result.Append(Environment.NewLine);
+						}
+						for(int c = 0; c<this.Columns; c++) this.CalcColWidth(c);
+						for(int r = 0; r<this.Rows; r++) this.CalcRowHeight(r);
+					}
+				}catch{};
+				//return(result.ToString());
+			}
+			public void RedrawTable() {
+				//System.Text.StringBuilder result = new System.Text.StringBuilder();
+				float sumx = this.TopLeftX;
+				float sumy = this.TopLeftY;
+				try{
+					for(int r = 0; r<this.Rows; r++) {
+//						float y = sumy + this.TopLeftY+this.RowHeight[r];
+						for(int c = 0; c<this.Columns; c++) {
+							if(this.Cells[r,c].TextColor != Brushes.Transparent) {
+								//float x = sumx + this.TopLeftX+this.ColWidth[c];
+								this.graphics.DrawTextLayout(  this.Cells[r,c].Value, this.Cells[r,c].Font, new SolidColorBrush(this.Cells[r,c].TextColor), sumx, sumy);
+								//result = result.Append(sumx.ToString("0")).Append("-").Append(sumy.ToString("0")).Append("\t");
+							}
+							sumx = this.ColWidth[c]+sumx;
+						}
+						sumx = this.TopLeftX;
+						sumy = this.RowHeight[r]+sumy;
+						//result = result.Append(Environment.NewLine);
+					}
+				}catch{};
+				//return(result.ToString());
+			}
+			public void RedrawTable(float Width, float Height) {
+				this.TableHeight = 0;
+				for(int r = 0; r<this.Rows; r++) this.TableHeight = this.TableHeight+this.RowHeight[r];
+				this.TableWidth = 0;
+				for(int c = 0; c<this.Columns; c++) this.TableWidth = this.TableWidth+this.ColWidth[c];
+				float widthFactor = Width / this.TableWidth;
+				float heightFactor = Height / this.TableHeight;
+				this.ScaleFactor = Math.Min(widthFactor, heightFactor);
+
+				float sumx = this.TopLeftX;
+				float sumy = this.TopLeftY;
+				try{
+					for(int r = 0; r<this.Rows; r++) {
+						for(int c = 0; c<this.Columns; c++) {
+							if(this.Cells[r,c].TextColor != Brushes.Transparent) {
+								System.Drawing.Font f = this.Cells[r,c].Font;
+								if(this.ScaleFactor!=1.0f) f = new NinjaTrader.Gui.Tools.SimpleFont(f.FontFamily, f.Size * this.ScaleFactor);
+								this.graphics.DrawTextLayout(  this.Cells[r,c].Value, f, new SolidColorBrush(this.Cells[r,c].TextColor), sumx, sumy);
+							}
+							sumx = this.ColWidth[c]*this.ScaleFactor+sumx;
+						}
+						sumx = this.TopLeftX;
+						sumy = this.RowHeight[r]*this.ScaleFactor+sumy;
+					}
+				}catch{};
+			}
+		}
+
+        #region Variables
+        // Wizard generated variables
+			private int[] CurrentBarPtr = new int[10] {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
+			private double[] Adjustments = new double[10] {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
+			private Color[] pWeekColors = new Color[10] {Color.Yellow, Brushes.Cyan, Brushes.Magenta, Brushes.Orange, Brushes.Blue, Brushes.Red, Brushes.Beige, Brushes.Navy, Brushes.Maroon, Brushes.DimGray};
+			private Color[] AdjWeekColors = new Color[10];
+			private double[] LineSlopes = new double[10] {0,0,0,0,0,0,0,0,0,0};
+			private double[] HighTicks = new double[10] {0,0,0,0,0,0,0,0,0,0};
+			private double[] LowTicks = new double[10] {0,0,0,0,0,0,0,0,0,0};
+			private string[] MissingDataMsg = new string[10] {"","","","","","","","","",""};
+
+			private bool ExitOut = false, RunInit=true, RunPlotInit=true;
+			private List<OHLC_input> oldOHLC;
+
+			private string dirpath = Core.Globals.UserDataDir;
+			private DateTime LastDateTimeFromTxtFile = DateTime.MinValue;
+
+			private bool NewContractData = false;
+			private int WeeksOnChart = 0;
+			private DateTime FirstDTforData = DateTime.MinValue;
+			private List<OHLC_input>[] PlottedBars = new List<OHLC_input>[10];
+			private int RightChartBar = -1;
+			private int LeftChartBar = -1;
+			private Brush upColor, downColor, outlineColor;
+			private float outlineWidth=1;
+			private List<OHLC_input>[] plots = new List<OHLC_input>[19];
+			private int BarsInMarginSpace;
+			private long AvgTicksBetweenBar = 0;
+        #endregion
+		private DateTime TimeAtLaunch = NinjaTrader.Core.Globals.Now;
+		private DateTime TimeOfError = DateTime.MinValue;
+		private string ErrorMsg = "";
+		private OHLC_input b;
+		private int cobcshift = 0;
+		private int imageNum = 0;
+		private string logoname = string.Empty;
+		private Image image;
+		private System.Drawing.Font txtFont = null;
+		private Brush txtBrush;
+		private DateTime TimeOfMissingDataAlert = DateTime.MinValue;
+		private DateTime TimeOfPing=DateTime.MinValue;
+		private TableDef UpDownTable;
+		private bool IsDevelopment = false;
+		private string FS = string.Empty;
+
+		#region Licensing Variables
+		private string licensepath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),"NTC_UserLicense.txt");
+		private int LicenseStatus = -1;
+		private long stopdate = 0;
+		private bool RunLocalLicenseCheck = false;
+		#endregion
+		#region License
+        private void LicenseCheck(string pLicenseFileName, string pEncryptedStr)
+        {
+			int FAIL = 0;
+			int MACHINEID_SUCCESS = 1;
+			int DATE_SUCCESS = 2;
+			string DecryptedString = string.Empty;
+			int LineNum = 1;
+			stopdate = 0;
+			LicenseStatus = FAIL;
+			if(pEncryptedStr.Length==0) {
+//Print(Name+" searching License Path: "+path);
+				string readText = System.IO.File.ReadAllText(licensepath);
+				string [] CompleteFile = readText.Split(new Char [] {'\r', '\n'},StringSplitOptions.RemoveEmptyEntries);
+				foreach(string line in CompleteFile) {
+					DecryptedString = Decrypt(line);
+					string SerialNum = string.Empty;
+					if(DecryptedString.Length>6) SerialNum = DecryptedString.Substring(DecryptedString.Length-6, 6);
+					if(SerialNum.CompareTo("SBG512")==0) {
+						//Encrypted string is supposed to be either:
+						//		'<machine id>SBG512'
+						//   or '<year>.<month>.<day>SBG512'
+						PrintIt(MakeString(new Object[]{LineNum.ToString(),". Successful decryption\t'",line,"':\t'",DecryptedString,"'"}));
+						DecryptedString = DecryptedString.Substring(0,DecryptedString.Length-6);
+						DecryptedString = DecryptedString.Substring(DecryptedString.Length-1,1)+DecryptedString.Substring(1,DecryptedString.Length-2);
+						//PrintIt("Here's the line without the Serial Number: ",DecryptedString,"   ",NinjaTrader.Cbi.License.MachineId);
+						DateTime d;
+						if(!DateTime.TryParse(DecryptedString, out d)) {
+							//PrintIt("\t\tTried to determine date, failed");
+							if(DecryptedString.CompareTo(NinjaTrader.Cbi.License.MachineId)==0) {
+								PrintIt(MakeString(new Object[]{"\t\tThis is the machine id of this machine!    ",DecryptedString}));
+								LicenseStatus = MACHINEID_SUCCESS;
+							}
+						} else {
+							stopdate = d.Ticks;
+							//PrintIt("\t\tThis is a date!  ",DecryptedString,"   ",d.ToString());
+							LicenseStatus = DATE_SUCCESS;
+						}
+					} else if(SerialNum.CompareTo("SBG513")==0) {
+						//Encrypted string is supposed to be:  
+						//		'<machine id>,<year>.<month>.<day>SBG513'
+						PrintIt(MakeString(new Object[]{LineNum.ToString(),". Successful decryption\t'",line,"':\t'",DecryptedString,"'"}));
+						DecryptedString = DecryptedString.Substring(0,DecryptedString.Length-6);
+						DecryptedString = DecryptedString.Substring(1);
+						DecryptedString = DecryptedString.Substring(DecryptedString.Length-1) + DecryptedString.Substring(0, DecryptedString.Length-1);
+						//PrintIt("Here's the line without the Serial Number: ",DecryptedString,"   ",NinjaTrader.Cbi.License.MachineId);
+						DateTime d;
+						string [] Elements = DecryptedString.Split(new Char [] {','},StringSplitOptions.RemoveEmptyEntries);
+						if(Elements.Length==2) {
+							string machineid = Elements[0]; 
+							string expirationtime = Elements[1];
+							if(!DateTime.TryParse(expirationtime, out d)) {
+								//PrintIt("\t\tTried to determine date, failed:  '",expirationtime,"'");
+							} else {
+								stopdate = d.Ticks;
+								//PrintIt("\t\tThis is a date!  '",expirationtime,"'   ",stopdate.ToString());
+								if(Time[0].Ticks <= d.Ticks) {
+									if(machineid.Length>0) {
+										PrintIt(MakeString(new Object[]{"\t\tThe machine id:  '",machineid,"'"}));
+										if(machineid.CompareTo(NinjaTrader.Cbi.License.MachineId)==0) {
+											PrintIt("\t\tThis machine id matches this machine!");
+											LicenseStatus = MACHINEID_SUCCESS;
+										}
+									}
+								}
+							}
+						}
+					} else {
+						//PrintIt(LineNum.ToString(),".\tLine does not contain valid Serial Number:  ",DecryptedString);
+					}
+					LineNum++;
+				}
+			} else {
+				DecryptedString = Decrypt(pEncryptedStr);
+				//PrintIt("Decrypting result:  ",DecryptedString);
+				string SerialNum = string.Empty;
+				if(DecryptedString.Length>6) SerialNum = DecryptedString.Substring(DecryptedString.Length-6, 6);
+				if(SerialNum.CompareTo("SBG511")==0) {
+					//PrintIt(LineNum.ToString(),". Successful decryption\t'",pEncryptedStr,"':\t'",DecryptedString,"'");
+					DecryptedString = DecryptedString.Substring(0,DecryptedString.Length-6);
+					PrintIt(MakeString(new Object[]{"Here's the line without the Serial Number: ",DecryptedString,"   ",NinjaTrader.Cbi.License.MachineId}));
+					DateTime d;
+					if(!DateTime.TryParse(DecryptedString, out d)) {
+						PrintIt("\t\tTried to determine date, failed");
+						if(DecryptedString.CompareTo(NinjaTrader.Cbi.License.MachineId)==0) {
+							//PrintIt("\t\tThis is the machine id of this machine!    ",DecryptedString);
+							LicenseStatus = MACHINEID_SUCCESS;
+						}
+					} else {
+						stopdate = d.Ticks;
+						//PrintIt("\t\tThis is a date!  ",DecryptedString,"   ",d.ToString());
+						LicenseStatus = DATE_SUCCESS;
+					}
+				} else {
+					//PrintIt(LineNum.ToString(),".\tLine does not contain valid Serial Number:  ",DecryptedString);
+				}
+			}
+        }
+
+//============================================================================================
+		private void PrintIt(string msg) {
+//			if(NinjaTrader.Cbi.License.MachineId.CompareTo("091C46B0D4C68FF3EB6266285883836E")==0)
+//				Print(msg);
+		}
+//============================================================================================
+		private string Decrypt(string EncryptedText) {
+			string outtext = string.Empty;
+
+			int eposition=0;
+			if(int.TryParse(EncryptedText.Substring(0,1), out eposition)) {
+				//eposition = int.Parse(EncryptedText.Substring(0,1));
+				EncryptedText = EncryptedText.Substring(1);
+				foreach(char eletter in EncryptedText) {
+					int eascii = (int)eletter-32;
+					eascii = eascii-eposition;
+					eposition++;
+					while(eascii<0)
+						eascii = eascii+94;
+					if(eascii!=32) //skip spaces
+						outtext = outtext + (char) (eascii+32);
+				}
+			}
+			return outtext;
+		}
+//============================================================================================
+		#endregion
+
+
+		#region Variables in up/down table calculation
+		private string info1="", info2="";
+		private float TableLeftEdgePixel=0;
+		private float txtY = 0;
+		private int txtHeight= 0;
+//  		private SizeF linesize = new SizeF(0,0);
+		#endregion
+
+private static string MakeString(object[] s){
+	System.Text.StringBuilder stb = new System.Text.StringBuilder(null);
+	for(int i = 0; i<s.Length; i++) {
+		stb = stb.Append(s[i].ToString());
+	}
+	return stb.ToString();
+}
+void Printf(string msg) {
+	Print(msg);
+	//System.IO.File.AppendAllText(string.Concat(dirpath,"log.txt"),string.Concat(msg,Environment.NewLine));
+}
+        /// <summary>
+        /// This method is used to configure the indicator and is called once before any bar data is loaded.
+        /// </summary>
+        protected override void OnStateChange()
+	{
+		if (State == State.SetDefaults)
+        {
+			string file = dirpath+"111111111111revradar.txt";
+			IsDevelopment = System.IO.File.Exists("c:\\111111111111revradar.txt");
+			bool IsLocalLicense = false;
+			try{IsLocalLicense = System.IO.File.Exists(licensepath);}catch(Exception err){IsLocalLicense = false;}
+			if(!IsLocalLicense && !IsDevelopment) {
+if(IsDevelopment) Print("Running NT Vendor Database license check");
+#if FLUX_INVESTOR
+					VendorLicense("AffordableIndicators", "FluxInvestor", "www.BackToTheFutureTrading.com", "info@backtothefuturetrading.com");
+#else
+					VendorLicense("AffordableIndicators", "RevRadar", "www.BackToTheFutureTrading.com", "info@backtothefuturetrading.com");
+#endif
+//				VendorLicense("AffordableIndicators", "RevRadar1", "www.BackToTheFutureTrading.com", "info@backtothefuturetrading.com");
+				RunLocalLicenseCheck = false;
+			} else {
+if(IsDevelopment) Print("Running NTC local license check");
+				RunLocalLicenseCheck = true;
+			}
+if(IsDevelopment) {
+	Print("FluxReverseRadar Initialize:  LicensePath: "+licensepath);
+}
+AddPlot(new Stroke(Brushes.Aqua,3),  PlotStyle.Dot, "Current");
+AddPlot(new Stroke(Brushes.Black,1), PlotStyle.Dot, "HH");
+AddPlot(new Stroke(Brushes.Black,1), PlotStyle.Dot, "LL");
+
+IsAutoScale=false;
+Calculate=Calculate.OnBarClose;
+IsOverlay=false;
+			//PriceTypeSupported	= false;
+			DrawOnPricePanel    = false;
+			PaintPriceMarkers = false;
+			RunInit = true;
+
+			if(IsDevelopment) ClearOutputWindow();
+			Name="Flux ReverseRadar v2.4";
+		}
+		if (State == State.Configure)
+		{
+			ExitOut = false;
+			string LicenseAdministrator = "  info@backtothefuturetrading.com  ";
+			#region License
+			if(!IsDevelopment && RunLocalLicenseCheck) {
+				LicenseCheck("NTC_UserLicense.txt","");
+//				Print("License number received: "+License);
+				if(LicenseStatus == 0) {Draw.TextFixed(this, "licenseerror",string.Concat("License failure...contact: ",LicenseAdministrator," to obtain a license on ",Name),TextPosition.Center);}
+				if(LicenseStatus == 2 || (LicenseStatus == 1 && stopdate>0)) {
+//					Print("Date received from license module: "+DateTime.FromBinary(stopdate).ToString());
+					if(NinjaTrader.Core.Globals.Now.Ticks > stopdate) {
+						LicenseStatus=0; 
+						Draw.TextFixed(this, "licenseerror",string.Concat("Temporary license expired on ",Name,Environment.NewLine,"contact:  ",LicenseAdministrator),TextPosition.Center);
+					}
+				}
+				if(stopdate!=0) {
+					TimeSpan timeremaining = new TimeSpan(stopdate - NinjaTrader.Core.Globals.Now.Ticks);
+					DateTime d = new DateTime(stopdate);
+					if(timeremaining.TotalDays>0 && timeremaining.TotalDays<5) Draw.TextFixed(this, "licenseerror1",string.Concat("Temporary license for ",Name," will expire on ",d.ToShortDateString()," (",(timeremaining.TotalDays<1?"tonight":(timeremaining.TotalDays<2?"1-day":timeremaining.TotalDays.ToString("0")+"-days")),"), contact:  ",LicenseAdministrator," for extension information",Environment.NewLine,"\t"),TextPosition.BottomLeft);
+				}
+				if(LicenseStatus<=0) ExitOut = true;
+			}
+			#endregion
+
+			if(ErrorMsg.Length>0) {
+				DrawOnPricePanel = false;
+				Draw.TextFixed(this, "error1", ErrorMsg, TextPosition.Center);
+				Print(ErrorMsg); 
+			}
+			if(ExitOut) return;
+
+			if(pBasis != FluxReverseRadar_Basis.HLC) {
+				for(int i = 0; i<19; i++) plots[i] = new List<OHLC_input>();
+			}
+			logoname = MakeString(new Object[] {Core.Globals.UserDataDir.ToString(),"radar2.gif"});
+			if(System.IO.File.Exists(logoname) && pShowRadarGraphic){
+				image= new Bitmap(logoname);
+			} else 
+				logoname = string.Empty;
+
+			int PriceDigits = 0;
+			FS = TickSize.ToString();
+			if(FS.Contains("E-")) {
+				FS = FS.Substring(FS.IndexOf("E-")+2);
+				PriceDigits = int.Parse(FS);
+			}
+			else PriceDigits = Math.Max(0,FS.Length-2);
+			
+			if(PriceDigits==0) FS="0";
+			if(PriceDigits==1) FS="0.0";
+			if(PriceDigits==2) FS="0.00";
+			if(PriceDigits==3) FS="0.000";
+			if(PriceDigits==4) FS="0.0000";
+			if(PriceDigits==5) FS="0.00000";
+			if(PriceDigits==6) FS="0.000000";
+			if(PriceDigits==7) FS="0.0000000";
+			if(PriceDigits>=8) FS="0.00000000";
+		}
+	}
+
+		/// <summary>
+		/// Called on each bar update event (incoming tick)
+		/// </summary>
+		protected override void OnBarUpdate()
+		{
+//try {
+			if(ExitOut) return;
+			if(CurrentBar<5) return;
+			AvgTicksBetweenBar = Math.Abs((Time[CurrentBar].Ticks - Time[0].Ticks)) / CurrentBar * 40;
+			try{
+				TimeSpan Since = new TimeSpan(NinjaTrader.Core.Globals.Now.Ticks - TimeAtLaunch.Ticks);
+				if(Since.TotalSeconds > 20) {
+					DrawOnPricePanel = false;
+					RemoveDrawObject("textfilemissing"); //this text was drawn in the Method_AccessHistoryFile partial class
+				}
+				Since = new TimeSpan(NinjaTrader.Core.Globals.Now.Ticks - TimeOfError.Ticks);
+				if(Since.TotalSeconds > 20) {
+					DrawOnPricePanel = false;
+					RemoveDrawObject("error"); //this text was drawn in the Method_AccessHistoryFile partial class
+					ErrorMsg = string.Empty;
+				}
+				Since = new TimeSpan(NinjaTrader.Core.Globals.Now.Ticks - TimeOfMissingDataAlert.Ticks);
+				if(Since.TotalSeconds > 20) {
+					for(int i = 0; i<MissingDataMsg.Length; i++) MissingDataMsg[i] = string.Empty;
+				}
+			}catch(Exception TFMerror){}
+
+			if(Bars.BarsPeriod.BarsPeriodType != BarsPeriodType.Minute) {
+				DrawTextFixed ("error",MakeString(new Object[] {"FluxReverseRadar only works on minute sequenced bars, not ",Bars.BarsPeriod.BarsPeriodType}),TextPosition.Center);
+				ExitOut = true;
+				return;
+			}
+			if(RunInit) {
+if(IsDevelopment) Print("FluxReverseRadar:  RunInit in OnBarUpdate");
+//if(System.IO.File.Exists(string.Concat(dirpath,"log.txt"))) System.IO.File.Delete(string.Concat(dirpath,"log.txt"));
+				RunInit = false;
+				#region RunInit
+				txtFont = new NinjaTrader.Gui.Tools.SimpleFont("Arial", (float)pFontSize);
+				IBar ibar = Bars.Get(Bars.Count-1);
+Calculate=Calculate.OnBarClose;
+				FirstDTforData = Time[0];
+
+				for(int pl = 0; pl<AdjWeekColors.Length; pl++) {
+ Brush cl = pWeekColors[pl];
+					AdjWeekColors[pl] = Brushes.FromArgb((int)Math.Truncate(255.0*(pLineOpacity+1.0)/10.0), cl.R, cl.G, cl.B);
+				}
+				txtBrush = new SolidColorBrush(pNeutralTextColor); txtBrush.Freeze();
+				if(pFontSize>0) {
+					UpDownTable = new TableDef(pMaxWeeks+2,8,0,0);
+					int minutes = pLenOfTrendLine * Bars.BarsPeriod.Value;
+					UpDownTable.ChangeCell(0,0,MakeString(new Object[] {"REVERSE RADAR NEXT ",minutes," MINUTES"}),txtFont,-1,string.Empty,txtBrush.Color, Brushes.Transparent, false);
+					UpDownTable.ChangeCell(1,0,"STATUS", txtFont, -1, string.Empty, pNeutralTextColor, Brushes.Transparent, false);
+					UpDownTable.ChangeCell(2,0,"", txtFont, -1, string.Empty, pNeutralTextColor, Brushes.Transparent, false);
+					UpDownTable.ChangeCell(pMaxWeeks, 2, " ", txtFont, -1, string.Empty, pNeutralTextColor, Brushes.Transparent, false);
+
+					txtBrush = new SolidColorBrush(pNeutralTextColor); txtBrush.Freeze();
+					for(int i = 1;i<=pMaxWeeks; i++) {
+						UpDownTable.ChangeCell(i-1, 2, MakeString(new Object[] {"WK",i," "}), txtFont, -1, string.Empty, AdjWeekColors[i-1], Brushes.Transparent, false);
+						UpDownTable.ChangeCell(i-1, 3, " UP:",   txtFont, 1, string.Empty, pNeutralTextColor, Brushes.Transparent, false);
+						UpDownTable.ChangeCell(i-1, 4, "#",      txtFont, 1, string.Empty, AdjWeekColors[i-1], Brushes.Transparent, false);
+						UpDownTable.ChangeCell(i-1, 6, "   DOWN:", txtFont, 1, string.Empty, pNeutralTextColor, Brushes.Transparent, false);
+						UpDownTable.ChangeCell(i-1, 7, "#",      txtFont, 1, string.Empty, AdjWeekColors[i-1], Brushes.Transparent, false);
+					}
+					UpDownTable.ChangeCell(pMaxWeeks+1, 2, "AVG ",   txtFont, -1, string.Empty, pNeutralTextColor, Brushes.Transparent, false);
+					UpDownTable.ChangeCell(pMaxWeeks+1, 3, " UP:",   txtFont, 1, string.Empty, pNeutralTextColor, Brushes.Transparent, false);
+					UpDownTable.ChangeCell(pMaxWeeks+1, 4, "#",      txtFont, 1, string.Empty, pNeutralTextColor, Brushes.Transparent, false);
+					UpDownTable.ChangeCell(pMaxWeeks+1, 5, "   ",    txtFont, 1, string.Empty, pNeutralTextColor, Brushes.Transparent, false);
+					UpDownTable.ChangeCell(pMaxWeeks+1, 6, "   DOWN:", txtFont, 1, string.Empty, pNeutralTextColor, Brushes.Transparent, false);
+					UpDownTable.ChangeCell(pMaxWeeks+1, 7, "#",      txtFont, 1, string.Empty, pNeutralTextColor, Brushes.Transparent, false);
+				}
+				oldOHLC = new List<OHLC_input>();
+
+//				if(pOldContractDate.Length>0) {
+//					path = MakeString(new Object[] {dirpath, Instrument.MasterInstrument.Name, " ", pOldContractDate, ".txt"});
+//					ReadInstrumentHistoricalData(path, ref oldOHLC);
+//					if(oldOHLC.Count>0) {
+//						LastDateTimeFromTxtFile = oldOHLC[oldOHLC.Count-1].DT;
+//						FirstDTforData = oldOHLC[0].DT;
+//						oldOHLC.Reverse();
+//						Draw.TextFixed(this, "error", MakeString(new Object[] {oldOHLC.Count.ToString()," read in from historical flat file ",path}), TextPosition.TopLeft);
+//					}
+//					else
+//						Draw.TextFixed(this, "error", "No data read in from historical flat file", TextPosition.TopLeft);
+//				} else {
+					LastDateTimeFromTxtFile = Time[0].AddDays(1);
+//				}
+// /**/Printf("304  LastDateTimeFromTxtFile: "+LastDateTimeFromTxtFile.ToString());
+
+				if(pBasis == FluxReverseRadar_Basis.HLC) {
+					for(int i = 0; i<PlottedBars.Length; i++) {
+						PlottedBars[i] = new List<OHLC_input>();
+					}
+				}
+				Plots[1].Pen = new Pen(ChartControl.Properties.ChartBackground, 1);
+				Plots[2].Pen = new Pen(ChartControl.Properties.ChartBackground, 1);
+if(CalculateOnBarClose)cobcshift=1;elsecobcshift=0;
+				#endregion
+//				Draw.TextFixed(this, "starttime",FirstDTforData.ToString(),TextPosition.TopRight);
+			}
+//			TimeSpan chartdata = new TimeSpan(Math.Abs(Time[CurrentBar-1].Ticks-Time[1].Ticks));
+			TimeSpan chartdata = new TimeSpan(Math.Abs(FirstDTforData.Ticks-Time[1].Ticks));
+			WeeksOnChart = (int)Math.Truncate(chartdata.TotalDays / 7.0);
+//Draw.TextFixed(this, "weeksonchart",WeeksOnChart.ToString(),TextPosition.TopLeft);
+//  Printf("315");
+			if(WeeksOnChart < pMaxWeeks) Draw.TextFixed(this, "error", MakeString(new Object[] {"Chart has only ",WeeksOnChart,"-weeks of data...increase number of days using FormatDataSeries"}), TextPosition.TopLeft);
+//   Printf("317");
+//  Printf("Ending OnBarUpdate");
+		}
+//===========================================================================================================
+protected override void OnRender(ChartControl chartControl, ChartScale chartScale) {
+if (!IsVisible) return;double min = chartScale.MinValue; double max = chartScale.MaxValue;
+base.OnRender(chartControl, chartScale);
+Point PanelUpperLeftPoint	= new Point(ChartPanel.X, ChartPanel.Y);
+Point PanelLowerRightPoint	= new Point(ChartPanel.X + ChartPanel.W, ChartPanel.Y + ChartPanel.H);
+int firstBarPainted = ChartBars.FromIndex;
+int lastBarPainted = ChartBars.ToIndex;
+
+
+if(IsDevelopment) Print("");
+if(IsDevelopment) Print("FluxReverseRadar:  Plot method:");
+			if(ChartControl==null) return;
+			if(pFontSize>0) {
+				UpDownTable.graphics = graphics;
+				if(RunPlotInit) {
+					RunPlotInit = false;
+					UpDownTable.RecalcTableSize();
+					//for(int i = 0; i<UpDownTable.Rows; i++) Print("Rowh: "+i+"  "+UpDownTable.RowHeight[i].ToString("0.0"));
+					//for(int i = 0; i<UpDownTable.Columns; i++) Print("Colw: "+i+"  "+UpDownTable.ColWidth[i].ToString("0.0"));
+				}
+			}
+try{
+			SmoothingMode oldSmoothingMode = RenderTarget.SmoothingMode;
+			int barPaintWidth = ChartControl.chartControl.GetBarPaintWidth(ChartBars);;
+			RightChartBar	= Math.Min(lastBarPainted, Bars.Count - 1);
+			LeftChartBar	= (RightChartBar - ChartControl.BarsPainted) + 1;
+if(IsDevelopment) Print(string.Concat("Leftbar: ",LeftChartBar,"  RightBar: ",RightChartBar,"  TimeAtRightBar: ",Time[CurrentBar-RightChartBar].ToString()));
+// /**/Printf("343");
+			if(LeftChartBar < 1) return;
+			int bar = Math.Max(0,CurrentBar-RightChartBar)-(RightChartBar>CurrentBar?1:0);
+			BarsInMarginSpace = (int) Math.Truncate((double)(ChartControl.Properties.BarMarginRightRight/ChartControl.Properties.BarDistance))-2;
+			if(BarsInMarginSpace<=0) {
+				Draw.TextFixed(this, "nomargin", "Increase chart margin (Chart Properties) to see the FluxReverseRadar",TextPosition.Center);
+				return;
+			} else {
+				RemoveDrawObject("nomargin");
+			}
+// /**/Printf("353");
+
+if(IsDevelopment) Print(String.Concat("CurrentBar: ",CurrentBar,"  bar: ",bar, "   RightChartBar: ",RightChartBar));
+			if(pBasis == FluxReverseRadar_Basis.HLC) {
+				for(int i = 0; i<PlottedBars.Length; i++) {
+					if(PlottedBars[i]!=null) PlottedBars[i].Clear();
+				}
+			}
+
+			DateTime RightmostBarTime = Time[bar];
+if(IsDevelopment) Print(string.Concat("551  Initializing RightmostBarTime at ",RightmostBarTime.ToString()));
+			if(RightmostBarTime.Ticks<LastDateTimeFromTxtFile.Ticks) return;
+			double CurrentBar_close = Open[bar];
+			double CurrentBar_median = (High[bar]+Low[bar])/2.0;
+			double CurrentBar_typical = (High[bar]+Low[bar]+Open[bar])/3.0;
+			DateTime RightmostBarTime_unchanging = Time[bar];
+// /**/Printf(string.Concat("368  Initializing RightmostBarTime_unchanging at ",RightmostBarTime_unchanging.ToString()));
+//Draw.TextFixed(this, "rmt",String.Concat("RightmostTime: ", Time[bar]),TextPosition.TopRight);
+			DateTime ShiftedTime = RightmostBarTime.AddMinutes(pMinutesInAdvance);
+			ShiftedTime = ShiftedTime.AddDays(-7);
+// /**/Printf(string.Concat("372  Initializing ShiftedTime at ",ShiftedTime.ToString()));
+			string DatesIncluded = string.Empty;
+			int ptr = 0;
+			double adj = 0;
+// /**/Printf("376");
+			bool looperror = false;
+
+			while(!looperror && ptr<Math.Min(pMaxWeeks,WeeksOnChart) && ptr<PlottedBars.Length) {// && plots!=null && ptr<plots.Length) {
+// /**/Printf(string.Concat("  loop ptr: ",ptr,"  pMaxWeeks: ",pMaxWeeks,"  WeeksOnChart: ",WeeksOnChart));
+				try{
+// /**/Printf(string.Concat("382   ShiftedTime = ",ShiftedTime));
+					if(ShiftedTime.Ticks > LastDateTimeFromTxtFile.Ticks) {
+						CurrentBarPtr[ptr] = Bars.GetBar(ShiftedTime);
+// /**/Printf(string.Concat("385   ShiftedTime is after LastDateTimeFromTxtFile...adding bar data pulled from chart, abs bar: ",CurrentBarPtr[ptr]));
+						bar = CurrentBar-CurrentBarPtr[ptr]-(RightChartBar>CurrentBar?1:0);
+// /**/Printf(String.Concat("387:  relbar: ",bar,", time at bar is ", Time[bar]));
+						if(CurrentBarPtr[ptr]<0) {looperror=true; return;}
+						if(CurrentBarPtr[ptr]>CurrentBar) {looperror=true; return;}
+// /**/Printf("579");
+
+						if(DatesIncluded.Length==0) DatesIncluded = ShiftedTime.ToString();
+						else DatesIncluded = MakeString(new Object[] {DatesIncluded,", ",ShiftedTime});
+// /**/Printf(string.Concat("583  DatesIncluded: ",DatesIncluded));
+						if(false/*pBasis == FluxReverseRadar_Basis.Close*/) {
+							#region Close basis, from chart
+							if(ptr==0) {
+								Adjustments[0] = CurrentBar_close - Close[bar];
+								//plots[plots.Length-1][0] = (BarsInMarginSpace, Adjustments[0]);
+								adj = Adjustments[0];
+							} 
+							else {
+								Adjustments[ptr] = CurrentBar_close - Close[bar];
+								adj = Adjustments[ptr];
+							}
+
+							//plots[ptr][0] = (BarsInMarginSpace, close+adj);
+							for(int i = 1; i<BarsInMarginSpace-1; i++) {
+								int before = bar+i;
+								int after = bar-i;
+								//if(BarsInMarginSpace+i<CurrentBar && i<pBarsBehindCurrentDot) plots[ptr][0] = (BarsInMarginSpace+i, Close[before]+adj);
+								//plots[ptr][0] = (BarsInMarginSpace-i, Close[after]+adj);
+							}
+							#endregion
+						}
+						else if(false/*pBasis == FluxReverseRadar_Basis.Median*/) {
+							#region Median basis, from chart
+							double median = (High[bar]+Low[bar]+Close[bar])/3.0;
+							if(ptr==0) {
+								Adjustments[0] = median - CurrentBar_median;
+								adj = Adjustments[0];
+							} 
+							else {
+								Adjustments[ptr] = median - CurrentBar_median;
+								adj = Adjustments[ptr];
+							}
+
+							//plots[ptr][0] = (BarsInMarginSpace, median+adj);
+
+							for(int i = 1; i<=BarsInMarginSpace; i++) {
+								int before = bar+i;
+								int after = bar-i;
+								//if(BarsInMarginSpace+i<CurrentBar && i<pBarsBehindCurrentDot) plots[ptr][0] = (BarsInMarginSpace+i, (High[before]+Low[before])/2.0+adj);
+								//plots[ptr][0] = (BarsInMarginSpace-i, (High[after]+Low[after])/2.0+adj);
+							}
+							#endregion
+						}
+						else if(pBasis == FluxReverseRadar_Basis.HLC) {
+							#region OHLC Bars, from chart
+							if(ptr==0) {
+								Adjustments[0] = CurrentBar_close - Close[bar];//CurrentBar_median;
+								adj = Adjustments[0];
+// /**/Printf(string.Concat("441   ",Time[bar].ToString(),"  ",Close[bar].ToString()));
+							}
+							else {
+								Adjustments[ptr] = CurrentBar_close - Close[bar];//CurrentBar_median;
+								adj = Adjustments[ptr];
+							}
+
+							b = new OHLC_input();
+							b.DT = Time[bar];
+							b.O = Open[bar] +adj;
+							b.H = High[bar] +adj;
+							b.L = Low[bar]  +adj;
+							b.C = Close[bar]+adj;
+							PlottedBars[ptr].Insert(0, b);
+
+// /**/Printf(string.Concat("456   Wk",ptr,"  Time of initial bar: ",b.DT.ToString()," ...proceeding to add historical bars on this week"));
+							for(int i = 1; i<=BarsInMarginSpace; i++) {
+								if(BarsInMarginSpace+i<CurrentBar && i<pBarsBehindCurrentDot+3) {
+									b.DT = Time[bar+i];
+									b.O = Open[bar+i] +adj;
+									b.H = High[bar+i] +adj;
+									b.L = Low[bar+i]  +adj;
+									b.C = Close[bar+i]+adj;
+									PlottedBars[ptr].Add(b);
+//if(ptr==2) Print("   Time of prior bar: "+b.DT.ToString());
+								}
+								b.DT = Time[bar-i];
+								b.O = Open[bar-i] +adj;
+								b.H = High[bar-i] +adj;
+								b.L = Low[bar-i]  +adj;
+								b.C = Close[bar-i]+adj;
+								PlottedBars[ptr].Insert(0, b);
+//if(ptr==2) Print("   Time of subsequent bar: "+b.DT.ToString());
+							}
+// /**/Printf(String.Concat("475  Addition complete, Len of PlottedBars[",ptr,"]: ",PlottedBars[ptr].Count));
+							#endregion
+						}
+						else if(pBasis == FluxReverseRadar_Basis.HiLo) {
+							#region HiLo bars, from chart
+							int hptr = ptr;
+							int lptr = hptr+(int)Math.Truncate(plots.Length/2d);
+							if(ptr==0) {
+								Adjustments[0] = CurrentBar_close - Close[bar];//CurrentBar_median;
+								//plots[plots.Length-1][0] = (BarsInMarginSpace, Adjustments[0]);
+								adj = Adjustments[0];
+							}
+							else {
+								Adjustments[ptr] = CurrentBar_close - Close[bar];//CurrentBar_median
+								adj = Adjustments[ptr];
+							}
+
+							//plots[hptr][0] = (BarsInMarginSpace, High[bar]+adj);
+							//plots[lptr][0] = (BarsInMarginSpace, Low[bar]+adj);
+
+							for(int i = 1; i<=BarsInMarginSpace; i++) {
+								if(BarsInMarginSpace+i<CurrentBar && i<pBarsBehindCurrentDot) {
+									//plots[hptr][0] = (BarsInMarginSpace+i, High[bar+i]+adj);
+									//plots[lptr][0] = (BarsInMarginSpace+i, Low[bar+i]+adj);
+								}
+								//plots[hptr][0] = (BarsInMarginSpace-i, High[bar-i]+adj);
+								//plots[lptr][0] = (BarsInMarginSpace-i, Low[bar-i]+adj);
+							}
+							#endregion
+						}
+						else if(false/*pBasis == FluxReverseRadar_Basis.Typical*/) {
+							#region typical, from chart
+							double typical = (High[bar]+Low[bar]+Close[bar])/3.0;
+							if(ptr==0) {
+								Adjustments[0] = CurrentBar_typical - typical;
+								//plots[plots.Length-1][0] = (BarsInMarginSpace, typical);
+								adj = Adjustments[0];
+							} 
+							else {
+								Adjustments[ptr] = CurrentBar_typical - typical;
+								adj = Adjustments[ptr];
+							}
+
+							//plots[ptr][0] = (BarsInMarginSpace, typical+adj);
+	
+							for(int i = 1; i<BarsInMarginSpace-1; i++) {
+								int before = bar+i;
+								int after = bar-i;
+								//if(BarsInMarginSpace+i<CurrentBar && i<pBarsBehindCurrentDot) plots[ptr][0] = (BarsInMarginSpace+i, (High[before]+Low[before]+Close[before])/3.0+adj);
+								//plots[ptr][0] = (BarsInMarginSpace-i, (High[after]+Low[after]+Close[after])/3.0+adj);
+							}
+							#endregion
+						}
+// /**/Printf("530");
+					} else if(oldOHLC.Count>1) {
+//Print(string.Concat("oldOHLC count: ",oldOHLC.Count.ToString()));
+//Print(string.Concat("532   ShiftedTime(",ShiftedTime,") is BEFORE LastDateTimeFromTxtFile(",LastDateTimeFromTxtFile,")..."));
+						int index = FindOHLC(oldOHLC, ShiftedTime);
+						if(index==-1) {index = FindNearestOHLC(oldOHLC, ShiftedTime);}
+						if(index==-1) continue;
+//						TimeSpan diff = new TimeSpan(Math.Abs(oldOHLC[index].DT.Ticks-ShiftedTime.Ticks));
+//						if(diff.TotalMinutes>80) {goto Skip;}
+//Print("539");
+
+						if(DatesIncluded.Length==0) DatesIncluded = ShiftedTime.ToString();
+						else DatesIncluded = MakeString(new Object[] {DatesIncluded,", ",ShiftedTime});
+
+						if(false/*pBasis == FluxReverseRadar_Basis.Close*/) {
+							#region Close, from file
+							if(ptr==0) {
+								Adjustments[0] = CurrentBar_close - oldOHLC[index].C;
+								//plots[plots.Length-1][0] = (BarsInMarginSpace, Adjustments[0]);
+								adj = Adjustments[0];
+							} 
+							else {
+								Adjustments[ptr] = CurrentBar_close - oldOHLC[index].C;
+								adj = Adjustments[ptr];
+							}
+
+							//plots[ptr][0] = (BarsInMarginSpace, oldOHLC[index].C+adj);
+
+							for(int i = 1; i<BarsInMarginSpace-1; i++) {
+								//if(BarsInMarginSpace+i<CurrentBar && i<pBarsBehindCurrentDot) plots[ptr][0] = (BarsInMarginSpace+i, oldOHLC[index+i].C+adj);
+								//plots[ptr][0] = (BarsInMarginSpace-i, oldOHLC[index-i].C+adj);
+							}
+							#endregion
+						}
+						else if(pBasis == FluxReverseRadar_Basis.HLC) {
+							#region OHLC Bars, from file
+
+							if(ptr==0) {
+								Adjustments[0] = CurrentBar_close - oldOHLC[index].C;//(oldOHLC[index].H+oldOHLC[index].L)/2.0;
+								adj = Adjustments[ptr];
+							} 
+							else {
+								Adjustments[ptr] = CurrentBar_close - oldOHLC[index].C;//(oldOHLC[index].H+oldOHLC[index].L)/2.0;
+								adj = Adjustments[ptr];
+							}
+
+							b = new OHLC_input();
+							b.DT = oldOHLC[index].DT;
+							b.O = oldOHLC[index].O+adj;
+							b.H = oldOHLC[index].H+adj;
+							b.L = oldOHLC[index].L+adj;
+							b.C = oldOHLC[index].C+adj;
+							PlottedBars[ptr].Insert(0, b);
+
+							for(int i = 1; i<BarsInMarginSpace-1; i++) {
+								if(BarsInMarginSpace+i<CurrentBar && i<pBarsBehindCurrentDot+3) {
+									b.DT = oldOHLC[index+i].DT;
+									b.O = oldOHLC[index+i].O+adj;
+									b.H = oldOHLC[index+i].H+adj;
+									b.L = oldOHLC[index+i].L+adj;
+									b.C = oldOHLC[index+i].C+adj;
+									PlottedBars[ptr].Add(b);
+								}
+								b.DT = oldOHLC[index-i].DT;
+								b.O = oldOHLC[index-i].O+adj;
+								b.H = oldOHLC[index-i].H+adj;
+								b.L = oldOHLC[index-i].L+adj;
+								b.C = oldOHLC[index-i].C+adj;
+								PlottedBars[ptr].Insert(0, b);
+							}
+//Print(string.Concat("600  Addition complete, Len of PlottedBars[",ptr,"]: ",PlottedBars[ptr].Count));
+							#endregion
+						}
+						else if(pBasis == FluxReverseRadar_Basis.HiLo) {
+							#region HiLo Bars, from file
+							int hptr = ptr;
+							int lptr = hptr+(int)Math.Truncate(plots.Length/2d);
+							double median = (oldOHLC[index].H+oldOHLC[index].L)/2.0;
+
+							if(ptr==0) {
+								Adjustments[0] = CurrentBar_median - median;
+								//plots[plots.Length-1][0] = (BarsInMarginSpace, Adjustments[0]);
+								adj = Adjustments[0];
+							} 
+							else {
+								Adjustments[ptr] = CurrentBar_median - median;
+								adj = Adjustments[ptr];
+							}
+
+							//plots[hptr][0] = (BarsInMarginSpace, oldOHLC[index].H+adj);
+							//plots[lptr][0] = (BarsInMarginSpace, oldOHLC[index].L+adj);
+
+							for(int i = 1; i<BarsInMarginSpace-1; i++) {
+								if(BarsInMarginSpace+i<CurrentBar && i<pBarsBehindCurrentDot) {
+									//plots[hptr][0] = (BarsInMarginSpace+i, oldOHLC[index+i].H+adj);
+									//plots[lptr][0] = (BarsInMarginSpace+i, oldOHLC[index+i].L+adj);
+								}
+								//plots[hptr][0] = (BarsInMarginSpace-i, oldOHLC[index-i].H+adj);
+								//plots[lptr][0] = (BarsInMarginSpace-i, oldOHLC[index-i].L+adj);
+							}
+							#endregion
+						}
+						else if(false/*pBasis == FluxReverseRadar_Basis.Median*/) {
+							#region Median, from file
+							double median = (oldOHLC[index].H+oldOHLC[index].L)/2.0;
+							if(ptr==0) {
+								Adjustments[0] = CurrentBar_median - median;
+								//plots[plots.Length-1][0] = (BarsInMarginSpace, Adjustments[0]);
+								adj = Adjustments[0];
+							} 
+							else {
+								Adjustments[ptr] = CurrentBar_median - median;
+								adj = Adjustments[ptr];
+							}
+
+							//plots[ptr][0] = (BarsInMarginSpace, median+adj);
+							for(int i = 1; i<BarsInMarginSpace-1; i++) {
+								//if(BarsInMarginSpace+i<CurrentBar && i<pBarsBehindCurrentDot) plots[ptr][0] = (BarsInMarginSpace+i, (oldOHLC[index+i].H+oldOHLC[index+i].L)/2.0+adj);
+								//plots[ptr][0] = (BarsInMarginSpace-i, (oldOHLC[index-i].H+oldOHLC[index-i].L)/2.0+adj);
+							}
+							#endregion
+						}
+						else if(false/*pBasis == FluxReverseRadar_Basis.Typical*/) {
+							#region Typical, from file
+							double typical = (oldOHLC[index].H+oldOHLC[index].L+oldOHLC[index].C)/3.0;
+							if(ptr==0) {
+								Adjustments[0] = CurrentBar_typical - typical;
+								//plots[plots.Length-1][0] = (BarsInMarginSpace, Adjustments[0]);
+								adj = Adjustments[0];
+							} 
+							else {
+								Adjustments[ptr] = CurrentBar_typical - typical;
+								adj = Adjustments[ptr];
+							}
+
+							//plots[ptr][0] = (BarsInMarginSpace, typical+adj);
+
+							for(int i = 1; i<BarsInMarginSpace-1; i++) {
+								//if(BarsInMarginSpace+i<CurrentBar && i<pBarsBehindCurrentDot) plots[ptr][0] = (BarsInMarginSpace+i, (oldOHLC[index+i].H+oldOHLC[index+i].L+oldOHLC[index+i].C)/3.0+adj);
+								//plots[ptr][0] = (BarsInMarginSpace-i, (oldOHLC[index-i].H+oldOHLC[index-i].L+oldOHLC[index-i].C)/3.0+adj);
+							}
+							#endregion
+						}
+					}
+					ptr++;
+					Skip:
+					ShiftedTime = ShiftedTime.AddDays(-7);
+				}catch(Exception err) {
+					Print(MakeString(new Object[] {Instrument.FullName,": error: ",err.ToString()}));
+// /**/Printf(String.Concat(Instrument.FullName,": 679 error: ",err.ToString()));
+					Draw.TextFixed(this, "error",err.ToString(),TextPosition.Center); looperror=true;}
+			}
+			Draw.TextFixed(this, "datesincluded", DatesIncluded, TextPosition.BottomLeft);
+
+
+// /**/Printf("685");
+			int penwidth =  Math.Max(1, ChartControl.BarWidth -2);
+			int offset = Math.Max(1, (barPaintWidth/2-2));
+			double hh = double.MinValue;
+			double ll = double.MaxValue;
+
+			#region Draw bars & trendlines, check for data gaps, calculate slopes, calculate up/down traversal
+
+//			string msg = String.Concat(ChartControl.Properties.ChartBackground.ToString(),", ");
+			int NumOfChartsDrawn = 0;
+			int LineX1 = int.MinValue;
+			int LineY1 = 0;
+			int rmbPixel = ChartControl.CanvasRight - ChartControl.Properties.BarMarginRightRight - barPaintWidth / 2;
+			int leftmostPixel = rmbPixel - ChartControl.Properties.BarDistance * pBarsBehindCurrentDot; 
+			for(int ii=0; ii<LineSlopes.Length; ii++) LineSlopes[ii]=double.NaN;
+			int plotcount = 0;
+			while(plotcount<PlottedBars.Length) {
+				if(PlottedBars[plotcount]==null || PlottedBars[plotcount].Count==0 || pWeekColors[plotcount]==Color.Transparent || pWeekColors[plotcount]==ChartControl.Properties.ChartBackground) {plotcount++; continue;}
+				if(pWeeksToSkip.Contains((plotcount+1).ToString())) {plotcount++;continue;}
+// /**/Printf(string.Concat("704   Draw Bars...starting cycle with Wk",plotcount.ToString()));
+
+				#region Check for possibility of large gap in chart data
+				DateTime st = RightmostBarTime_unchanging.AddDays(-7*(plotcount+1));
+				long diff = Math.Abs(PlottedBars[plotcount][PlottedBars[plotcount].Count-1].DT.Ticks - st.Ticks);
+				if(diff > AvgTicksBetweenBar) {
+					MissingDataMsg[plotcount] = MakeString(new Object[] {"It appears there is a significant amount of data missing on your chart at approximately ",st.ToString(),"...that plot has been removed",Environment.NewLine});
+// /**/Printf(string.Concat("AvgMinutes: ",(AvgTicksBetweenBar/TimeSpan.TicksPerMinute).ToString(),"  DiffMinutes found: ",(diff/TimeSpan.TicksPerMinute).ToString()));
+					PlottedBars[plotcount].Clear();
+					TimeOfMissingDataAlert = NinjaTrader.Core.Globals.Now;
+					plotcount++;
+					continue;
+				}
+				DrawTextFixed ("missingdata", String.Concat(MissingDataMsg), TextPosition.TopRight);  // /**/Printf(String.Concat(MissingDataMsg));
+				#endregion
+
+				NumOfChartsDrawn++;
+// /**/Printf(string.Concat("720  NumOfChartsDrawn incremented to: ",NumOfChartsDrawn));
+				int searchptr = 0;
+// /**/Printf(string.Concat("searchptr initialized to ",searchptr, " count of bars to search: ",PlottedBars[plotcount].Count));
+	for(searchptr = 0; searchptr<PlottedBars[plotcount].Count; searchptr++) {
+//Print(string.Concat("725  viewing #",searchptr,"  time: ",PlottedBars[plotcount][searchptr].DT.ToString()));
+	} // /**/Printf(" ");
+//				DateTime starttime = RightmostBarTime.AddDays(-7*plotcount);
+				DateTime starttime = PlottedBars[plotcount][PlottedBars[plotcount].Count-1].DT;
+
+				for(searchptr = 0; searchptr<PlottedBars[plotcount].Count; searchptr++) {
+					RightmostBarTime = new DateTime(starttime.Year, starttime.Month, starttime.Day, RightmostBarTime.Hour, RightmostBarTime.Minute, RightmostBarTime.Second);
+					TimeSpan tsd = new TimeSpan(Math.Abs(starttime.Ticks-RightmostBarTime.Ticks));
+					if(tsd.TotalMinutes>500) RightmostBarTime=RightmostBarTime.AddDays(1);
+					if(tsd.TotalMinutes<-500) RightmostBarTime=RightmostBarTime.AddDays(-1);
+//					RightmostBarTime = new DateTime(PlottedBars[plotcount][searchptr].DT.Year,PlottedBars[plotcount][searchptr].DT.Month,PlottedBars[plotcount][searchptr].DT.Day,RightmostBarTime.Hour,RightmostBarTime.Minute,RightmostBarTime.Second);
+//Print(string.Concat("736  comparing #",searchptr,"  time: ",PlottedBars[plotcount][searchptr].DT.ToString(), "  to RMBtime: ",RightmostBarTime.ToString()));
+					if(PlottedBars[plotcount][searchptr].DT.Ticks <= RightmostBarTime.Ticks) {
+//Print(string.Concat("738  ",searchptr," ",PlottedBars[plotcount][searchptr].DT.ToString()," is <= Rightmostbartime ",RightmostBarTime.ToString()));
+						break;
+					}
+				}// /**/Printf(string.Concat("736  searchptr: ",searchptr));
+				#region Init variables
+				if(searchptr>=PlottedBars[plotcount].Count) searchptr = PlottedBars[plotcount].Count-1;
+				if(searchptr>0) {
+// /**/Printf(string.Concat("744   searchptr settled on ",searchptr, "  found PlottedBars[",plotcount,"].DT of ",PlottedBars[plotcount][searchptr].DT.ToString(),"  RightmostBarTime: ",RightmostBarTime.ToString()));
+// /**/Printf(string.Concat("745    PlottedBars[",plotcount,"][",searchptr,"].DT: ",PlottedBars[plotcount][searchptr].DT.ToString()));
+					long t1 = Math.Abs(PlottedBars[plotcount][searchptr].DT.Ticks - RightmostBarTime.Ticks);
+// /**/Printf(string.Concat("747    PlottedBars[",plotcount,"][",(searchptr-1).ToString(),"].DT: ",PlottedBars[plotcount][searchptr-1].DT.ToString()));
+					long t2 = Math.Abs(PlottedBars[plotcount][searchptr-1].DT.Ticks - RightmostBarTime.Ticks);
+					if(t2<t1) {
+						searchptr = searchptr-1; //searchptr now points to the nearest historical bar compared to the rightmost bar time
+						// /**/Printf(string.Concat("746   t2 is > t1...searchptr is being decremented to ",searchptr));
+					}
+				}
+				searchptr = searchptr + pBarsBehindCurrentDot; //searchptr now points to the leftmost bar to be painted to chart
+
+				upColor = AdjWeekColors[plotcount];
+				downColor = AdjWeekColors[plotcount];
+				outlineColor = AdjWeekColors[plotcount];
+				Pen myPen = new Pen(outlineColor,1);
+				Brush brushUp = new SolidColorBrush(upColor); brushUp.Freeze();
+				Brush brushDown = new SolidColorBrush(downColor); brushDown.Freeze();
+				int ChartPosPtr = 0;
+				HighTicks[plotcount] = 0;
+				LowTicks[plotcount] = 0;
+				double ClosePrice = 0;
+				#endregion
+
+				while (ChartPosPtr<PlottedBars[plotcount].Count) //run through all the collected historical bars, draw them if margin space permits
+				{
+					int	x = (int) (leftmostPixel + (ChartPosPtr /*- ChartControl.BarsPainted +1*/) * ChartControl.Properties.BarDistance);
+// /**/Printf(string.Concat("771:  ChartPosPtr set to: ",ChartPosPtr));
+					bar = searchptr-ChartPosPtr;
+// /**/Printf(string.Concat("773:  bar calculated to be: ",bar," = searchptr-ChartPosPtr"));
+					if(bar>=PlottedBars[plotcount].Count) {Print("Exiting Slopes calculation because bar>PlottedBars.Count");ChartPosPtr++;continue;}
+					if(bar<0) {/*Printf(string.Concat("Week ",plotcount,", Bar is <0, moving on to next week of data, ",(plotcount+1).ToString()));*/break;}
+
+					hh = Math.Max(hh, PlottedBars[plotcount][bar].H);
+					ll = Math.Min(ll, PlottedBars[plotcount][bar].L);
+					int y1 = GetYPos(PlottedBars[plotcount][bar].O, bounds, min, max);
+					int y2 = GetYPos(PlottedBars[plotcount][bar].H, bounds, min, max);
+					int y3 = GetYPos(PlottedBars[plotcount][bar].L, bounds, min, max);
+					int y4 = GetYPos(PlottedBars[plotcount][bar].C, bounds, min, max);
+// /**/Printf(string.Concat("783:   OHLC: ",PlottedBars[plotcount][bar].O," ",PlottedBars[plotcount][bar].H," ",PlottedBars[plotcount][bar].L," ",PlottedBars[plotcount][bar].C));
+					if(ChartPosPtr == pBarsBehindCurrentDot) {
+						LineX1 = rmbPixel; 
+						LineY1 = y4;
+						ClosePrice = PlottedBars[plotcount][bar].C;
+// Printf(String.Concat("788   ",PlottedBars[plotcount][bar].DT,"    Close price: ",ClosePrice.ToString("0.00")));
+						HighTicks[plotcount] = (PlottedBars[plotcount][bar].H - ClosePrice)/TickSize;
+						LowTicks[plotcount] = (ClosePrice-PlottedBars[plotcount][bar].L)/TickSize;
+			//Run through pLenOfTrendLine bars finding the ticks traversed up and down
+try{
+						for(int bp=0; bp<=Math.Min(pLenOfTrendLine,BarsInMarginSpace); bp++) {
+							int barptr = bar-bp; //barptr starts at the right end of the trendline, and goes down to the left end of the trendline 
+// /**/Printf(string.Concat("795:  barptr: ",barptr," = bar(",bar,")-bp(",bp,")"));
+							if(barptr<0) {continue;}
+							double ticks = (PlottedBars[plotcount][barptr].H - ClosePrice)/TickSize;
+							HighTicks[plotcount] = Math.Max(HighTicks[plotcount], ticks);
+							ticks = (ClosePrice - PlottedBars[plotcount][barptr].L)/TickSize;
+							LowTicks[plotcount] = Math.Max(LowTicks[plotcount], ticks);
+// /**/Printf(String.Concat("801   HighTicks.Length: ",HighTicks.Length,"  LowTicks.Length: ",LowTicks.Length));
+// /**/Printf(string.Concat("802   HH: ",HighTicks[plotcount]," LL: ",LowTicks[plotcount]));
+						}
+}catch{};
+//}catch(Exception err785){Printf(string.Concat("error797: ",err785.ToString()));}
+					}
+					try{    // /**/Printf(string.Concat("787   LineX1 ",LineX1," pLenOfTrendline ",pLenOfTrendLine,"  BarsInMarginSpace: ",BarsInMarginSpace,"  BarsBehindCurrentDot: ",pBarsBehindCurrentDot));
+						if(LineX1!= int.MinValue && ChartPosPtr==Math.Min(pLenOfTrendLine,BarsInMarginSpace)+pBarsBehindCurrentDot) {
+							RenderTarget.DrawLine(new Pen(AdjWeekColors[plotcount],2), LineX1, LineY1, x, y4);
+							LineSlopes[plotcount] = (1.0*LineY1-y1) / (1.0*x - LineX1);
+//Print(string.Concat(Environment.NewLine,"Calculated LineSlopes[",plotcount,"] = ",LineSlopes[plotcount].ToString()));
+						} else {
+//Print(string.Concat(plotcount,"  Skipping LineSlopes calculation, LineX1=",LineX1,"  ChartPosPtr: ",ChartPosPtr));
+						}
+					}catch{};
+					//}catch(Exception err813){Printf(string.Concat("error813:   ",err813.ToString()));};
+// /**/Printf("814");
+
+					#region Draw bars, OHLC, Candlestick, HiLo
+					switch (ChartBars.Properties.ChartStyleType)
+					{
+						case ChartStyleType.OHLC:
+// /**/Printf("820");
+							myPen.Color = (y4>y1) ? downColor:upColor;
+							myStroke.Width = penwidth;
+							RenderTarget.DrawLine(myPen, x, y2-penwidth/2, x, y3+penwidth/2);
+							RenderTarget.DrawLine(myPen, x-offset, y1, x, y1);
+							RenderTarget.DrawLine(myPen, x, y4, x+offset, y4);
+							break;
+						case ChartStyleType.Box:
+						case ChartStyleType.CandleStick:
+// /**/Printf("828");
+							if (y4>y1) {
+								RenderTarget.FillRectangle(brushDown,x-barPaintWidth/2+1,y1,barPaintWidth-2,y4-y1);
+								RenderTarget.Draw.Rectangle(this, new Pen(outlineColor,outlineWidth),x-barPaintWidth/2+1,y1,barPaintWidth-2,y4-y1);
+							} else if (y4<y1) {
+								RenderTarget.FillRectangle(brushUp,x-barPaintWidth/2+1,y4,barPaintWidth-2,y1-y4);
+								RenderTarget.Draw.Rectangle(this, new Pen(outlineColor,outlineWidth),x-barPaintWidth/2+1,y4,barPaintWidth-2,y1-y4);
+							}
+							RenderTarget.DrawLine(new Pen(outlineColor,outlineWidth), x, y2, x, Math.Min(y1,y4));
+							RenderTarget.DrawLine(new Pen(outlineColor,outlineWidth), x, y3, x, Math.Max(y1,y4));
+							if (y1==y4) RenderTarget.DrawLine(new Pen(outlineColor,outlineWidth),x-barPaintWidth/2+1, y1, x-barPaintWidth/2+barPaintWidth-2, y4);
+							break;
+						case ChartStyleType.HiLoBars:
+// /**/Printf("841");
+							myPen.Color = (y4>y1) ? downColor:upColor;
+							myStroke.Width = penwidth;
+							RenderTarget.DrawLine(myPen, x, y2, x, y3);
+							if (y2 == y3) RenderTarget.DrawLine(myPen,x-penwidth/2,y2,x-penwidth/2+penwidth,y3);
+							break;
+						default:
+							break;
+					}
+					#endregion
+					ChartPosPtr++;
+				}
+				plotcount++;
+			}
+			#endregion
+// /**/Printf("856");
+
+		//Calculate slopes, determine if an audible alert needs to be played, draw the P and R ticks
+			int ups = 0;
+			int downs = 0;
+			double avgupticks = 0;
+			double avgdnticks = 0;
+
+			#region Draw up/down table
+// /**/Printf("866");
+
+			for(int ii= 0; ii<LineSlopes.Length; ii++) {
+				try{
+				if(double.IsNaN(LineSlopes[ii])) {
+					if(ii<pMaxWeeks) {
+// /**/Printf(string.Concat("872   LineSlopes# ",ii,"  ",LineSlopes[ii].ToString(),"  pMaxWeeks: ",pMaxWeeks));
+						UpDownTable.ChangeCell(ii, 4, "#", txtFont, 1, string.Empty, txtBrush.Color, Brushes.Transparent, false);
+						UpDownTable.ChangeCell(ii, 7, "#", txtFont, 1, string.Empty, txtBrush.Color, Brushes.Transparent, false);
+					}
+				} else {
+					if(LineSlopes[ii]>0) {
+						ups++;
+					}
+					else if(LineSlopes[ii]<0) {
+						downs++;
+					}
+					if(pFontSize>0) {
+						//Draw lines of up/down data
+						txtBrush = new SolidColorBrush(AdjWeekColors[ii]); txtBrush.Freeze();
+						avgupticks = avgupticks + HighTicks[ii];
+						avgdnticks = avgdnticks + LowTicks[ii];
+						UpDownTable.ChangeCell(ii, 4, HighTicks[ii].ToString("0"), txtFont, 1, string.Empty, txtBrush.Color, Brushes.Transparent, false);
+						UpDownTable.ChangeCell(ii, 7, LowTicks[ii].ToString("0"), txtFont, 1, string.Empty, txtBrush.Color, Brushes.Transparent, false);
+					}
+				}
+				}catch{};
+//				}catch(Exception err893){Printf(string.Concat("Err893 ",err893.ToString()));}
+// /**/Printf("894");
+
+			}
+// /**/Printf("897");
+			if(pFontSize>0) {
+				if(NumOfChartsDrawn<=1) {
+					UpDownTable.Cells[pMaxWeeks+1, 2].TextColor = Brushes.Transparent;
+					UpDownTable.Cells[pMaxWeeks+1, 3].TextColor = Brushes.Transparent;
+					UpDownTable.Cells[pMaxWeeks+1, 4].TextColor = Brushes.Transparent;
+					UpDownTable.Cells[pMaxWeeks+1, 6].TextColor = Brushes.Transparent;
+					UpDownTable.Cells[pMaxWeeks+1, 7].TextColor = Brushes.Transparent;
+				} else {
+					UpDownTable.Cells[pMaxWeeks+1, 2].TextColor = pNeutralTextColor;
+					UpDownTable.Cells[pMaxWeeks+1, 3].TextColor = pNeutralTextColor;
+					UpDownTable.Cells[pMaxWeeks+1, 4].TextColor = pNeutralTextColor;
+					UpDownTable.Cells[pMaxWeeks+1, 6].TextColor = pNeutralTextColor;
+					UpDownTable.Cells[pMaxWeeks+1, 7].TextColor = pNeutralTextColor;
+					UpDownTable.ChangeValue(pMaxWeeks+1, 2, "AVG ");
+					UpDownTable.ChangeValue(pMaxWeeks+1, 4, (avgupticks/NumOfChartsDrawn).ToString("0.0"));
+					UpDownTable.ChangeValue(pMaxWeeks+1, 7, (avgdnticks/NumOfChartsDrawn).ToString("0.0"));
+				}
+			}
+// /**/Printf("927");
+
+			TimeSpan sincesound = new TimeSpan(Math.Abs(TimeOfPing.Ticks-NinjaTrader.Core.Globals.Now.Ticks));
+			if(IsFirstTickOfBar && sincesound.TotalSeconds>60 && pAgreeingTrends<=PlottedBars.Length && !Historical) {
+				TimeOfPing = NinjaTrader.Core.Globals.Now;
+				if(ups>=pAgreeingTrends) {
+// /**/Printf("933");
+					if(pFontSize>0) UpDownTable.ChangeCell(2,0,"HIGH PROBABILITY UP TREND", txtFont, -1, string.Empty, pBuyTextColor, Brushes.Transparent, false);
+					PlaySound(AddSoundFolder(pAgreementSound));
+				}
+				else if(downs>=pAgreeingTrends) {
+// /**/Printf("938");
+					if(pFontSize>0) UpDownTable.ChangeCell(2,0,"HIGH PROBABILITY DOWN TREND", txtFont, -1, string.Empty, pSellTextColor, Brushes.Transparent, false);
+					PlaySound(AddSoundFolder(pAgreementSound));
+				} else UpDownTable.ChangeValue(2,0,string.Empty);
+//Draw.TextFixed(this, "hiloavg",String.Concat("ups: ",ups,"  dns: ",downs), TextPosition.BottomRight);
+			}
+//				string info = String.Concat(HiLoAvgMsg);
+			//Print(String.Concat(Time[0].ToString(),"   ",String.Concat(HiLoAvgMsg)));
+			//Draw.TextFixed(this, "hiloavg",String.Concat(HiLoAvgMsg), TextPosition.Center);
+			#endregion
+// /**/Printf("937");
+
+		//set the plots HighestHigh and LowestLow...this helps to automatically scale the panel
+			if(hh>double.MinValue && ll<double.MaxValue) {
+				for(int i = LeftChartBar; i<RightChartBar; i++) {
+					if(i>0 && i<=CurrentBar) {
+						Values[1][0] = (CurrentBar-i,hh);
+						Values[2][0] = (CurrentBar-i,ll);
+//						Draw.TextFixed(this, "HHLL",(hh-ll).ToString(),TextPosition.Center);
+					} else break;
+				}
+				if(pFontSize>0) UpDownTable.ChangeCell(3,0,"HH-LL: "+(hh-ll).ToString(FS), txtFont, -1, string.Empty, ChartControl.Properties.AxisPen.Brush, Brushes.Transparent, false);
+				if(pShowHHLL) {
+					DrawOnPricePanel = true;
+					Draw.HorizontalLine(this, "RRHH",false,hh,pHHcolor,pHHLLdashStyle,pHHLLwidth);
+					Draw.HorizontalLine(this, "RRLL",false,ll,pLLcolor,pHHLLdashStyle,pHHLLwidth);
+				}
+			}
+
+			int timerdotXpixel = rmbPixel;
+			int timerdotYpixel = ChartPanel.Y+ChartPanel.H-4;
+			int timerbar = 0;
+			while(timerdotXpixel < bounds.Right) {
+				timerbar++;
+				timerdotXpixel = timerdotXpixel + ChartControl.Properties.BarDistance;
+				if(timerbar % pTimerDotSpacing == 0) DrawADot(ref graphics, ChartControl.Properties.AxisPen.Brush, timerdotXpixel, timerdotYpixel, 4);
+			}
+// /**/Printf("955");
+
+			if(pFontSize>0) UpDownTable.TopLeftX = 5;
+			#region Radar Graphic
+			if(logoname.Length>0 && pShowRadarGraphic) {
+				float width = image.Width;
+				float height = image.Height;
+				int holeheight = ChartPanel.H-24;
+				float factor = holeheight / height;
+				Rectangle frame = new Rectangle(0, ChartPanel.Y+12, (int)Math.Round(factor * width,0), holeheight);
+				RenderTarget.DrawImage(image, frame, 0,	0, width, height, GraphicsUnit.Pixel);
+				if(pFontSize>0) UpDownTable.TopLeftX = frame.Right+5;
+			}
+			#endregion
+
+			if(pFontSize>0) {
+// /**/Printf("971");
+				UpDownTable.TopLeftY = ChartPanel.Y+15;
+				UpDownTable.RedrawTable();
+//				UpDownTable.RedrawTable(leftmostPixel - UpDownTable.TopLeftX, bounds.Size.Height-10);
+			}
+// /**/Printf("976");
+
+}catch(Exception err){
+	Print(MakeString(new Object[] {"Plot error: ",err}));
+// /**/Printf(String.Concat("Plot error: ",err.ToString()));
+}
+// /**/Printf("Ending Plot Routine");
+		}
+		void DrawADot(ref Graphics g, Brush clr, int CenterPixelX, int CenterPixelY, int Diameter) {
+			int radius = Diameter/2;
+			g.FillEllipse(new SolidColorBrush(clr), CenterPixelX-radius, CenterPixelY-radius, Diameter, Diameter);
+		}
+//===========================================================================================================
+		private void Printt(string msg) {
+			//Print(msg);
+		}
+//===========================================================================================================
+//		public override string ToString()
+//		{
+//			return n;
+//		}
+//===========================================================================================================
+		private int GetYPos(double price, Rectangle bounds, double min, double max)
+		{
+			return (int) ((ChartPanel.Y + ChartPanel.H) - ((price - min) / ChartControl.MaxMinusMin(max, min)) * ChartPanel.H);
+		}
+		private int GetXPos(int baridx, Rectangle bounds)
+		{
+			double PctFromRight = (RightChartBar - baridx);
+			PctFromRight = PctFromRight / (RightChartBar-LeftChartBar);
+			int PixelFromRight = (int) Math.Round(bounds.Right - ChartPanel.W * PctFromRight);
+			if(PixelFromRight > bounds.Right) PixelFromRight = ChartPanel.X;
+			return PixelFromRight;
+		}
+
+//===========================================================================================================
+
+		private int FindOHLC(List<OHLC_input> list, DateTime DT)
+		{
+// /**/Printf("1005");
+			int i = 0;
+			bool found = false;
+			while(i<list.Count) {
+				if (list[i].DT.Ticks == DT.Ticks) {
+					found = true;
+					return(i);
+				}
+				i++;
+			}
+			return(-1);
+		}
+
+//=====================================================================
+		private int FindNearestOHLC(List<OHLC_input> list, DateTime DT)
+		{
+// /**/Printf("1021");
+			int i = 0;
+			bool found = false;
+			while(i<list.Count) {
+				if (list[i].DT.Ticks == DT.Ticks) {
+					found = true;
+					return(i);
+				} else if(i>0) {
+					if(list[i].DT.Ticks<=DT.Ticks && list[i-1].DT.Ticks>=DT.Ticks) {
+						return(i);
+					}
+				}
+				i++;
+			}
+			return(-1);
+		}
+
+//=====================================================================
+		private void ReadInstrumentHistoricalData(string FilePath, ref List<OHLC_input> OHLC) {
+			#region ReadInstrumentHistoricalData
+			string[] CompleteFile=null;
+			int LineId = 0;
+	try{
+			bool Error = false;
+			string [] SubStr;
+			int ElementId=0;
+			if(Instrument == null) return;
+
+			if (!System.IO.File.Exists(FilePath))
+			{
+				string msg = "-- Text File MISSING --"+Environment.NewLine+Environment.NewLine+FilePath+"  was not found"+Environment.NewLine+Environment.NewLine+"Visit http://screencast.com/t/zmtOTJHVMO for details on creating the required text file";
+				Log(msg, LogLevel.Information);
+				Draw.TextFixed(this, "textfilemissing", msg, TextPosition.Center);
+				Error = true;
+				return;
+			}
+			else
+			{
+			// Opens the text file and reads all lines into a string. It will then close the file.
+				//Printt(NinjaTrader.Core.Globals.Now.ToString()+"  File found: "+MyDocs+FileName);
+				//Printt("  contents dumping:");
+				string readText = System.IO.File.ReadAllText(FilePath);
+				//Printt(readText);
+	
+				/* Splits the file at every new line or carriage return. Places each split into the string array.
+				' ' represents a space, '\r' represents carriage returns, '\n' represents line feeds */
+				CompleteFile = readText.Split(new Char [] {'\r', '\n'},StringSplitOptions.RemoveEmptyEntries);
+	
+				LineId = 0;
+	
+				// For every FullLine inside the CompleteFile
+				foreach (string FullLine in CompleteFile)
+				{
+					LineId++; 
+					//Printt("Reading line: "+LineId);
+				// Ignores strings that are null (e.g. the strings created from the new lines)
+					if (!FullLine.Contains("//") && FullLine.Trim() != "")
+					{
+						SubStr = FullLine.Split(new Char []{'\t',';',' '},StringSplitOptions.None);
+	
+						ElementId = 0;
+						double temp = 0;
+						int itemp = 0;
+						OHLC_input indata = new OHLC_input();
+						foreach (string str in SubStr) 
+						{
+							//Printt("Line "+LineId+" Element "+ElementId+"   "+str);
+							switch(ElementId) {
+								case 0: if(int.TryParse(str, out itemp)) {  	//itemp = 20091204
+											temp = itemp/10000; 				//temp = 2009.1204
+											int Y = (int)Math.Truncate(temp); 	//Y = 2009
+											temp = itemp-Y*10000; 				//temp = 20091204 - 20090000 = 1204
+											double temp2 = temp/100; 			//temp2 = 12.04
+											int M = (int)Math.Truncate(temp2); 	//M = 12
+											temp = temp - M*100; 				// temp = 1204 - 1200 = 4
+											int D = (int)temp; 					//D = 4
+											indata.DT = new DateTime(Y,M,D,0,0,0,0);
+										} else {
+											Log("Date not parsed at line "+LineId+":  '"+str+"'",LogLevel.Alert); 
+											Error=true;
+										}
+										ElementId++; break;
+								case 1: if(int.TryParse(str, out itemp)) {		//itemp = 134501
+											temp = itemp/10000;					//temp = 13.4501
+											int H = (int)Math.Truncate(temp);	//H = 13
+											temp = itemp - temp*10000;			//temp = 4501
+											double temp2 = temp/100;			//temp2 = 45.01
+											int M = (int)Math.Truncate(temp2);	//M = 45
+											int S = (int)(temp-temp2*100);		//S = 4501 - 4500 = 1
+											indata.DT = new DateTime(indata.DT.Year, indata.DT.Month, indata.DT.Day, H, M, S);
+										}
+										else {
+											Error=true; Log("Time not parsed at line "+LineId+":  '"+str+"' is not a valid HHMMSS number",LogLevel.Alert);
+										}
+										ElementId++;break;
+								case 2: if(double.TryParse(str, out temp))
+											indata.O=temp;
+										else {
+											Error=true; Log("OPEN price not parsed at line "+LineId+":  '"+str+"' is not a valid decimal number",LogLevel.Alert);
+										}
+										ElementId++;break;
+								case 3: if(double.TryParse(str, out temp))
+											indata.H = temp;
+										else {
+											Error=true; Log("HIGH price not parsed at line "+LineId+":  '"+str+"' is not a valid decimal number",LogLevel.Alert);
+										}
+										ElementId++;break;
+								case 4: if(double.TryParse(str, out temp))
+											indata.L = temp;
+										else {
+											Error=true; Log("LOW price not parsed at line "+LineId+":  '"+str+"' is not a valid decimal number",LogLevel.Alert);
+										}
+										ElementId++;break;
+								case 5: if(double.TryParse(str, out temp))
+											indata.C = temp;
+										else {
+											Error=true; Log("CLOSE price not parsed at line "+LineId+":  '"+str+"' is not a valid decimal number",LogLevel.Alert);
+										}
+										OHLC.Add(indata); ElementId++;break;
+								break;
+							}
+						}
+						if(ElementId != 6) {
+							Log("Text File Error at line "+LineId+": "+FilePath+" does not meet the format <name> <date>,<double>,<name> <date>,<double>, <description>",LogLevel.Alert);
+							Error = true;
+							return;
+						}
+					}
+				}
+			}
+	}catch(Exception FileIO) {
+		Print("FileIO: "+FileIO.ToString()+Environment.NewLine+"CompleteFile size: "+CompleteFile.Length+"   TextLine: "+LineId+"   OHLC list size: "+OHLC.Count);
+	}
+			#endregion
+		}
+
+        internal class LoadSoundFileList : StringConverter
+        {
+			#region LoadSoundFileList
+            public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
+            {
+                //true means show a combobox
+                return true;
+            }
+
+            public override bool GetStandardValuesExclusive(ITypeDescriptorContext context)
+            {
+                //true will limit to list. false will show the list, 
+                //but allow free-form entry
+                return false;
+            }
+
+            public override System.ComponentModel.TypeConverter.StandardValuesCollection
+                   GetStandardValues(ITypeDescriptorContext context)
+            {
+                string folder = System.IO.Path.Combine(Core.Globals.InstallDir,"sounds");
+                string search = "*.wav";
+                System.IO.DirectoryInfo dirCustom = new System.IO.DirectoryInfo(folder);
+				string[] filteredlist = new string[1];
+				if(!dirCustom.Exists) {
+					filteredlist[0]= "unavailable";
+					return new StandardValuesCollection(filteredlist);;
+				}
+                System.IO.FileInfo[] filCustom = dirCustom.GetFiles(search);
+
+                string[] list = new string[filCustom.Length];
+                int i = 0;
+                foreach (System.IO.FileInfo fi in filCustom)
+                {
+                    list[i] = fi.Name;
+   	                i++;
+                }
+				filteredlist = new string[i];
+				for(i = 0; i<filteredlist.Length; i++) filteredlist[i] = list[i];
+                return new StandardValuesCollection(filteredlist);
+            }
+			#endregion
+        }
+//====================================================================
+		private string AddSoundFolder(string wav){
+			return System.IO.Path.Combine(NinjaTrader.Core.Globals.InstallDir, "sounds",wav);
+		}
+//====================================================================
+
+        #region Properties
+
+		#region Text Color
+		private Brush pNeutralTextColor = Brushes.Black;
+        [Description("Color of text when Radar reports no-trend")]
+        [Category("Text")]
+        public Brush NeutralColor
+        {
+            get { return pNeutralTextColor; }
+            set { pNeutralTextColor = value; }
+        }
+		[Browsable(false)]
+		public string ntClSerialize
+		{	get { return Serialize.BrushToString(pNeutralTextColor); } set { pNeutralTextColor = Serialize.StringToBrush(value); }
+		}
+		private Brush pBuyTextColor = Brushes.Lime;
+        [Description("Color of text when Radar reports a BUY trend")]
+        [Category("Text")]
+        public Brush BuyColor
+        {
+            get { return pBuyTextColor; }
+            set { pBuyTextColor = value; }
+        }
+		[Browsable(false)]
+		public string btClSerialize
+		{	get { return Serialize.BrushToString(pBuyTextColor); } set { pBuyTextColor = Serialize.StringToBrush(value); }
+		}
+		private Brush pSellTextColor = Brushes.Red;
+        [Description("Color of text when Radar reports a SELL trend")]
+        [Category("Text")]
+        public Brush SellColor
+        {
+            get { return pSellTextColor; }
+            set { pSellTextColor = value; }
+        }
+		[Browsable(false)]
+		public string stClSerialize
+		{	get { return Serialize.BrushToString(pSellTextColor); } set { pSellTextColor = Serialize.StringToBrush(value); }
+		}
+		#endregion
+
+		private FluxReverseRadar_Basis pBasis = FluxReverseRadar_Basis.HLC;
+//        [Description("")]
+//        [Category("Parameters")]
+//        public FluxReverseRadar_Basis Basis
+//        {
+//            get { return pBasis; }
+//            set { pBasis = value; }
+//        }
+
+		#region HH and LL line params
+		private bool pShowHHLL = false;
+//        [Description("Show HH and LL lines?")]
+//        [Category("Visual HHLL")]
+//        public bool ShowHHLL
+//        {
+//            get { return pShowHHLL; }
+//            set { pShowHHLL = value; }
+//        }
+		private Brush pHHcolor = Brushes.Green;
+//		[XmlIgnore()]
+//        [Description("Color of HH line")]
+//        [Category("Visual HHLL")]
+//        public Brush HH_LineColor
+//        {
+//            get { return pHHcolor; }
+//            set { pHHcolor = value; }
+//        }
+//		[Browsable(false)]
+//		public string HHClSerialize
+//		{	get { return Serialize.BrushToString(pHHcolor); } set { pHHcolor = Serialize.StringToBrush(value); }
+//		}
+		private Brush pLLcolor = Brushes.Green;
+//		[XmlIgnore()]
+//        [Description("Color of LL line")]
+//        [Category("Visual HHLL")]
+//        public Brush LL_LineColor
+//        {
+//            get { return pLLcolor; }
+//            set { pLLcolor = value; }
+//        }
+//		[Browsable(false)]
+//		public string LLClSerialize
+//		{	get { return Serialize.BrushToString(pLLcolor); } set { pLLcolor = Serialize.StringToBrush(value); }
+//		}
+		private DashStyleHelper pHHLLdashStyle = DashStyleHelper.Solid;
+//        [Description("Dash style of HH and LL lines")]
+//        [Category("Visual HHLL")]
+//        public DashStyleHelper HHLL_DashStyle
+//        {
+//            get { return pHHLLdashStyle; }
+//            set { pHHLLdashStyle = value; }
+//        }
+		private int pHHLLwidth = 1;
+//        [Description("Width of HH and LL lines")]
+//        [Category("Visual HHLL")]
+//        public int HHLLwidth
+//        {
+//            get { return pHHLLwidth; }
+//            set { pHHLLwidth = Math.Max(1,value); }
+//        }
+		#endregion
+
+		private int pTimerDotSpacing = 5;
+        [Description("Enter the bar interval for the timer reference dots")]
+        [Category("Visual")]
+        public int TimerDotSpacing
+        {
+            get { return pTimerDotSpacing; }
+            set { pTimerDotSpacing = Math.Abs(value); }
+        }
+
+		private string pWeeksToSkip = "none";
+        [Description("Enter the week numbers you want to skip, e.g. '1,4,5' would hide the output of weeks 1, 4 and 5")]
+        [Category("Visual")]
+        public string WeeksToSkip
+        {
+            get { return pWeeksToSkip; }
+            set { pWeeksToSkip = value; }
+        }
+
+		private bool pShowRadarGraphic = true;
+        [Description("Show the radar graphic?")]
+        [Category("Visual")]
+        public bool ShowRadarGraphic
+        {
+            get { return pShowRadarGraphic; }
+            set { pShowRadarGraphic = value; }
+        }
+		private int pFontSize = 8;
+        [Description("Set to '0' to turn-off the display of up/down table calculation")]
+        [Category("Visual")]
+        public int FontSize
+        {
+            get { return pFontSize; }
+            set { pFontSize = Math.Max(0,value); }
+        }
+
+		#region Color
+        [Description("")]
+        [Category("Visual")]
+        public Brush Color_Week1
+        {
+            get { return pWeekColors[0]; }
+            set { pWeekColors[0] = value; }
+        }
+		[Browsable(false)]
+		public string W1ClSerialize
+		{	get { return Serialize.BrushToString(pWeekColors[0]); } set { pWeekColors[0] = Serialize.StringToBrush(value); }
+		}
+
+        [Description("")]
+        [Category("Visual")]
+        public Brush Color_Week2
+        {
+            get { return pWeekColors[1]; }
+            set { pWeekColors[1] = value; }
+        }
+		[Browsable(false)]
+		public string W2ClSerialize
+		{	get { return Serialize.BrushToString(pWeekColors[1]); } set { pWeekColors[1] = Serialize.StringToBrush(value); }
+		}
+
+        [Description("")]
+        [Category("Visual")]
+        public Brush Color_Week3
+        {
+            get { return pWeekColors[2]; }
+            set { pWeekColors[2] = value; }
+        }
+		[Browsable(false)]
+		public string W3ClSerialize
+		{	get { return Serialize.BrushToString(pWeekColors[2]); } set { pWeekColors[2] = Serialize.StringToBrush(value); }
+		}
+
+        [Description("")]
+        [Category("Visual")]
+        public Brush Color_Week4
+        {
+            get { return pWeekColors[3]; }
+            set { pWeekColors[3] = value; }
+        }
+		[Browsable(false)]
+		public string W4ClSerialize
+		{	get { return Serialize.BrushToString(pWeekColors[3]); } set { pWeekColors[3] = Serialize.StringToBrush(value); }
+		}
+
+        [Description("")]
+        [Category("Visual")]
+        public Brush Color_Week5
+        {
+            get { return pWeekColors[4]; }
+            set { pWeekColors[4] = value; }
+        }
+		[Browsable(false)]
+		public string W5ClSerialize
+		{	get { return Serialize.BrushToString(pWeekColors[4]); } set { pWeekColors[4] = Serialize.StringToBrush(value); }
+		}
+
+		private Brush pWeek6color = Brushes.Yellow;
+        [Description("")]
+        [Category("Visual")]
+        public Brush Color_Week6
+        {
+            get { return pWeekColors[5]; }
+            set { pWeekColors[5] = value; }
+        }
+		[Browsable(false)]
+		public string W6ClSerialize
+		{	get { return Serialize.BrushToString(pWeekColors[5]); } set { pWeekColors[5] = Serialize.StringToBrush(value); }
+		}
+
+		private Brush pWeek7color = Brushes.Yellow;
+        [Description("")]
+        [Category("Visual")]
+        public Brush Color_Week7
+        {
+            get { return pWeekColors[6]; }
+            set { pWeekColors[6] = value; }
+        }
+		[Browsable(false)]
+		public string W7ClSerialize
+		{	get { return Serialize.BrushToString(pWeekColors[6]); } set { pWeekColors[6] = Serialize.StringToBrush(value); }
+		}
+
+		private Brush pWeek8color = Brushes.Yellow;
+        [Description("")]
+        [Category("Visual")]
+        public Brush Color_Week8
+        {
+            get { return pWeekColors[7]; }
+            set { pWeekColors[7] = value; }
+        }
+		[Browsable(false)]
+		public string W8ClSerialize
+		{	get { return Serialize.BrushToString(pWeekColors[7]); } set { pWeekColors[7] = Serialize.StringToBrush(value); }
+		}
+
+		private Brush pWeek9color = Brushes.Yellow;
+        [Description("")]
+        [Category("Visual")]
+        public Brush Color_Week9
+        {
+            get { return pWeekColors[8]; }
+            set { pWeekColors[8] = value; }
+        }
+		[Browsable(false)]
+		public string W9ClSerialize
+		{	get { return Serialize.BrushToString(pWeekColors[8]); } set { pWeekColors[8] = Serialize.StringToBrush(value); }
+		}
+		#endregion
+
+		#region SoundAlert
+		private int pAgreeingTrends = 3;
+        [Description("Number of trendlines in agreement before audio alert is generated, to disengage the audio, enter a large number, like 20")]
+        [Category("Alert")]
+        public int AgreeingTrends
+        {
+            get { return pAgreeingTrends; }
+            set { pAgreeingTrends = Math.Max(2,value); }
+        }
+		private string pAgreementSound = "Radar.wav";
+        [Description("Make sure this file is in your Ninja Sounds folder")]
+        [RefreshProperties(RefreshProperties.All)]
+        [TypeConverter(typeof(LoadSoundFileList))]
+        [Category("Alert")]
+        public string AgreementSound
+        {
+            get { return pAgreementSound; }
+            set { pAgreementSound = value; }
+        }
+		#endregion
+
+		private int pLenOfTrendLine = 10;
+        [Description("")]
+        [Category("Plots")]
+        public int LengthOfTrendline
+        {
+            get { return pLenOfTrendLine; }
+            set { pLenOfTrendLine = Math.Max(0,value); }
+        }
+		private int pLineOpacity = 8;
+        [Description("Opacity level for histograms 0=transparent 9=opaque")]
+        [Category("Plots")]
+        public int LineOpacity
+        {
+            get { return pLineOpacity; }
+            set { pLineOpacity = Math.Max(0,Math.Min(9,value)); }
+        }
+
+		private int pMinutesInAdvance = 0;
+//        [Description("Number of minutes of shift")]
+//        [Category("Parameters")]
+//        public int MinutesInAdvance
+//        {
+//            get { return pMinutesInAdvance; }
+//            set { pMinutesInAdvance = value; }
+//        }
+
+//		private int BarsInMarginSpace = 25;
+//        [Description("Number of bars that the overlay plot is shifted left")]
+//        [Category("Parameters")]
+//        public int BarsShiftedLeft
+//        {
+//            get { return BarsInMarginSpace; }
+//            set { BarsInMarginSpace = Math.Max(0, value); }
+//        }
+
+		private int pBarsBehindCurrentDot = 0;
+//        [Description("Number of bars of history to show to the left of the CurrentDot")]
+//        [Category("Parameters")]
+//        public int BarsBehindCurrentDot
+//        {
+//            get { return pBarsBehindCurrentDot; }
+//            set { pBarsBehindCurrentDot = Math.Max(0, value); }
+//        }
+
+		private int pMaxWeeks = 4;
+		[Description("Max weeks to pull from history")]
+        [Category("Parameters")]
+        public int MaxWeeks
+        {
+            get { return pMaxWeeks; }
+            set { pMaxWeeks = Math.Max(1, value); }
+        }
+
+//		private string pOldContractDate = "";
+//		[Description("Old contract data to merge:  specify MM-YY as '03-10' for March 2010 contract.  Leave blank to prevent merge operation")]
+//        [Category("Parameters")]
+//        public string OldContractDate
+//        {
+//            get { return pOldContractDate; }
+//            set { pOldContractDate = value; }
+//        }
+
+        #endregion
+    }
+}
+public enum FluxReverseRadar_Basis {
+	HLC,HiLo//Close, Median, Typical, HiLo, HLC
+}
+
+#region NinjaScript generated code. Neither change nor remove.
+
+namespace NinjaTrader.NinjaScript.Indicators
+{
+	public partial class Indicator : NinjaTrader.Gui.NinjaScript.IndicatorRenderBase
+	{
+		private FluxReverseRadar[] cacheFluxReverseRadar;
+		public FluxReverseRadar FluxReverseRadar()
+		{
+			return FluxReverseRadar(Input);
+		}
+
+		public FluxReverseRadar FluxReverseRadar(ISeries<double> input)
+		{
+			if (cacheFluxReverseRadar != null)
+				for (int idx = 0; idx < cacheFluxReverseRadar.Length; idx++)
+					if (cacheFluxReverseRadar[idx] != null &&  cacheFluxReverseRadar[idx].EqualsInput(input))
+						return cacheFluxReverseRadar[idx];
+			return CacheIndicator<FluxReverseRadar>(new FluxReverseRadar(), input, ref cacheFluxReverseRadar);
+		}
+	}
+}
+
+namespace NinjaTrader.NinjaScript.MarketAnalyzerColumns
+{
+	public partial class MarketAnalyzerColumn : MarketAnalyzerColumnBase
+	{
+		public Indicators.FluxReverseRadar FluxReverseRadar()
+		{
+			return indicator.FluxReverseRadar(Input);
+		}
+
+		public Indicators.FluxReverseRadar FluxReverseRadar(ISeries<double> input )
+		{
+			return indicator.FluxReverseRadar(input);
+		}
+	}
+}
+
+namespace NinjaTrader.NinjaScript.Strategies
+{
+	public partial class Strategy : NinjaTrader.Gui.NinjaScript.StrategyRenderBase
+	{
+		public Indicators.FluxReverseRadar FluxReverseRadar()
+		{
+			return indicator.FluxReverseRadar(Input);
+		}
+
+		public Indicators.FluxReverseRadar FluxReverseRadar(ISeries<double> input )
+		{
+			return indicator.FluxReverseRadar(input);
+		}
+	}
+}
+
+#endregion

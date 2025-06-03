@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf - 8"?>
+<ExportTemplate xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<ExportCompiled>true</ExportCompiled>
+  <ProductName>ARC_FullSuite</ProductName>
+  <Version>
+  <int>8</int>
+  <int>0</int>
+  <int>27</int>
+  <int>1</int>
+  </Version>
+  <ExportItems>
+   <ExportTemplateItem>
+   <Filename>*\Indicators\ARC\ARC_EasyTraderLean.cs</Filename>
+   <Type>Indicators</Type>
+   </ExportTemplateItem>
+   <ExportTemplateItem>
+   <Filename>*\Indicators\ARC\AlgoSup\ARC_EAActionQue.cs</Filename>
+   <Type>Indicators</Type>
+   </ExportTemplateItem>
+   <ExportTemplateItem>
+   <Filename>*\Indicators\ARC\AlgoSup\ARC_EAUtils.cs</Filename>
+   <Type>Indicators</Type>
+   </ExportTemplateItem>
+   <ExportTemplateItem>
+   <Filename>*\Indicators\ARC\AlgoSup\ARC_EAVisualModelLean.cs</Filename>
+   <Type>Indicators</Type>
+   </ExportTemplateItem>
+   <ExportTemplateItem>
+   <Filename>*\Indicators\ARC\AlgoSup\ArcCteUiEngine.cs</Filename>
+   <Type>Indicators</Type>
+   </ExportTemplateItem>
+   <ExportTemplateItem>
+   <Filename>*\Indicators\ARC\CTESup\ArcCteBackEnd.cs</Filename>
+   <Type>Indicators</Type>
+   </ExportTemplateItem>
+   <ExportTemplateItem>
+   <Filename>*\EasyTraderLean.UI.dll</Filename>
+   <Type>References</Type>
+   </ExportTemplateItem>
+   <ExportTemplateItem>
+   <Filename>*\PmEasyTrader.Controls.dll</Filename>
+   <Type>References</Type>
+   </ExportTemplateItem>
+   <ExportTemplateItem>
+   <Filename>*\Xceed.Wpf.Toolkit.dll</Filename>
+   <Type>References</Type>
+   </ExportTemplateItem>
+  </ExportItems>
+</ExportTemplate>

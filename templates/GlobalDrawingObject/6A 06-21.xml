@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NinjaTrader>
+  <GlobalDrawingTools>
+    <HorizontalLine xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <IsVisible>true</IsVisible>
+      <IsAutoScale>false</IsAutoScale>
+      <MaxValue>-1.7976931348623157E+308</MaxValue>
+      <MinValue>1.7976931348623157E+308</MinValue>
+      <ZOrder>20004</ZOrder>
+      <AttachedTo>
+        <InstrumentSerialize>6A 06-21</InstrumentSerialize>
+      </AttachedTo>
+      <ScaleJustification>Right</ScaleJustification>
+      <DrawingState>Normal</DrawingState>
+      <DisplayOnChartsMenus>true</DisplayOnChartsMenus>
+      <GlobalLastSeenSerialize>638418216165127185</GlobalLastSeenSerialize>
+      <GlobalWorkspace>VWAP</GlobalWorkspace>
+      <Id>45c280a41571462183ce9109793629ae</Id>
+      <IsLocked>false</IsLocked>
+      <PanelIndex>0</PanelIndex>
+      <Tag>@Horizontal Line</Tag>
+      <ZOrderType>Normal</ZOrderType>
+      <EndAnchor>
+        <SlotIndex>9025</SlotIndex>
+        <DisplayName>End</DisplayName>
+        <IsBrowsable>false</IsBrowsable>
+        <Time>2021-03-24T07:53:00</Time>
+        <Price>0.76263010358718741</Price>
+      </EndAnchor>
+      <StartAnchor>
+        <SlotIndex>9025</SlotIndex>
+        <DisplayName>Anchor</DisplayName>
+        <IsBrowsable>true</IsBrowsable>
+        <Time>2021-03-24T07:53:00</Time>
+        <Price>0.76263010358718741</Price>
+      </StartAnchor>
+      <Stroke>
+        <IsOpacityVisible>true</IsOpacityVisible>
+        <BrushSerialize>&lt;SolidColorBrush Color="#FFDC143C" Opacity="0.699999988079071" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" /&gt;</BrushSerialize>
+        <DashStyleHelper>Dash</DashStyleHelper>
+        <Opacity>70</Opacity>
+        <Width>4</Width>
+      </Stroke>
+      <FullTypeName>NinjaTrader.NinjaScript.DrawingTools.HorizontalLine</FullTypeName>
+      <IsGlobalDrawingObjectDefault>true</IsGlobalDrawingObjectDefault>
+      <IsOwnerVisible>true</IsOwnerVisible>
+    </HorizontalLine>
+    <HorizontalLine xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <IsVisible>true</IsVisible>
+      <IsAutoScale>false</IsAutoScale>
+      <MaxValue>-1.7976931348623157E+308</MaxValue>
+      <MinValue>1.7976931348623157E+308</MinValue>
+      <ZOrder>20004</ZOrder>
+      <AttachedTo>
+        <InstrumentSerialize>6A 06-21</InstrumentSerialize>
+      </AttachedTo>
+      <ScaleJustification>Right</ScaleJustification>
+      <DrawingState>Normal</DrawingState>
+      <DisplayOnChartsMenus>true</DisplayOnChartsMenus>
+      <GlobalLastSeenSerialize>638418216165127185</GlobalLastSeenSerialize>
+      <GlobalWorkspace>Untitled 8</GlobalWorkspace>
+      <Id>887e98dd51bc48d88552f46203c34559</Id>
+      <IsLocked>false</IsLocked>
+      <PanelIndex>0</PanelIndex>
+      <Tag>@Horizontal Line 44</Tag>
+      <ZOrderType>Normal</ZOrderType>
+      <EndAnchor>
+        <SlotIndex>9025</SlotIndex>
+        <DisplayName>End</DisplayName>
+        <IsBrowsable>false</IsBrowsable>
+        <Time>2021-03-24T07:53:00</Time>
+        <Price>0.76263010358718741</Price>
+      </EndAnchor>
+      <StartAnchor>
+        <SlotIndex>9025</SlotIndex>
+        <DisplayName>Anchor</DisplayName>
+        <IsBrowsable>true</IsBrowsable>
+        <Time>2021-03-24T07:53:00</Time>
+        <Price>0.76263010358718741</Price>
+      </StartAnchor>
+      <Stroke>
+        <IsOpacityVisible>true</IsOpacityVisible>
+        <BrushSerialize>&lt;SolidColorBrush Color="#FFDC143C" Opacity="0.699999988079071" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" /&gt;</BrushSerialize>
+        <DashStyleHelper>Dash</DashStyleHelper>
+        <Opacity>70</Opacity>
+        <Width>4</Width>
+      </Stroke>
+      <FullTypeName>NinjaTrader.NinjaScript.DrawingTools.HorizontalLine</FullTypeName>
+      <IsGlobalDrawingObjectDefault>true</IsGlobalDrawingObjectDefault>
+      <IsOwnerVisible>true</IsOwnerVisible>
+    </HorizontalLine>
+  </GlobalDrawingTools>
+</NinjaTrader>

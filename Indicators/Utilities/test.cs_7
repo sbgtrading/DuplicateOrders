@@ -1,0 +1,688 @@
+#region Using declarations
+using System;
+using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.ComponentModel;
+using System.Xml.Serialization;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Collections;
+using System.Windows.Forms;
+using NinjaTrader.Data;
+using NinjaTrader.Gui.Chart;
+using NinjaTrader.Gui.Design;
+#endregion
+
+
+
+// This namespace holds all indicators and is required. Do not change it.
+namespace NinjaTrader.Indicator
+{
+
+	[Description("Status Box")]
+	[Gui.Design.DisplayName("Status Box")]
+	public class StatusBox : Indicator
+	{
+
+		#region Variables
+		private SolidBrush 				PanelBrush 		= new SolidBrush(Color.ForestGreen);
+		private SolidBrush				alertBrushMid	= new SolidBrush(Color.Gold);
+		private SolidBrush				alertBrushLast	= new SolidBrush(Color.Red);
+		private	SolidBrush				txtHighBrush	= new SolidBrush(Color.Black);
+		private	SolidBrush				txtLowBrush		= new SolidBrush(Color.Black);
+		private SolidBrush				txtTimerBrush	= new SolidBrush(Color.Black);
+		private	SolidBrush				txtBrush		= new SolidBrush(Color.Blue);		
+		private StringFormat			stringFormat	= new StringFormat();
+		private string					strTimer		= "";
+		private bool            		displayPanel	= true;
+		private bool            		displayPanelBack= true;
+		private bool 					displayPercent 	= false;		
+		private int						fontSize        = 8;
+		private int						defaultWidth	= 120;
+		private int						defaultHeight	= 120;	
+		private	int 					Digits			= 0;
+		private int						unfilledTicks	= 0;
+		private int						unfilledVol		= 0;
+		private int 					alertMid   		= 50; 
+		private int 					alertLast 		= 15;
+		
+		private DataSeries	    		close;
+		private DataSeries	    		high;
+		private DataSeries	    		low;
+		
+		private System.Windows.Forms.Timer		timer;	
+		private	System.Drawing.Font				txtFont;
+		
+		
+		public enum StatusBoxPosition
+		{
+				TopRight,
+				BottomRight,
+				StretchRight,
+			 	TopLeft,
+				BottomLeft,
+				StretchLeft,
+		}
+		private StatusBoxPosition thisPosition = StatusBoxPosition.TopRight;
+		
+		#endregion
+
+		/// <summary>
+		/// This method is used to configure the indicator and is called once before any bar data is loaded.
+		/// </summary>
+		protected override void Initialize()
+		{
+			close	    	= new DataSeries(this);
+			high	    	= new DataSeries(this);
+			low	    		= new DataSeries(this);
+			txtFont		= new Font("Arial", fontSize);
+			
+			Overlay				= true;
+			
+			DisplayInDataBox = false; 
+            CalculateOnBarClose = false;
+			PaintPriceMarkers = false; 
+			
+			if (TickSize.ToString().StartsWith("1E-"))
+			{
+				Digits=Convert.ToInt32(TickSize.ToString().Substring(3));
+			}
+			else if (TickSize.ToString().IndexOf(".")>0)
+			{
+				Digits=TickSize.ToString().Substring(TickSize.ToString().IndexOf("."),TickSize.ToString().Length-1).Length-1;
+			}
+			
+			//BarsRequired = length+trigAvg;
+		}
+
+		
+		
+		/// <summary>
+		/// Calculates the indicator value(s) at the current index.
+		/// </summary>
+		protected override void OnBarUpdate()
+		{	
+			if (CurrentBar < 2)
+				return;
+			
+			if (Bars.Period.Id == PeriodType.Minute || Bars.Period.Id == PeriodType.Second)
+			{
+				if (timer == null)
+            	{
+                	timer = new System.Windows.Forms.Timer();
+                	timer.Interval = 1000;
+                	timer.Tick += new EventHandler(OnTimerTick);
+                	timer.Enabled = true;
+					
+				
+            	}
+			}
+			else if (PeriodType.Volume == Bars.Period.Id)
+				unfilledVol = (int)(Bars.Period.Value - Volume[0]);
+			else if (PeriodType.Tick == Bars.Period.Id)
+				unfilledTicks = Bars.Period.Value - Bars.TickCount;
+			
+			
+			close.Set(Close[0]);
+			high.Set(High[0]);
+			low.Set(Low[0]);
+		}
+		
+		
+		public string convertDoublePrice(double thisPrice)
+		{
+			StringBuilder strPrice = new StringBuilder();
+			
+			strPrice.Append((Math.Round(thisPrice,Digits,MidpointRounding.ToEven)).ToString());
+			if (TickSize<1) 
+			{
+				if ((Digits>0) && (strPrice.ToString().IndexOf(".")<1)) strPrice.Append(".");
+				while ((strPrice.ToString().Substring(strPrice.ToString().IndexOf(".")).Length)<=Digits) strPrice.Append("0");
+			}
+			return strPrice.ToString();
+		}
+		
+		public override void Plot(Graphics graphics, Rectangle bounds, double min, double max)
+		{
+			if (base.Bars == null) return;
+
+			Exception caughtException;
+			int index 	= -1;
+			byte bRed 	= (byte)~(base.ChartControl.BackColor.R);
+			byte bGreen = (byte)~(base.ChartControl.BackColor.G);
+			byte bBlue 	= (byte)~(base.ChartControl.BackColor.B);
+			
+			Color borderColor = Color.FromArgb(bRed,bGreen,bBlue);
+			
+			int Height=0;
+			int Width=0;
+			int StartXPos=0;
+			int StartYPos=0;
+			int col1=103;
+			int col2=53;
+			
+			switch (thisPosition)
+			{			
+				case StatusBoxPosition.TopRight:
+					Height=defaultHeight;
+					StartXPos=bounds.X + bounds.Width;
+					StartYPos=bounds.Y;
+				break;
+				case StatusBoxPosition.BottomRight:
+					Height=defaultHeight;
+					StartXPos=bounds.X + bounds.Width;
+				    StartYPos=bounds.Bottom-Height;
+				break;
+				case StatusBoxPosition.StretchRight:
+					Height=bounds.Height;
+					StartXPos=bounds.X + bounds.Width;
+					StartYPos=bounds.Bottom-Height;//StartYPos=bounds.Y;//bounds.Height-Height;
+				break;
+				case StatusBoxPosition.TopLeft:
+					Height=defaultHeight;
+					StartXPos=defaultWidth;
+					StartYPos=bounds.Y+15;
+				break;
+				case StatusBoxPosition.BottomLeft:
+					Height=defaultHeight;
+					StartXPos=defaultWidth;
+					StartYPos=bounds.Bottom-Height;
+				break;
+				case StatusBoxPosition.StretchLeft:
+					Height=bounds.Height-15;
+					StartXPos=defaultWidth;
+					StartYPos=bounds.Bottom-Height;//StartYPos=bounds.Y;
+				break;
+			}
+			
+			if ((ChartControl.BarMarginRight>4) && (ChartControl.BarMarginRight>defaultWidth) && (thisPosition.ToString().EndsWith("Right")))
+			{
+				col1=ChartControl.BarMarginRight-7;
+				col2=(ChartControl.BarMarginRight/2)-2;
+				Width=ChartControl.BarMarginRight;
+			}
+			else
+			{
+				col1=defaultWidth-7;
+				col2=(defaultWidth/2)-2;
+				Width=defaultWidth;
+			}
+			
+					
+			
+			
+			// draw panel
+			if (displayPanel)
+			{
+			
+				if (displayPanelBack)
+				{
+					//draw background box
+					graphics.FillRectangle(PanelBrush, StartXPos - (Width-5), StartYPos, Width-10,  (Height)-5);
+					graphics.DrawRectangle(new Pen(borderColor), StartXPos - (Width-5), StartYPos, Width-10,  (Height)-5);					
+				}
+				else
+				{
+					graphics.FillRectangle(new SolidBrush(ChartControl.BackColor), StartXPos - (Width-5), StartYPos, Width-10,  Height-5);
+				}
+				
+				// draw data
+				try
+				{          
+					
+					
+					txtHighBrush.Color = ChartControl.ChartStyle.UpColor;
+					txtLowBrush.Color  = ChartControl.ChartStyle.DownColor;
+					index = ((base.ChartControl.LastBarPainted - base.ChartControl.BarsPainted)) + base.ChartControl.BarsPainted;
+					
+					double thisVal = high.Get(index);
+					double prevVal = high.Get(index-1);
+					
+					if (!double.IsNaN(thisVal) && !double.IsNaN(prevVal))
+					{
+						graphics.DrawString(convertDoublePrice(prevVal), //test
+							txtFont, txtHighBrush, StartXPos - col1, /* test */
+					/*test1*/	StartYPos + (Height*5/100), stringFormat);
+
+
+
+/* test */
+
+						graphics.DrawString(convertDoublePrice(thisVal), txtFont, txtHighBrush, StartXPos - col2, StartYPos + (Height*5/100), stringFormat);
+					}
+					
+					thisVal = close.Get(index);
+					prevVal = close.Get(index-1);
+					if (!double.IsNaN(thisVal) && !double.IsNaN(prevVal))
+					{
+						graphics.DrawString(convertDoublePrice(prevVal), txtFont, txtBrush, StartXPos - col1, StartYPos + (Height*25/100), stringFormat);
+						graphics.DrawString(convertDoublePrice(thisVal), txtFont, txtBrush, StartXPos - col2, StartYPos + (Height*25/100), stringFormat);
+					}
+					
+					thisVal = low.Get(index);
+					prevVal = low.Get(index-1);
+					if (!double.IsNaN(thisVal) && !double.IsNaN(prevVal))
+					{
+						graphics.DrawString(convertDoublePrice(prevVal), txtFont, txtLowBrush, StartXPos - col1, StartYPos + (Height*45/100), stringFormat);
+						graphics.DrawString(convertDoublePrice(thisVal), txtFont, txtLowBrush, StartXPos - col2, StartYPos + (Height*45/100), stringFormat);
+					}
+					
+					thisVal = Math.Round((high.Get(index)-low.Get(index))/TickSize,0,MidpointRounding.ToEven);
+					prevVal = Math.Round((high.Get(index-1)-low.Get(index-1))/TickSize,0,MidpointRounding.ToEven);
+					if (!double.IsNaN(thisVal) && !double.IsNaN(prevVal))
+					{
+						graphics.DrawString(prevVal.ToString(), txtFont, txtBrush, StartXPos - col1, StartYPos + (Height*65/100), stringFormat);
+						graphics.DrawString(thisVal.ToString(), txtFont, txtBrush, StartXPos - col2, StartYPos + (Height*65/100), stringFormat);
+					}
+					
+					bool thisPercentTimer=displayPercent;
+					
+					if (Bars.Period.Id == PeriodType.Minute || Bars.Period.Id == PeriodType.Second)
+					{
+						TimeSpan ts = (Now - new DateTime(1970,1,1,0,0,0));
+					
+						TimeSpan barTs = ((new DateTime(Bars.Get(Bars.Count - 1).Time.Ticks,DateTimeKind.Local))- new DateTime(1970,1,1,0,0,0));					
+						TimeSpan barTimeLeft = barTs.Subtract(ts);
+						
+						if ((int)(barTimeLeft.TotalSeconds)>0)
+						{
+							if (timer != null && !timer.Enabled)
+								timer.Enabled = true;
+
+							if (barTimeLeft <= new TimeSpan(00, 00, alertLast))	
+								txtTimerBrush = alertBrushLast;	
+							else
+							{
+								if (barTimeLeft <= new TimeSpan(00, 00, alertMid))
+									txtTimerBrush = alertBrushMid;
+								else
+									txtTimerBrush = txtBrush;
+							}
+							
+							if (60 > (int)barTimeLeft.TotalSeconds)
+							{
+								strTimer = barTimeLeft.Seconds.ToString("0") + "s";
+								graphics.DrawString(strTimer, txtFont, txtTimerBrush, StartXPos - col2, StartYPos + (Height*85/100), stringFormat);
+							}
+							else if (3600 > (int)barTimeLeft.TotalSeconds)
+							{
+								strTimer = barTimeLeft.Minutes.ToString("00") + ":" + barTimeLeft.Seconds.ToString("00");
+								graphics.DrawString(strTimer, txtFont, txtTimerBrush, StartXPos - col2, StartYPos + (Height*85/100), stringFormat);
+							}
+							else
+							{
+								strTimer = barTimeLeft.Hours.ToString("00") + ":" + barTimeLeft.Minutes.ToString("00") + ":" + barTimeLeft.Seconds.ToString("00");
+								graphics.DrawString(strTimer, txtFont, txtTimerBrush, StartXPos - col2, StartYPos + (Height*85/100), stringFormat);						
+							}
+						}
+						else
+						{
+							graphics.DrawString("closed / filled", txtFont,txtBrush, StartXPos - col1, StartYPos + (Height*85/100), stringFormat);
+							thisPercentTimer=false;
+						}
+					}
+					else if (Bars.Period.Id == PeriodType.Volume)
+					{
+						if (unfilledVol <= alertLast)
+							graphics.DrawString(unfilledVol.ToString()+"v", txtFont,alertBrushLast, StartXPos - col2, StartYPos + (Height*85/100), stringFormat);
+						else if (unfilledVol <= alertMid)
+							graphics.DrawString(unfilledVol.ToString()+"v", txtFont,alertBrushMid, StartXPos - col2, StartYPos + (Height*85/100), stringFormat);
+						else
+							graphics.DrawString(unfilledVol.ToString()+"v", txtFont,txtBrush, StartXPos - col2, StartYPos + (Height*85/100), stringFormat);
+					}
+					else if (Bars.Period.Id == PeriodType.Tick)
+					{
+						if (unfilledTicks <= alertLast)
+							graphics.DrawString(unfilledTicks.ToString()+"t", txtFont,alertBrushLast, StartXPos - col2, StartYPos + (Height*85/100), stringFormat);
+						else if (unfilledTicks <= alertMid)
+							graphics.DrawString(unfilledTicks.ToString()+"t", txtFont,alertBrushMid, StartXPos - col2, StartYPos + (Height*85/100), stringFormat);
+						else
+							graphics.DrawString(unfilledTicks.ToString()+"t", txtFont,txtBrush, StartXPos - col2, StartYPos + (Height*85/100), stringFormat);
+					}
+					else
+					{
+						graphics.DrawString("no timer", txtFont,txtBrush, StartXPos - col1, StartYPos + (Height*85/100), stringFormat);
+						if (timer != null)
+							timer.Enabled = false;
+					}
+
+					if (thisPercentTimer)
+					{
+						graphics.DrawString(((int)(Bars.PercentComplete*100)).ToString()+"%", txtFont,txtBrush, StartXPos - col1, StartYPos + (Height*85/100), stringFormat);
+					}
+				}
+				catch (Exception exception) {caughtException=exception;}
+			}
+			
+			// Default plotting in base class. 
+			base.Plot(graphics, bounds, min, max);
+		}
+		
+
+        public override void Dispose()
+        {
+            if (timer != null)
+            {
+                timer.Enabled = false;
+                timer = null;
+            }
+            base.Dispose();
+        }
+
+		
+        private void OnTimerTick(object sender, EventArgs e)
+        {
+            ChartControl.ChartPanel.Invalidate();
+		}
+		
+		private DateTime Now
+		{
+			get { return (Bars.MarketData.Connection.Options.Provider == Cbi.Provider.Replay ? Bars.MarketData.Connection.Now : DateTime.Now); }
+		}
+
+		#region Properties
+		
+		/// <summary>
+		/// </summary>
+		
+		[Description("Whether to display Status Panel")]
+		[Category("Status panel")]
+		[NinjaTrader.Gui.Design.DisplayName("Show panel")]
+		public bool StatusPanelDisplay
+        {
+            get { return displayPanel; }
+			set { displayPanel = value; }
+        }
+		
+		
+		
+		[Browsable(false)]
+    	public string StatusPanelColorSerialize
+    	{
+        		get { return SerializableColor.ToString(this.StatusPanelBackColor); }
+        		set { this.StatusPanelBackColor = SerializableColor.FromString(value); }
+    	}
+		
+		[Description("Background Colour for Status Panel"), XmlIgnore, VisualizationOnly]
+		[Category("Status panel")]
+		[NinjaTrader.Gui.Design.DisplayName("Background color")]
+		public Color StatusPanelBackColor
+        {
+            get { return this.PanelBrush.Color; }
+        	set { this.PanelBrush = new SolidBrush(value); }
+        }
+		
+		[Description("Whether to display Status Panel Background")]
+		[Category("Status panel")]
+		[NinjaTrader.Gui.Design.DisplayName("Show background")]
+		public bool StatusPanelBack
+        {
+            get { return displayPanelBack; }
+			set { displayPanelBack = value; }
+        }
+		
+		[Browsable(false)]
+    	public string StatusPanelTextColorSerialize
+    	{
+        		get { return SerializableColor.ToString(this.StatusPanelTextColor); }
+        		set { this.StatusPanelTextColor = SerializableColor.FromString(value); }
+    	}
+		
+		[Description("Text Colour for Data Panel"), XmlIgnore, VisualizationOnly]
+		[Category("Status panel")]
+		[NinjaTrader.Gui.Design.DisplayName("Default text color")]
+		public Color StatusPanelTextColor
+        {
+            get { return this.txtBrush.Color; }
+        	set { this.txtBrush = new SolidBrush(value); }
+        }
+		
+		[Browsable(false)]
+    	public string StatusPanelFontSizeSerialize
+    	{
+        		get { return this.StatusPanelFontSize.ToString(); }
+        		set { this.StatusPanelFontSize = Convert.ToInt32(value); }
+    	}
+		
+		/// <summary>
+		/// </summary>
+		[Description("Font Size for Status Panel"), XmlIgnore, VisualizationOnly]
+		[Category("Status panel")]
+		[NinjaTrader.Gui.Design.DisplayName("Font size")]
+		public int StatusPanelFontSize
+		{
+			get { return fontSize; }
+			set { fontSize = Math.Max(1,value); }
+		}
+		
+		
+        [Description("Show additional Timer giving bar progress as percentage completed")]
+        [Category("Status panel")]
+		[NinjaTrader.Gui.Design.DisplayName("Display percent timer")]
+        public bool DisplayPercent
+        {
+            get { return displayPercent; }
+            set { displayPercent = value; }
+        }
+		
+		
+		[Browsable(false)]
+    	public string AlertMidSerialize
+    	{
+        		get { return this.AlertMid.ToString(); }
+        		set { this.AlertMid = Convert.ToInt32(value); }
+    	}
+		
+		[Description("1st Timer alert color change. Enter period remaining (Ticks for tick chart; Seconds for minute chart)")]
+        [Category("Status panel")]
+		[NinjaTrader.Gui.Design.DisplayName("Alert timer 1st")]
+        public int AlertMid
+        {
+            get { return alertMid; }
+            set { alertMid = Math.Max(0, value); }
+        }
+				
+		
+		[Browsable(false)]
+    	public string AlertLastSerialize
+    	{
+        		get { return this.AlertLast.ToString(); }
+        		set { this.AlertLast = Convert.ToInt32(value); }
+    	}
+		
+		[Description("Last Timer alert color change. Enter period remaining (Ticks for tick chart; Seconds for minute chart)")]
+        [Category("Status panel")]
+		[NinjaTrader.Gui.Design.DisplayName("Alert timer last")]
+        public int AlertLast
+        {
+            get { return alertLast; }
+            set { alertLast = Math.Max(0, value); }
+        }
+		
+		[Browsable(false)]
+    	public string Alert1stColorSerialize
+    	{
+        		get { return SerializableColor.ToString(this.Alert1stColor); }
+        		set { this.Alert1stColor = SerializableColor.FromString(value); }
+    	}
+		
+		[Description("Text Colour for 1st Alert"), XmlIgnore, VisualizationOnly]
+		[Category("Status panel")]
+		[NinjaTrader.Gui.Design.DisplayName("Alert timer 1st color")]
+		public Color Alert1stColor
+        {
+            get { return this.alertBrushMid.Color; }
+        	set { this.alertBrushMid = new SolidBrush(value); }
+        }
+		
+		[Browsable(false)]
+    	public string AlertLastColorSerialize
+    	{
+        		get { return SerializableColor.ToString(this.AlertLastColor); }
+        		set { this.AlertLastColor = SerializableColor.FromString(value); }
+    	}
+		
+		[Description("Text Colour for last Alert"), XmlIgnore, VisualizationOnly]
+		[Category("Status panel")]
+		[NinjaTrader.Gui.Design.DisplayName("Alert timer last color")]
+		public Color AlertLastColor
+        {
+            get { return this.alertBrushLast.Color; }
+        	set { this.alertBrushLast = new SolidBrush(value); }
+        }
+		
+		[Description("Position on the chart for the status panel")]
+        [Category("Status panel")]
+		[NinjaTrader.Gui.Design.DisplayName("Chart position")]
+		public StatusBoxPosition BoxPosition
+		{
+			get { return thisPosition; }
+            set { thisPosition = value; }
+		}
+
+		[Browsable(false)]
+    	public string DefaultHeightSerialize
+    	{
+        		get { return this.DefaultHeight.ToString(); }
+        		set { this.DefaultHeight = Convert.ToInt32(value); }
+    	}
+		
+		/// <summary>
+		/// </summary>
+		[Description("Default height for status panel."), XmlIgnore, VisualizationOnly]
+		[Category("Status panel")]
+		[NinjaTrader.Gui.Design.DisplayName("Default height")]
+		public int DefaultHeight
+		{
+			get { return defaultHeight; }
+			set { defaultHeight = Math.Max(1,value); }
+		}
+		
+		[Browsable(false)]
+    	public string DefaultWidthSerialize
+    	{
+        		get { return this.DefaultWidth.ToString(); }
+        		set { this.DefaultWidth = Convert.ToInt32(value); }
+    	}
+		
+		/// <summary>
+		/// </summary>
+		[Description("Default width for status panel. Note, if you set a larger right hand margin this value will be overridden for right hand boxes."), XmlIgnore, VisualizationOnly]
+		[Category("Status panel")]
+		[NinjaTrader.Gui.Design.DisplayName("Default width")]
+		public int DefaultWidth
+		{
+			get { return defaultWidth; }
+			set { defaultWidth = Math.Max(1,value); }
+		}
+		#endregion
+	}
+}
+
+#region NinjaScript generated code. Neither change nor remove.
+// This namespace holds all indicators and is required. Do not change it.
+namespace NinjaTrader.Indicator
+{
+    public partial class Indicator : IndicatorBase
+    {
+        private StatusBox[] cacheStatusBox = null;
+
+        private static StatusBox checkStatusBox = new StatusBox();
+
+        /// <summary>
+        /// Status Box
+        /// </summary>
+        /// <returns></returns>
+        public StatusBox StatusBox()
+        {
+            return StatusBox(Input);
+        }
+
+        /// <summary>
+        /// Status Box
+        /// </summary>
+        /// <returns></returns>
+        public StatusBox StatusBox(Data.IDataSeries input)
+        {
+
+            if (cacheStatusBox != null)
+                for (int idx = 0; idx < cacheStatusBox.Length; idx++)
+                    if (cacheStatusBox[idx].EqualsInput(input))
+                        return cacheStatusBox[idx];
+
+            StatusBox indicator = new StatusBox();
+            indicator.SetUp();
+            indicator.CalculateOnBarClose = CalculateOnBarClose;
+            indicator.Input = input;
+
+            StatusBox[] tmp = new StatusBox[cacheStatusBox == null ? 1 : cacheStatusBox.Length + 1];
+            if (cacheStatusBox != null)
+                cacheStatusBox.CopyTo(tmp, 0);
+            tmp[tmp.Length - 1] = indicator;
+            cacheStatusBox = tmp;
+            Indicators.Add(indicator);
+
+            return indicator;
+        }
+
+    }
+}
+
+// This namespace holds all market analyzer column definitions and is required. Do not change it.
+namespace NinjaTrader.MarketAnalyzer
+{
+    public partial class Column : ColumnBase
+    {
+        /// <summary>
+        /// Status Box
+        /// </summary>
+        /// <returns></returns>
+        [Gui.Design.WizardCondition("Indicator")]
+        public Indicator.StatusBox StatusBox()
+        {
+            return _indicator.StatusBox(Input);
+        }
+
+        /// <summary>
+        /// Status Box
+        /// </summary>
+        /// <returns></returns>
+        public Indicator.StatusBox StatusBox(Data.IDataSeries input)
+        {
+            return _indicator.StatusBox(input);
+        }
+
+    }
+}
+
+// This namespace holds all strategies and is required. Do not change it.
+namespace NinjaTrader.Strategy
+{
+    public partial class Strategy : StrategyBase
+    {
+        /// <summary>
+        /// Status Box
+        /// </summary>
+        /// <returns></returns>
+        [Gui.Design.WizardCondition("Indicator")]
+        public Indicator.StatusBox StatusBox()
+        {
+            return _indicator.StatusBox(Input);
+        }
+
+        /// <summary>
+        /// Status Box
+        /// </summary>
+        /// <returns></returns>
+        public Indicator.StatusBox StatusBox(Data.IDataSeries input)
+        {
+            if (InInitialize && input == null)
+                throw new ArgumentException("You only can access an indicator with the default input/bar series from within the 'Initialize()' method");
+
+            return _indicator.StatusBox(input);
+        }
+
+    }
+}
+#endregion

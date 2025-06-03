@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<NinjaTrader>
+  <ARC_SwingPointConfluence>
+    <ARC_SwingPointConfluence xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <IsVisible>true</IsVisible>
+      <AreLinesConfigurable>true</AreLinesConfigurable>
+      <ArePlotsConfigurable>true</ArePlotsConfigurable>
+      <BarsPeriodSerializable>
+        <BarsPeriodTypeSerialize>4</BarsPeriodTypeSerialize>
+        <BaseBarsPeriodType>Minute</BaseBarsPeriodType>
+        <BaseBarsPeriodValue>1</BaseBarsPeriodValue>
+        <VolumetricDeltaType>BidAsk</VolumetricDeltaType>
+        <MarketDataType>Last</MarketDataType>
+        <PointAndFigurePriceType>Close</PointAndFigurePriceType>
+        <ReversalType>Tick</ReversalType>
+        <Value>1</Value>
+        <Value2>1</Value2>
+      </BarsPeriodSerializable>
+      <BarsToLoad>0</BarsToLoad>
+      <DisplayInDataBox>true</DisplayInDataBox>
+      <From>2023-08-09T00:00:00</From>
+      <Panel>-1</Panel>
+      <ScaleJustification>Right</ScaleJustification>
+      <ShowTransparentPlotsInDataBox>false</ShowTransparentPlotsInDataBox>
+      <To>2023-08-25T00:00:00</To>
+      <Calculate>OnPriceChange</Calculate>
+      <Displacement>0</Displacement>
+      <IsAutoScale>false</IsAutoScale>
+      <IsDataSeriesRequired>true</IsDataSeriesRequired>
+      <IsOverlay>true</IsOverlay>
+      <Lines />
+      <MaximumBarsLookBack>TwoHundredFiftySix</MaximumBarsLookBack>
+      <Name>ARC_SwingPointConfluence</Name>
+      <Plots />
+      <SelectedValueSeries>0</SelectedValueSeries>
+      <InputPlot>0</InputPlot>
+      <IsTradingHoursBreakLineVisible>true</IsTradingHoursBreakLineVisible>
+      <DrawHorizontalGridLines>true</DrawHorizontalGridLines>
+      <DrawVerticalGridLines>true</DrawVerticalGridLines>
+      <DrawOnPricePanel>true</DrawOnPricePanel>
+      <PaintPriceMarkers>false</PaintPriceMarkers>
+      <ChartHashCodeDeserialized>0</ChartHashCodeDeserialized>
+      <IndicatorId>51</IndicatorId>
+      <InstrumentDeserialized>ES 09-23 Globex</InstrumentDeserialized>
+      <MaxSerialized>0</MaxSerialized>
+      <MinSerialized>0</MinSerialized>
+      <ZOrder>2147483646</ZOrder>
+      <pUseChartData>false</pUseChartData>
+      <pBkgDataStartDT>2023-08-07T09:45:39</pBkgDataStartDT>
+      <pBkgDataEndDT>2024-01-01T00:00:00</pBkgDataEndDT>
+      <pBkgDataMinuteValue>5</pBkgDataMinuteValue>
+      <pUseDynamicFocus>false</pUseDynamicFocus>
+      <pDynamicFocusATRmult>5.5</pDynamicFocusATRmult>
+      <pDynamicFocusLineOpacity>50</pDynamicFocusLineOpacity>
+      <pZoneSizeTicks>1</pZoneSizeTicks>
+      <pStrengthBasis>AvgPoints</pStrengthBasis>
+      <pMinimumStrengthPctile>0.8</pMinimumStrengthPctile>
+      <pMaxHistoSize>200</pMaxHistoSize>
+      <pHistoLoc>Right</pHistoLoc>
+      <pResistanceHistoBrushSerialize>&lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;#FFFF0000&lt;/SolidColorBrush&gt;</pResistanceHistoBrushSerialize>
+      <pSupportHistoBrushSerialize>&lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;#FF87CEFA&lt;/SolidColorBrush&gt;</pSupportHistoBrushSerialize>
+      <pStrongZoneOpacity>70</pStrongZoneOpacity>
+      <pWeakZoneOpacity>15</pWeakZoneOpacity>
+      <pZonesToDisplay>Both</pZonesToDisplay>
+      <pExendedStrongZones>true</pExendedStrongZones>
+      <pExendedWeakZones>false</pExendedWeakZones>
+      <pResistanceZoneBrushSerialize>&lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;#FF800000&lt;/SolidColorBrush&gt;</pResistanceZoneBrushSerialize>
+      <pSupportZoneBrushSerialize>&lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;#FF00008B&lt;/SolidColorBrush&gt;</pSupportZoneBrushSerialize>
+      <pShowTextOnStrongZones>true</pShowTextOnStrongZones>
+      <pShowTextOnWeakZones>false</pShowTextOnWeakZones>
+      <pLabelTextBrush_>&lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;#FFFFFFFF&lt;/SolidColorBrush&gt;</pLabelTextBrush_>
+      <isHLBased>true</isHLBased>
+      <SwingStrength>1</SwingStrength>
+      <pShowSwingLines>true</pShowSwingLines>
+      <UpLineColorSerialize>&lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;#FF00FF00&lt;/SolidColorBrush&gt;</UpLineColorSerialize>
+      <DownLineColorSerialize>&lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;#FFFF0000&lt;/SolidColorBrush&gt;</DownLineColorSerialize>
+      <ZZLineThickness>2</ZZLineThickness>
+      <pShowSwingLabels>false</pShowSwingLabels>
+      <pZZlabelFont>
+        <Bold>false</Bold>
+        <FamilySerialize>Arial</FamilySerialize>
+        <Italic>false</Italic>
+        <Size>12</Size>
+      </pZZlabelFont>
+      <pButtonText>SPC</pButtonText>
+      <pShowInputBarDataMsg>true</pShowInputBarDataMsg>
+    </ARC_SwingPointConfluence>
+  </ARC_SwingPointConfluence>
+</NinjaTrader>

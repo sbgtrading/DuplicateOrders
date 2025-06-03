@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NinjaTrader>
+  <RulerDollars xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <IsAutoScale>false</IsAutoScale>
+    <MaxValue>-1.7976931348623157E+308</MaxValue>
+    <MinValue>1.7976931348623157E+308</MinValue>
+    <DisplayOnChartsMenus>true</DisplayOnChartsMenus>
+    <GlobalLastSeenSerialize>0</GlobalLastSeenSerialize>
+    <GlobalWorkspace>aa current</GlobalWorkspace>
+    <IsLocked>false</IsLocked>
+    <PanelIndex>0</PanelIndex>
+    <ZOrderType>Normal</ZOrderType>
+    <StartAnchor>
+      <SlotIndex>13567</SlotIndex>
+      <DisplayName>Start</DisplayName>
+      <IsBrowsable>true</IsBrowsable>
+      <Time>2023-03-31T11:10:00</Time>
+      <Price>55.443256986634267</Price>
+    </StartAnchor>
+    <EndAnchor>
+      <SlotIndex>13591</SlotIndex>
+      <DisplayName>End</DisplayName>
+      <IsBrowsable>true</IsBrowsable>
+      <Time>2023-03-31T11:34:00</Time>
+      <Price>55.67491385176185</Price>
+    </EndAnchor>
+    <TextAnchor>
+      <SlotIndex>13584</SlotIndex>
+      <DisplayName>Text</DisplayName>
+      <IsBrowsable>true</IsBrowsable>
+      <Time>2023-03-31T11:27:00</Time>
+      <Price>55.753176306196842</Price>
+    </TextAnchor>
+    <LineColor>
+      <IsOpacityVisible>true</IsOpacityVisible>
+      <BrushSerialize>&lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;#FFFF69B4&lt;/SolidColorBrush&gt;</BrushSerialize>
+      <DashStyleHelper>Solid</DashStyleHelper>
+      <Opacity>100</Opacity>
+      <Width>5</Width>
+    </LineColor>
+    <TextColorSerialize>&lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;#FFFFFFFF&lt;/SolidColorBrush&gt;</TextColorSerialize>
+    <YValueDisplayUnit>Currency</YValueDisplayUnit>
+    <FullTypeName>NinjaTrader.NinjaScript.DrawingTools.RulerDollars</FullTypeName>
+    <IsGlobalDrawingObjectDefault>false</IsGlobalDrawingObjectDefault>
+    <IsOwnerVisible>true</IsOwnerVisible>
+  </RulerDollars>
+</NinjaTrader>

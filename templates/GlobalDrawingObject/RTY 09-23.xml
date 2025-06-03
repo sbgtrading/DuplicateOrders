@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NinjaTrader>
+  <GlobalDrawingTools>
+    <Rectangle xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <IsVisible>true</IsVisible>
+      <IsAutoScale>false</IsAutoScale>
+      <MaxValue>-1.7976931348623157E+308</MaxValue>
+      <MinValue>1.7976931348623157E+308</MinValue>
+      <ZOrder>30019</ZOrder>
+      <AttachedTo>
+        <InstrumentSerialize>RTY 09-23</InstrumentSerialize>
+      </AttachedTo>
+      <ScaleJustification>Right</ScaleJustification>
+      <DrawingState>Normal</DrawingState>
+      <DisplayOnChartsMenus>true</DisplayOnChartsMenus>
+      <GlobalLastSeenSerialize>638418216165127185</GlobalLastSeenSerialize>
+      <GlobalWorkspace>aa ZL only breakout at open</GlobalWorkspace>
+      <Id>d58afda54dce4821bbf842b826a4ef27</Id>
+      <IsLocked>false</IsLocked>
+      <PanelIndex>0</PanelIndex>
+      <Tag>@Rectangle 12</Tag>
+      <ZOrderType>Normal</ZOrderType>
+      <AreaBrushSerialize>&lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;#FF6495ED&lt;/SolidColorBrush&gt;</AreaBrushSerialize>
+      <AreaOpacity>20</AreaOpacity>
+      <OutlineStroke>
+        <IsOpacityVisible>true</IsOpacityVisible>
+        <BrushSerialize>&lt;SolidColorBrush Color="#FF6495ED" Opacity="0" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" /&gt;</BrushSerialize>
+        <DashStyleHelper>Solid</DashStyleHelper>
+        <Opacity>0</Opacity>
+        <Width>2</Width>
+      </OutlineStroke>
+      <EndAnchor>
+        <SlotIndex>9649</SlotIndex>
+        <DisplayName>End</DisplayName>
+        <IsBrowsable>true</IsBrowsable>
+        <Time>2023-07-12T14:22:35.231</Time>
+        <Price>1953.6342266244058</Price>
+      </EndAnchor>
+      <MiddleAnchor>
+        <SlotIndex>9503</SlotIndex>
+        <DisplayName>Middle</DisplayName>
+        <IsBrowsable>false</IsBrowsable>
+        <Time>2023-07-12T11:36:19.396</Time>
+        <Price>1955.288942947702</Price>
+      </MiddleAnchor>
+      <StartAnchor>
+        <SlotIndex>9503</SlotIndex>
+        <DisplayName>Start</DisplayName>
+        <IsBrowsable>true</IsBrowsable>
+        <Time>2023-07-12T11:36:19.396</Time>
+        <Price>1955.288942947702</Price>
+      </StartAnchor>
+      <FullTypeName>NinjaTrader.NinjaScript.DrawingTools.Rectangle</FullTypeName>
+      <IsGlobalDrawingObjectDefault>true</IsGlobalDrawingObjectDefault>
+      <IsOwnerVisible>true</IsOwnerVisible>
+    </Rectangle>
+    <Rectangle xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <IsVisible>true</IsVisible>
+      <IsAutoScale>false</IsAutoScale>
+      <MaxValue>-1.7976931348623157E+308</MaxValue>
+      <MinValue>1.7976931348623157E+308</MinValue>
+      <ZOrder>30019</ZOrder>
+      <AttachedTo>
+        <InstrumentSerialize>RTY 09-23</InstrumentSerialize>
+      </AttachedTo>
+      <ScaleJustification>Right</ScaleJustification>
+      <DrawingState>Normal</DrawingState>
+      <DisplayOnChartsMenus>true</DisplayOnChartsMenus>
+      <GlobalLastSeenSerialize>638418216165127185</GlobalLastSeenSerialize>
+      <GlobalWorkspace>ATRForecaster and DifToClose</GlobalWorkspace>
+      <Id>2a81153619174fde845e3a7d351c1c86</Id>
+      <IsLocked>false</IsLocked>
+      <PanelIndex>0</PanelIndex>
+      <Tag>@Rectangle 18</Tag>
+      <ZOrderType>Normal</ZOrderType>
+      <AreaBrushSerialize>&lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;#FF6495ED&lt;/SolidColorBrush&gt;</AreaBrushSerialize>
+      <AreaOpacity>20</AreaOpacity>
+      <OutlineStroke>
+        <IsOpacityVisible>true</IsOpacityVisible>
+        <BrushSerialize>&lt;SolidColorBrush Color="#FF6495ED" Opacity="0" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" /&gt;</BrushSerialize>
+        <DashStyleHelper>Solid</DashStyleHelper>
+        <Opacity>0</Opacity>
+        <Width>2</Width>
+      </OutlineStroke>
+      <EndAnchor>
+        <SlotIndex>9649</SlotIndex>
+        <DisplayName>End</DisplayName>
+        <IsBrowsable>true</IsBrowsable>
+        <Time>2023-07-12T14:22:35.231</Time>
+        <Price>1953.6342266244058</Price>
+      </EndAnchor>
+      <MiddleAnchor>
+        <SlotIndex>9503</SlotIndex>
+        <DisplayName>Middle</DisplayName>
+        <IsBrowsable>false</IsBrowsable>
+        <Time>2023-07-12T11:36:19.396</Time>
+        <Price>1955.288942947702</Price>
+      </MiddleAnchor>
+      <StartAnchor>
+        <SlotIndex>9503</SlotIndex>
+        <DisplayName>Start</DisplayName>
+        <IsBrowsable>true</IsBrowsable>
+        <Time>2023-07-12T11:36:19.396</Time>
+        <Price>1955.288942947702</Price>
+      </StartAnchor>
+      <FullTypeName>NinjaTrader.NinjaScript.DrawingTools.Rectangle</FullTypeName>
+      <IsGlobalDrawingObjectDefault>true</IsGlobalDrawingObjectDefault>
+      <IsOwnerVisible>true</IsOwnerVisible>
+    </Rectangle>
+  </GlobalDrawingTools>
+</NinjaTrader>

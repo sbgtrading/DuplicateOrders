@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NinjaTrader>
+  <GlobalDrawingTools>
+    <Ray xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <IsVisible>true</IsVisible>
+      <IsAutoScale>false</IsAutoScale>
+      <MaxValue>-1.7976931348623157E+308</MaxValue>
+      <MinValue>1.7976931348623157E+308</MinValue>
+      <ZOrder>20009</ZOrder>
+      <AttachedTo>
+        <InstrumentSerialize>MNQ 03-22</InstrumentSerialize>
+      </AttachedTo>
+      <ScaleJustification>Right</ScaleJustification>
+      <DrawingState>Normal</DrawingState>
+      <DisplayOnChartsMenus>true</DisplayOnChartsMenus>
+      <GlobalLastSeenSerialize>638418216165127185</GlobalLastSeenSerialize>
+      <GlobalWorkspace>Micros_DualTrendAgeSystem</GlobalWorkspace>
+      <Id>132f04980d9c4e7d92f1730a4e4c243b</Id>
+      <IsLocked>false</IsLocked>
+      <PanelIndex>0</PanelIndex>
+      <Tag>@Ray 16</Tag>
+      <ZOrderType>Normal</ZOrderType>
+      <EndAnchor>
+        <SlotIndex>29830</SlotIndex>
+        <DisplayName>End</DisplayName>
+        <IsBrowsable>true</IsBrowsable>
+        <Time>2022-03-09T15:22:05.595</Time>
+        <Price>13754.181400953728</Price>
+      </EndAnchor>
+      <StartAnchor>
+        <SlotIndex>29726</SlotIndex>
+        <DisplayName>Start</DisplayName>
+        <IsBrowsable>true</IsBrowsable>
+        <Time>2022-03-09T14:54:33.507</Time>
+        <Price>13711.108751637297</Price>
+      </StartAnchor>
+      <Stroke>
+        <IsOpacityVisible>true</IsOpacityVisible>
+        <BrushSerialize>&lt;SolidColorBrush Color="#FF00CED1" Opacity="0.89999997615814209" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" /&gt;</BrushSerialize>
+        <DashStyleHelper>Dash</DashStyleHelper>
+        <Opacity>90</Opacity>
+        <Width>2</Width>
+      </Stroke>
+      <FullTypeName>NinjaTrader.NinjaScript.DrawingTools.Ray</FullTypeName>
+      <IsGlobalDrawingObjectDefault>true</IsGlobalDrawingObjectDefault>
+      <IsOwnerVisible>true</IsOwnerVisible>
+    </Ray>
+    <Ray xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <IsVisible>true</IsVisible>
+      <IsAutoScale>false</IsAutoScale>
+      <MaxValue>-1.7976931348623157E+308</MaxValue>
+      <MinValue>1.7976931348623157E+308</MinValue>
+      <ZOrder>20010</ZOrder>
+      <AttachedTo>
+        <InstrumentSerialize>MNQ 03-22</InstrumentSerialize>
+      </AttachedTo>
+      <ScaleJustification>Right</ScaleJustification>
+      <DrawingState>Normal</DrawingState>
+      <DisplayOnChartsMenus>true</DisplayOnChartsMenus>
+      <GlobalLastSeenSerialize>638418216165127185</GlobalLastSeenSerialize>
+      <GlobalWorkspace>Micros_DualTrendAgeSystem</GlobalWorkspace>
+      <Id>0bb9448173d94b27bd4eb7cbd84eca8b</Id>
+      <IsLocked>false</IsLocked>
+      <PanelIndex>0</PanelIndex>
+      <Tag>@Ray 17</Tag>
+      <ZOrderType>Normal</ZOrderType>
+      <EndAnchor>
+        <SlotIndex>29842</SlotIndex>
+        <DisplayName>End</DisplayName>
+        <IsBrowsable>true</IsBrowsable>
+        <Time>2022-03-09T15:25:45.026</Time>
+        <Price>13779.889683791807</Price>
+      </EndAnchor>
+      <StartAnchor>
+        <SlotIndex>29784</SlotIndex>
+        <DisplayName>Start</DisplayName>
+        <IsBrowsable>true</IsBrowsable>
+        <Time>2022-03-09T15:10:03.967</Time>
+        <Price>13785.752976368913</Price>
+      </StartAnchor>
+      <Stroke>
+        <IsOpacityVisible>true</IsOpacityVisible>
+        <BrushSerialize>&lt;SolidColorBrush Color="#FF00CED1" Opacity="0.89999997615814209" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" /&gt;</BrushSerialize>
+        <DashStyleHelper>Dash</DashStyleHelper>
+        <Opacity>90</Opacity>
+        <Width>2</Width>
+      </Stroke>
+      <FullTypeName>NinjaTrader.NinjaScript.DrawingTools.Ray</FullTypeName>
+      <IsGlobalDrawingObjectDefault>true</IsGlobalDrawingObjectDefault>
+      <IsOwnerVisible>true</IsOwnerVisible>
+    </Ray>
+  </GlobalDrawingTools>
+</NinjaTrader>

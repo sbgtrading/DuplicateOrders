@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NinjaTrader>
+  <GlobalDrawingTools>
+    <Ray xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <IsVisible>true</IsVisible>
+      <IsAutoScale>false</IsAutoScale>
+      <MaxValue>-1.7976931348623157E+308</MaxValue>
+      <MinValue>1.7976931348623157E+308</MinValue>
+      <ZOrder>20004</ZOrder>
+      <AttachedTo>
+        <InstrumentSerialize>ZW 09-21</InstrumentSerialize>
+      </AttachedTo>
+      <ScaleJustification>Right</ScaleJustification>
+      <DrawingState>Normal</DrawingState>
+      <DisplayOnChartsMenus>true</DisplayOnChartsMenus>
+      <GlobalLastSeenSerialize>638418216165127185</GlobalLastSeenSerialize>
+      <GlobalWorkspace>BreakoutResearch_2minCharts_Rev</GlobalWorkspace>
+      <Id>a654ba04812144ff905204f7bc8fbbb2</Id>
+      <IsLocked>false</IsLocked>
+      <PanelIndex>0</PanelIndex>
+      <Tag>@Ray 15</Tag>
+      <ZOrderType>Normal</ZOrderType>
+      <EndAnchor>
+        <SlotIndex>1299</SlotIndex>
+        <DisplayName>End</DisplayName>
+        <IsBrowsable>true</IsBrowsable>
+        <Time>2021-07-27T14:20:00</Time>
+        <Price>645.23095744680847</Price>
+      </EndAnchor>
+      <StartAnchor>
+        <SlotIndex>211</SlotIndex>
+        <DisplayName>Start</DisplayName>
+        <IsBrowsable>true</IsBrowsable>
+        <Time>2021-07-13T14:20:00</Time>
+        <Price>644.99393617021269</Price>
+      </StartAnchor>
+      <Stroke>
+        <IsOpacityVisible>true</IsOpacityVisible>
+        <BrushSerialize>&lt;SolidColorBrush Color="#FF00CED1" Opacity="0.89999997615814209" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" /&gt;</BrushSerialize>
+        <DashStyleHelper>Dash</DashStyleHelper>
+        <Opacity>90</Opacity>
+        <Width>2</Width>
+      </Stroke>
+      <FullTypeName>NinjaTrader.NinjaScript.DrawingTools.Ray</FullTypeName>
+      <IsGlobalDrawingObjectDefault>true</IsGlobalDrawingObjectDefault>
+      <IsOwnerVisible>true</IsOwnerVisible>
+    </Ray>
+  </GlobalDrawingTools>
+</NinjaTrader>

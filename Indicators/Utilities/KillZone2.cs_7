@@ -1,0 +1,223 @@
+// TradingStudies.com
+// info@tradingStudies.com
+using System;
+using System.ComponentModel;
+using System.Drawing;
+using System.Xml.Serialization;
+using NinjaTrader.Data;
+using NinjaTrader.Gui.Chart;
+
+namespace NinjaTrader.Indicator
+{
+    [Gui.Design.DisplayName(" EMini School Kill Zone")]
+    [Description("Kill Zone")]
+    public class KillZone2 : Indicator
+    {
+        private bool paintBars = true;
+        private int period;
+        private BoolSeries signal;
+
+        protected override void Initialize()
+        {
+            //VendorLicense("eMiniSchool", "eMiniSchool", "www.eminischool.com", "trade@eminischool.com");
+            Add(new Plot(new Pen(Color.Blue, 2), PlotStyle.Dot, "Peak"));
+            Add(new Plot(new Pen(Color.Yellow, 2), PlotStyle.Dot, "Valley"));
+            Add(new Plot(new Pen(Color.LimeGreen, 2), PlotStyle.Line, "Up"));
+            Add(new Plot(new Pen(Color.Red, 2), PlotStyle.Line, "Down"));
+            Add(new Plot(new Pen(Color.LimeGreen, 2), PlotStyle.Bar, "UpHisto"));
+            Add(new Plot(new Pen(Color.Red, 2), PlotStyle.Bar, "DownHisto"));
+            Add(new Line(Color.Black, 135, "UpperThreshold"));
+            Add(new Line(Color.Black, 0, "LowerThreshold"));
+            Add(new Line(Color.Black, 0, "ZeroLine"));
+            signal = new BoolSeries(this);
+            Overlay = false;
+            PriceTypeSupported = false;
+			CalculateOnBarClose = false;
+        }
+
+        protected override void OnBarUpdate()
+        {
+            period = 8;
+            if (CurrentBar == 0)
+                return;
+            if (paintBars)
+                CandleOutlineColor = ChartControl.CandleOutlineColorSeries[0];
+            if (DM(period).DiPlus[0] > DM(period).DiMinus[0])
+            {
+                signal.Set(true);
+                if (Plots[2].PlotStyle == PlotStyle.Line)
+                    Values[2].Set(1, ((DM(period)[1] - 18) * 3.848));
+                Values[2].Set((DM(period)[0] - 18) * 3.848);
+                Values[4].Set((DM(period)[0] - 18) * 3.848);
+                if (paintBars)
+                    BarColor = Plots[2].Pen.Color;
+            }
+            else
+            {
+                signal.Set(false);
+                if (Plots[3].PlotStyle == PlotStyle.Line)
+                    Values[3].Set(1, (DM(period)[1] - 18) * 3.848);
+                Values[3].Set((DM(period)[0] - 18) * 3.848);
+                Values[5].Set((DM(period)[0] - 18) * 3.848);
+                if (paintBars)
+                    BarColor = Plots[3].Pen.Color;
+            }
+			
+			if((DM(period)[0] - 18) * 3.848 > Lines[0].Value)
+			{
+				Values[0].Set(0);
+				if(paintBars)
+                  BarColor = Plots[0].Pen.Color;
+			}
+			else
+				if((DM(period)[0] - 18) * 3.848 < Lines[1].Value)
+				{
+					Values[1].Set(0);
+					if(paintBars)
+					 BarColor = Plots[1].Pen.Color;
+				}
+        }
+
+        #region Properties
+
+//        [Description("")]
+//        [Category("Parameters")]
+//        public int Period
+//        {
+//            get { return _period; }
+//            set { _period = Math.Max(1, value); }
+//        }
+
+        [Description("")]
+        [Category("Visual")]
+        public bool PaintBars
+        {
+            get { return paintBars; }
+            set { paintBars = value; }
+        }
+
+        [Browsable(false)] 
+        [XmlIgnore] 
+        public BoolSeries Signal
+        {
+            get { return signal; }
+        }
+
+        #endregion
+    }
+}
+
+#region NinjaScript generated code. Neither change nor remove.
+// This namespace holds all indicators and is required. Do not change it.
+namespace NinjaTrader.Indicator
+{
+    public partial class Indicator : IndicatorBase
+    {
+        private KillZone2[] cacheKillZone2 = null;
+
+        private static KillZone2 checkKillZone2 = new KillZone2();
+
+        /// <summary>
+        /// Kill Zone
+        /// </summary>
+        /// <returns></returns>
+        public KillZone2 KillZone2()
+        {
+            return KillZone2(Input);
+        }
+
+        /// <summary>
+        /// Kill Zone
+        /// </summary>
+        /// <returns></returns>
+        public KillZone2 KillZone2(Data.IDataSeries input)
+        {
+            if (cacheKillZone2 != null)
+                for (int idx = 0; idx < cacheKillZone2.Length; idx++)
+                    if (cacheKillZone2[idx].EqualsInput(input))
+                        return cacheKillZone2[idx];
+
+            lock (checkKillZone2)
+            {
+                if (cacheKillZone2 != null)
+                    for (int idx = 0; idx < cacheKillZone2.Length; idx++)
+                        if (cacheKillZone2[idx].EqualsInput(input))
+                            return cacheKillZone2[idx];
+
+                KillZone2 indicator = new KillZone2();
+                indicator.BarsRequired = BarsRequired;
+                indicator.CalculateOnBarClose = CalculateOnBarClose;
+#if NT7
+                indicator.ForceMaximumBarsLookBack256 = ForceMaximumBarsLookBack256;
+                indicator.MaximumBarsLookBack = MaximumBarsLookBack;
+#endif
+                indicator.Input = input;
+                Indicators.Add(indicator);
+                indicator.SetUp();
+
+                KillZone2[] tmp = new KillZone2[cacheKillZone2 == null ? 1 : cacheKillZone2.Length + 1];
+                if (cacheKillZone2 != null)
+                    cacheKillZone2.CopyTo(tmp, 0);
+                tmp[tmp.Length - 1] = indicator;
+                cacheKillZone2 = tmp;
+                return indicator;
+            }
+        }
+    }
+}
+
+// This namespace holds all market analyzer column definitions and is required. Do not change it.
+namespace NinjaTrader.MarketAnalyzer
+{
+    public partial class Column : ColumnBase
+    {
+        /// <summary>
+        /// Kill Zone
+        /// </summary>
+        /// <returns></returns>
+        [Gui.Design.WizardCondition("Indicator")]
+        public Indicator.KillZone2 KillZone2()
+        {
+            return _indicator.KillZone2(Input);
+        }
+
+        /// <summary>
+        /// Kill Zone
+        /// </summary>
+        /// <returns></returns>
+        public Indicator.KillZone2 KillZone2(Data.IDataSeries input)
+        {
+            return _indicator.KillZone2(input);
+        }
+    }
+}
+
+// This namespace holds all strategies and is required. Do not change it.
+namespace NinjaTrader.Strategy
+{
+    public partial class Strategy : StrategyBase
+    {
+        /// <summary>
+        /// Kill Zone
+        /// </summary>
+        /// <returns></returns>
+        [Gui.Design.WizardCondition("Indicator")]
+        public Indicator.KillZone2 KillZone2()
+        {
+            return _indicator.KillZone2(Input);
+        }
+
+        /// <summary>
+        /// Kill Zone
+        /// </summary>
+        /// <returns></returns>
+        public Indicator.KillZone2 KillZone2(Data.IDataSeries input)
+        {
+            if (InInitialize && input == null)
+                throw new ArgumentException("You only can access an indicator with the default input/bar series from within the 'Initialize()' method");
+
+            return _indicator.KillZone2(input);
+        }
+    }
+}
+#endregion

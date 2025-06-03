@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NinjaTrader>
+  <ARC_SoundWave>
+    <ARC_SoundWave xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <IsVisible>true</IsVisible>
+      <AreLinesConfigurable>true</AreLinesConfigurable>
+      <ArePlotsConfigurable>true</ArePlotsConfigurable>
+      <BarsPeriodSerializable>
+        <BarsPeriodTypeSerialize>3</BarsPeriodTypeSerialize>
+        <BaseBarsPeriodType>Minute</BaseBarsPeriodType>
+        <BaseBarsPeriodValue>1</BaseBarsPeriodValue>
+        <VolumetricDeltaType>BidAsk</VolumetricDeltaType>
+        <MarketDataType>Last</MarketDataType>
+        <PointAndFigurePriceType>Close</PointAndFigurePriceType>
+        <ReversalType>Tick</ReversalType>
+        <Value>3</Value>
+        <Value2>1</Value2>
+      </BarsPeriodSerializable>
+      <BarsToLoad>0</BarsToLoad>
+      <DisplayInDataBox>true</DisplayInDataBox>
+      <From>2023-10-18T00:00:00</From>
+      <Panel>-1</Panel>
+      <ScaleJustification>Right</ScaleJustification>
+      <ShowTransparentPlotsInDataBox>false</ShowTransparentPlotsInDataBox>
+      <To>2023-10-19T00:00:00</To>
+      <Calculate>OnEachTick</Calculate>
+      <Displacement>0</Displacement>
+      <IsAutoScale>true</IsAutoScale>
+      <IsDataSeriesRequired>true</IsDataSeriesRequired>
+      <IsOverlay>true</IsOverlay>
+      <Lines />
+      <MaximumBarsLookBack>TwoHundredFiftySix</MaximumBarsLookBack>
+      <Name>ARC_SoundWave</Name>
+      <Plots />
+      <SelectedValueSeries>0</SelectedValueSeries>
+      <InputPlot>0</InputPlot>
+      <IsTradingHoursBreakLineVisible>true</IsTradingHoursBreakLineVisible>
+      <DrawHorizontalGridLines>true</DrawHorizontalGridLines>
+      <DrawVerticalGridLines>true</DrawVerticalGridLines>
+      <DrawOnPricePanel>true</DrawOnPricePanel>
+      <PaintPriceMarkers>true</PaintPriceMarkers>
+      <ChartHashCodeDeserialized>0</ChartHashCodeDeserialized>
+      <IndicatorId>2162</IndicatorId>
+      <MaxSerialized>0</MaxSerialized>
+      <MinSerialized>0</MinSerialized>
+      <ZOrder>10004</ZOrder>
+      <pSecondsLookback>3</pSecondsLookback>
+      <pThresholdSmoothingPeriod>20</pThresholdSmoothingPeriod>
+      <pSmoothingType>Simple</pSmoothingType>
+      <pShowExpirationDates>false</pShowExpirationDates>
+      <pShowSensitivityFactors>false</pShowSensitivityFactors>
+      <pSensitivityFactor0>5</pSensitivityFactor0>
+      <pSoundOnOff0>On</pSoundOnOff0>
+      <pSymbol1>RTY 12-23</pSymbol1>
+      <pSensitivityFactor1>50</pSensitivityFactor1>
+      <pSoundOnOff1>On</pSoundOnOff1>
+      <pSymbol2>ES 12-23</pSymbol2>
+      <pSensitivityFactor2>50</pSensitivityFactor2>
+      <pSoundOnOff2>On</pSoundOnOff2>
+      <pSymbol3>none</pSymbol3>
+      <pSensitivityFactor3>50</pSensitivityFactor3>
+      <pSoundOnOff3>On</pSoundOnOff3>
+      <pSymbol4>none</pSymbol4>
+      <pSensitivityFactor4>50</pSensitivityFactor4>
+      <pSoundOnOff4>On</pSoundOnOff4>
+      <pSymbol5>none</pSymbol5>
+      <pSensitivityFactor5>50</pSensitivityFactor5>
+      <pSoundOnOff5>On</pSoundOnOff5>
+      <pSymbol6>none</pSymbol6>
+      <pSensitivityFactor6>50</pSensitivityFactor6>
+      <pSoundOnOff6>On</pSoundOnOff6>
+      <pSymbol7>none</pSymbol7>
+      <pSensitivityFactor7>50</pSensitivityFactor7>
+      <pSoundOnOff7>On</pSoundOnOff7>
+      <pAudioVolume_HiAlert>100</pAudioVolume_HiAlert>
+      <pAudioVolume_MedAlert>80</pAudioVolume_MedAlert>
+      <pAudioVolume_Alert>60</pAudioVolume_Alert>
+      <pGraphRegionSize>200</pGraphRegionSize>
+      <pBigPositiveHistoBrush_>&lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;#FF00FF00&lt;/SolidColorBrush&gt;</pBigPositiveHistoBrush_>
+      <pSmallPositiveHistoBrush_>&lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;#FF006400&lt;/SolidColorBrush&gt;</pSmallPositiveHistoBrush_>
+      <pBigNegativeHistoBrush_>&lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;#FFFF00FF&lt;/SolidColorBrush&gt;</pBigNegativeHistoBrush_>
+      <pSmallNegativeHistoBrush_>&lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;#FF8B0000&lt;/SolidColorBrush&gt;</pSmallNegativeHistoBrush_>
+      <pGraphicBoxBrush_>&lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;#FFFFFF00&lt;/SolidColorBrush&gt;</pGraphicBoxBrush_>
+      <pGraphicBoxFillBrush_>&lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;#FF000000&lt;/SolidColorBrush&gt;</pGraphicBoxFillBrush_>
+      <pButtonText>SoundWave</pButtonText>
+    </ARC_SoundWave>
+  </ARC_SoundWave>
+</NinjaTrader>

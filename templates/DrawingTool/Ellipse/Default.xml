@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NinjaTrader>
+  <Ellipse xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <IsAutoScale>false</IsAutoScale>
+    <MaxValue>-1.7976931348623157E+308</MaxValue>
+    <MinValue>1.7976931348623157E+308</MinValue>
+    <DisplayOnChartsMenus>true</DisplayOnChartsMenus>
+    <GlobalLastSeenSerialize>0</GlobalLastSeenSerialize>
+    <GlobalWorkspace>Untitled 9</GlobalWorkspace>
+    <IsLocked>false</IsLocked>
+    <PanelIndex>0</PanelIndex>
+    <ZOrderType>Normal</ZOrderType>
+    <AreaBrushSerialize>&lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;#FF6495ED&lt;/SolidColorBrush&gt;</AreaBrushSerialize>
+    <AreaOpacity>10</AreaOpacity>
+    <OutlineStroke>
+      <IsOpacityVisible>true</IsOpacityVisible>
+      <BrushSerialize>&lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;#FF6495ED&lt;/SolidColorBrush&gt;</BrushSerialize>
+      <DashStyleHelper>Solid</DashStyleHelper>
+      <Opacity>100</Opacity>
+      <Width>2</Width>
+    </OutlineStroke>
+    <EndAnchor>
+      <SlotIndex>1495</SlotIndex>
+      <DisplayName>End</DisplayName>
+      <IsBrowsable>true</IsBrowsable>
+      <Time>2022-08-30T15:46:33.223</Time>
+      <Price>3996.017298926145</Price>
+    </EndAnchor>
+    <MiddleAnchor>
+      <SlotIndex>1495</SlotIndex>
+      <DisplayName>Middle</DisplayName>
+      <IsBrowsable>false</IsBrowsable>
+      <Time>2022-08-30T15:46:33.223</Time>
+      <Price>3996.017298926145</Price>
+    </MiddleAnchor>
+    <StartAnchor>
+      <SlotIndex>1502</SlotIndex>
+      <DisplayName>Start</DisplayName>
+      <IsBrowsable>true</IsBrowsable>
+      <Time>2022-08-30T15:49:37.53</Time>
+      <Price>3991.8713598509753</Price>
+    </StartAnchor>
+    <FullTypeName>NinjaTrader.NinjaScript.DrawingTools.Ellipse</FullTypeName>
+    <IsGlobalDrawingObjectDefault>false</IsGlobalDrawingObjectDefault>
+    <IsOwnerVisible>true</IsOwnerVisible>
+  </Ellipse>
+</NinjaTrader>

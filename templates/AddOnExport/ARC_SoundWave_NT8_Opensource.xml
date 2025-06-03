@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf - 8"?>
+<ExportTemplate xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<ExportCompiled>true</ExportCompiled>
+  <ProductName>ARC_FullSuite</ProductName>
+  <Version>
+  <int>8</int>
+  <int>1</int>
+  <int>1</int>
+  <int>7</int>
+  </Version>
+  <ExportItems>
+   <ExportTemplateItem>
+   <Filename>*\Indicators\ARC\ARC_SoundWave.cs</Filename>
+   <Type>Indicators</Type>
+   </ExportTemplateItem>
+   <ExportTemplateItem>
+   <Filename>*\Indicators\ARC\ARC_SoundWaveEngine.cs</Filename>
+   <Type>Indicators</Type>
+   </ExportTemplateItem>
+  </ExportItems>
+</ExportTemplate>

@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NinjaTrader>
+  <Ruler xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <IsAutoScale>false</IsAutoScale>
+    <MaxValue>-1.7976931348623157E+308</MaxValue>
+    <MinValue>1.7976931348623157E+308</MinValue>
+    <DisplayOnChartsMenus>true</DisplayOnChartsMenus>
+    <GlobalLastSeenSerialize>0</GlobalLastSeenSerialize>
+    <GlobalWorkspace>Spreads_dogerblue</GlobalWorkspace>
+    <IsLocked>false</IsLocked>
+    <PanelIndex>1</PanelIndex>
+    <ZOrderType>Normal</ZOrderType>
+    <StartAnchor>
+      <SlotIndex>25279.966796875</SlotIndex>
+      <DisplayName>Start</DisplayName>
+      <IsBrowsable>true</IsBrowsable>
+      <Time>2022-11-11T14:37:56.015</Time>
+      <Price>868.46349764024626</Price>
+    </StartAnchor>
+    <EndAnchor>
+      <SlotIndex>25280.0546875</SlotIndex>
+      <DisplayName>End</DisplayName>
+      <IsBrowsable>true</IsBrowsable>
+      <Time>2022-11-11T14:38:06.562</Time>
+      <Price>-473.87507569729041</Price>
+    </EndAnchor>
+    <TextAnchor>
+      <SlotIndex>25277.013671875</SlotIndex>
+      <DisplayName>Text</DisplayName>
+      <IsBrowsable>true</IsBrowsable>
+      <Time>2022-11-11T14:32:01.64</Time>
+      <Price>-278.11736708556646</Price>
+    </TextAnchor>
+    <LineColor>
+      <IsOpacityVisible>true</IsOpacityVisible>
+      <BrushSerialize>&lt;SolidColorBrush Color="#FFA9A9A9" Opacity="0.5" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" /&gt;</BrushSerialize>
+      <DashStyleHelper>Solid</DashStyleHelper>
+      <Opacity>50</Opacity>
+      <Width>3</Width>
+    </LineColor>
+    <TextColorSerialize>&lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;#FFFFFFFF&lt;/SolidColorBrush&gt;</TextColorSerialize>
+    <YValueDisplayUnit>Price</YValueDisplayUnit>
+    <FullTypeName>NinjaTrader.NinjaScript.DrawingTools.Ruler</FullTypeName>
+    <IsGlobalDrawingObjectDefault>false</IsGlobalDrawingObjectDefault>
+    <IsOwnerVisible>true</IsOwnerVisible>
+  </Ruler>
+</NinjaTrader>

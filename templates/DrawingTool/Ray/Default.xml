@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NinjaTrader>
+  <Ray xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <IsAutoScale>false</IsAutoScale>
+    <MaxValue>-1.7976931348623157E+308</MaxValue>
+    <MinValue>1.7976931348623157E+308</MinValue>
+    <DisplayOnChartsMenus>true</DisplayOnChartsMenus>
+    <GlobalLastSeenSerialize>0</GlobalLastSeenSerialize>
+    <GlobalWorkspace>AMA bands</GlobalWorkspace>
+    <IsLocked>false</IsLocked>
+    <PanelIndex>0</PanelIndex>
+    <ZOrderType>Normal</ZOrderType>
+    <EndAnchor>
+      <SlotIndex>2522</SlotIndex>
+      <DisplayName>End</DisplayName>
+      <IsBrowsable>true</IsBrowsable>
+      <Time>2021-03-01T15:06:21.003</Time>
+      <Price>192.55776555155589</Price>
+    </EndAnchor>
+    <StartAnchor>
+      <SlotIndex>2327</SlotIndex>
+      <DisplayName>Start</DisplayName>
+      <IsBrowsable>true</IsBrowsable>
+      <Time>2021-03-01T08:45:04.91</Time>
+      <Price>192.55776555155589</Price>
+    </StartAnchor>
+    <Stroke>
+      <IsOpacityVisible>true</IsOpacityVisible>
+      <BrushSerialize>&lt;SolidColorBrush Color="#FF00CED1" Opacity="0.89999997615814209" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" /&gt;</BrushSerialize>
+      <DashStyleHelper>Dash</DashStyleHelper>
+      <Opacity>90</Opacity>
+      <Width>2</Width>
+    </Stroke>
+    <FullTypeName>NinjaTrader.NinjaScript.DrawingTools.Ray</FullTypeName>
+    <IsGlobalDrawingObjectDefault>true</IsGlobalDrawingObjectDefault>
+    <IsOwnerVisible>true</IsOwnerVisible>
+  </Ray>
+</NinjaTrader>

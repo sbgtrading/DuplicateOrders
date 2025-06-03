@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ExportTemplate xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <ExportCompiled>true</ExportCompiled>
+  <ProtectAssembly>true</ProtectAssembly>
+  <ProductName>ARC_FullSuite</ProductName>
+  <Version>
+    <int>8</int>
+    <int>0</int>
+    <int>26</int>
+    <int>1</int>
+  </Version>
+  <ExportItems>
+    <ExportTemplateItem>
+      <Filename>*\DrawingTools\ARC_DT\ArcAnchoredVwap.cs</Filename>
+      <Type>DrawingTool</Type>
+    </ExportTemplateItem>
+    <ExportTemplateItem>
+      <Filename>*\MarketAnalyzerColumns\ARC\ARC_DataLagTimer.cs</Filename>
+      <Type>MarketAnalyzerColumns</Type>
+    </ExportTemplateItem>
+    <ExportTemplateItem>
+      <Filename>*\Indicators\ARC\ARC_ACP.cs</Filename>
+      <Type>Indicators</Type>
+    </ExportTemplateItem>
+    <ExportTemplateItem>
+      <Filename>*\PmEasyTrader.Controls.dll</Filename>
+      <Type>References</Type>
+    </ExportTemplateItem>
+    <ExportTemplateItem>
+      <Filename>*\Strategies\ARC_DAStrategyBase.cs</Filename>
+      <Type>Strategies</Type>
+    </ExportTemplateItem>
+  </ExportItems>
+</ExportTemplate>

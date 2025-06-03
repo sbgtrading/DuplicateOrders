@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NinjaTrader>
+  <Triangle xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <IsAutoScale>false</IsAutoScale>
+    <MaxValue>-1.7976931348623157E+308</MaxValue>
+    <MinValue>1.7976931348623157E+308</MinValue>
+    <DisplayOnChartsMenus>true</DisplayOnChartsMenus>
+    <GlobalLastSeenSerialize>0</GlobalLastSeenSerialize>
+    <GlobalWorkspace>Spreads</GlobalWorkspace>
+    <IsLocked>false</IsLocked>
+    <PanelIndex>1</PanelIndex>
+    <ZOrderType>Normal</ZOrderType>
+    <AreaBrushSerialize>&lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;#FFDC143C&lt;/SolidColorBrush&gt;</AreaBrushSerialize>
+    <AreaOpacity>20</AreaOpacity>
+    <OutlineStroke>
+      <IsOpacityVisible>true</IsOpacityVisible>
+      <BrushSerialize>&lt;SolidColorBrush Color="#FFDC143C" Opacity="0.800000011920929" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" /&gt;</BrushSerialize>
+      <DashStyleHelper>Solid</DashStyleHelper>
+      <Opacity>80</Opacity>
+      <Width>2</Width>
+    </OutlineStroke>
+    <EndAnchor>
+      <SlotIndex>9511.6</SlotIndex>
+      <DisplayName>End</DisplayName>
+      <IsBrowsable>true</IsBrowsable>
+      <Time>2022-09-19T10:54:36</Time>
+      <Price>3647.7743807754482</Price>
+    </EndAnchor>
+    <MiddleAnchor>
+      <SlotIndex>9508.4</SlotIndex>
+      <DisplayName>Middle</DisplayName>
+      <IsBrowsable>true</IsBrowsable>
+      <Time>2022-09-19T10:51:24</Time>
+      <Price>3415.4824474508519</Price>
+    </MiddleAnchor>
+    <StartAnchor>
+      <SlotIndex>9497.6</SlotIndex>
+      <DisplayName>Start</DisplayName>
+      <IsBrowsable>true</IsBrowsable>
+      <Time>2022-09-19T10:40:36</Time>
+      <Price>3609.059058554682</Price>
+    </StartAnchor>
+    <FullTypeName>NinjaTrader.NinjaScript.DrawingTools.Triangle</FullTypeName>
+    <IsGlobalDrawingObjectDefault>false</IsGlobalDrawingObjectDefault>
+    <IsOwnerVisible>true</IsOwnerVisible>
+  </Triangle>
+</NinjaTrader>

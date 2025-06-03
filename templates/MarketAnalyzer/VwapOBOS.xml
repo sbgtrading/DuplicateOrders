@@ -1,0 +1,565 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NinjaTrader>
+  <MarketAnalyzerProperties>
+    <MarketAnalyzerProperties xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <AlwaysOnTop>false</AlwaysOnTop>
+      <AreTabsVisible>true</AreTabsVisible>
+      <IgnoreGridCustomizations>true</IgnoreGridCustomizations>
+      <TabName>@FUNCTION</TabName>
+      <VisibleColumns />
+      <AutoSort>false</AutoSort>
+      <AutoSortSeconds>10</AutoSortSeconds>
+      <FontInfo>
+        <Bold>false</Bold>
+        <FamilySerialize>Arial</FamilySerialize>
+        <Italic>false</Italic>
+        <Size>18</Size>
+      </FontInfo>
+      <LabelRowTextAlignment>Center</LabelRowTextAlignment>
+      <MaxNumberOfRows>10</MaxNumberOfRows>
+      <RowChangeHlDuration>1000</RowChangeHlDuration>
+      <RowFilter>true</RowFilter>
+      <ShowTotalRow>false</ShowTotalRow>
+      <SelectedHotList />
+      <GridBackgroundSerialize>&lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;#FF000000&lt;/SolidColorBrush&gt;</GridBackgroundSerialize>
+      <GridForegroundSerialize>DEFAULT</GridForegroundSerialize>
+      <GridLinesSerialize>DEFAULT</GridLinesSerialize>
+      <HotListMode>false</HotListMode>
+      <LabelRowBackgroundSerialize>DEFAULT</LabelRowBackgroundSerialize>
+      <LabelRowForegroundSerialize>&lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;#FF696969&lt;/SolidColorBrush&gt;</LabelRowForegroundSerialize>
+      <RowChangeHighlightBackgroundSerialize>&lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;#00FFFFFF&lt;/SolidColorBrush&gt;</RowChangeHighlightBackgroundSerialize>
+      <RowChangeHighlightForegroundSerialize>&lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;#FF696969&lt;/SolidColorBrush&gt;</RowChangeHighlightForegroundSerialize>
+      <TotalRowBackgroundSerialize>DEFAULT</TotalRowBackgroundSerialize>
+    </MarketAnalyzerProperties>
+  </MarketAnalyzerProperties>
+  <Columns>
+    <ArrayOfMarketAnalyzerColumnSerialize xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <MarketAnalyzerColumnSerialize>
+        <Column>&lt;Instrument xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
+  &lt;IsVisible&gt;true&lt;/IsVisible&gt;
+  &lt;AreLinesConfigurable&gt;true&lt;/AreLinesConfigurable&gt;
+  &lt;ArePlotsConfigurable&gt;true&lt;/ArePlotsConfigurable&gt;
+  &lt;BarsPeriodSerializable&gt;
+    &lt;BarsPeriodTypeSerialize&gt;4&lt;/BarsPeriodTypeSerialize&gt;
+    &lt;BaseBarsPeriodType&gt;Minute&lt;/BaseBarsPeriodType&gt;
+    &lt;BaseBarsPeriodValue&gt;1&lt;/BaseBarsPeriodValue&gt;
+    &lt;VolumetricDeltaType&gt;BidAsk&lt;/VolumetricDeltaType&gt;
+    &lt;MarketDataType&gt;Last&lt;/MarketDataType&gt;
+    &lt;PointAndFigurePriceType&gt;Close&lt;/PointAndFigurePriceType&gt;
+    &lt;ReversalType&gt;Tick&lt;/ReversalType&gt;
+    &lt;Value&gt;1&lt;/Value&gt;
+    &lt;Value2&gt;1&lt;/Value2&gt;
+  &lt;/BarsPeriodSerializable&gt;
+  &lt;BarsToLoad&gt;50&lt;/BarsToLoad&gt;
+  &lt;DisplayInDataBox&gt;true&lt;/DisplayInDataBox&gt;
+  &lt;From&gt;2099-12-01T00:00:00&lt;/From&gt;
+  &lt;Panel&gt;0&lt;/Panel&gt;
+  &lt;ScaleJustification&gt;Right&lt;/ScaleJustification&gt;
+  &lt;ShowTransparentPlotsInDataBox&gt;false&lt;/ShowTransparentPlotsInDataBox&gt;
+  &lt;To&gt;1800-01-01T00:00:00&lt;/To&gt;
+  &lt;Calculate&gt;OnBarClose&lt;/Calculate&gt;
+  &lt;Displacement&gt;0&lt;/Displacement&gt;
+  &lt;IsAutoScale&gt;true&lt;/IsAutoScale&gt;
+  &lt;IsDataSeriesRequired&gt;false&lt;/IsDataSeriesRequired&gt;
+  &lt;IsOverlay&gt;false&lt;/IsOverlay&gt;
+  &lt;Lines /&gt;
+  &lt;MaximumBarsLookBack&gt;TwoHundredFiftySix&lt;/MaximumBarsLookBack&gt;
+  &lt;Plots /&gt;
+  &lt;SelectedValueSeries&gt;0&lt;/SelectedValueSeries&gt;
+  &lt;AltBarColorSerialize&gt;&amp;lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&amp;gt;#FFFF0000&amp;lt;/SolidColorBrush&amp;gt;&lt;/AltBarColorSerialize&gt;
+  &lt;BackColorSerialize&gt;&amp;lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&amp;gt;#00FFFFFF&amp;lt;/SolidColorBrush&amp;gt;&lt;/BackColorSerialize&gt;
+  &lt;MinBackgroundColorSerialize&gt;&amp;lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&amp;gt;#00FFFFFF&amp;lt;/SolidColorBrush&amp;gt;&lt;/MinBackgroundColorSerialize&gt;
+  &lt;MaxBackgroundColorSerialize&gt;&amp;lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&amp;gt;#FF4682B4&amp;lt;/SolidColorBrush&amp;gt;&lt;/MaxBackgroundColorSerialize&gt;
+  &lt;MinForegroundColorSerialize&gt;DEFAULT&lt;/MinForegroundColorSerialize&gt;
+  &lt;MaxForegroundColorSerialize&gt;DEFAULT&lt;/MaxForegroundColorSerialize&gt;
+  &lt;BarColorSerializable&gt;&amp;lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&amp;gt;#FF00FF00&amp;lt;/SolidColorBrush&amp;gt;&lt;/BarColorSerializable&gt;
+  &lt;CellConditionsSerialize /&gt;
+  &lt;DataTypeSerialize&gt;string&lt;/DataTypeSerialize&gt;
+  &lt;DaysBack&gt;5&lt;/DaysBack&gt;
+  &lt;FilterConditionsSerialize /&gt;
+  &lt;ForeColorSerialize&gt;DEFAULT&lt;/ForeColorSerialize&gt;
+  &lt;IsStableSession&gt;true&lt;/IsStableSession&gt;
+  &lt;TradingHoursSerializable /&gt;
+  &lt;StartDate&gt;2020-12-05T16:57:36.0287121&lt;/StartDate&gt;
+  &lt;IsColorDistributionEnabled&gt;false&lt;/IsColorDistributionEnabled&gt;
+  &lt;ColorDistribution&gt;Automatic&lt;/ColorDistribution&gt;
+  &lt;MaxValueRange&gt;100&lt;/MaxValueRange&gt;
+  &lt;MinValueRange&gt;0&lt;/MinValueRange&gt;
+  &lt;BarGraphGrowthType&gt;Center&lt;/BarGraphGrowthType&gt;
+  &lt;BarGraphGrowthMaxValue&gt;1000&lt;/BarGraphGrowthMaxValue&gt;
+  &lt;BarGraphReferenceValue&gt;0&lt;/BarGraphReferenceValue&gt;
+  &lt;ColumnType&gt;Regular&lt;/ColumnType&gt;
+  &lt;RangeType&gt;Bars&lt;/RangeType&gt;
+  &lt;ShowInTotalRow&gt;false&lt;/ShowInTotalRow&gt;
+&lt;/Instrument&gt;</Column>
+        <TypeName>NinjaTrader.NinjaScript.MarketAnalyzerColumns.Instrument</TypeName>
+        <ColumnInput>&lt;Input /&gt;</ColumnInput>
+        <ColumnWidth>176.45</ColumnWidth>
+        <IsCustomName>false</IsCustomName>
+      </MarketAnalyzerColumnSerialize>
+      <MarketAnalyzerColumnSerialize>
+        <Column>&lt;IndicatorMarketAnalyzerColumn xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
+  &lt;IsVisible&gt;true&lt;/IsVisible&gt;
+  &lt;AreLinesConfigurable&gt;true&lt;/AreLinesConfigurable&gt;
+  &lt;ArePlotsConfigurable&gt;true&lt;/ArePlotsConfigurable&gt;
+  &lt;BarsPeriodSerializable&gt;
+    &lt;BarsPeriodTypeSerialize&gt;4&lt;/BarsPeriodTypeSerialize&gt;
+    &lt;BaseBarsPeriodType&gt;Minute&lt;/BaseBarsPeriodType&gt;
+    &lt;BaseBarsPeriodValue&gt;1&lt;/BaseBarsPeriodValue&gt;
+    &lt;VolumetricDeltaType&gt;BidAsk&lt;/VolumetricDeltaType&gt;
+    &lt;MarketDataType&gt;Last&lt;/MarketDataType&gt;
+    &lt;PointAndFigurePriceType&gt;Close&lt;/PointAndFigurePriceType&gt;
+    &lt;ReversalType&gt;Tick&lt;/ReversalType&gt;
+    &lt;Value&gt;2&lt;/Value&gt;
+    &lt;Value2&gt;1&lt;/Value2&gt;
+  &lt;/BarsPeriodSerializable&gt;
+  &lt;BarsToLoad&gt;50&lt;/BarsToLoad&gt;
+  &lt;DisplayInDataBox&gt;true&lt;/DisplayInDataBox&gt;
+  &lt;From&gt;2099-12-01T00:00:00&lt;/From&gt;
+  &lt;Panel&gt;0&lt;/Panel&gt;
+  &lt;ScaleJustification&gt;Right&lt;/ScaleJustification&gt;
+  &lt;ShowTransparentPlotsInDataBox&gt;false&lt;/ShowTransparentPlotsInDataBox&gt;
+  &lt;To&gt;1800-01-01T00:00:00&lt;/To&gt;
+  &lt;Calculate&gt;OnPriceChange&lt;/Calculate&gt;
+  &lt;Displacement&gt;0&lt;/Displacement&gt;
+  &lt;IsAutoScale&gt;true&lt;/IsAutoScale&gt;
+  &lt;IsDataSeriesRequired&gt;true&lt;/IsDataSeriesRequired&gt;
+  &lt;IsOverlay&gt;false&lt;/IsOverlay&gt;
+  &lt;Lines /&gt;
+  &lt;MaximumBarsLookBack&gt;Infinite&lt;/MaximumBarsLookBack&gt;
+  &lt;Name&gt;VWAP Trend on 2 Min&lt;/Name&gt;
+  &lt;Plots /&gt;
+  &lt;SelectedValueSeries&gt;0&lt;/SelectedValueSeries&gt;
+  &lt;AltBarColorSerialize&gt;&amp;lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&amp;gt;#FFFF0000&amp;lt;/SolidColorBrush&amp;gt;&lt;/AltBarColorSerialize&gt;
+  &lt;BackColorSerialize&gt;&amp;lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&amp;gt;#00FFFFFF&amp;lt;/SolidColorBrush&amp;gt;&lt;/BackColorSerialize&gt;
+  &lt;MinBackgroundColorSerialize&gt;&amp;lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&amp;gt;#00FFFFFF&amp;lt;/SolidColorBrush&amp;gt;&lt;/MinBackgroundColorSerialize&gt;
+  &lt;MaxBackgroundColorSerialize&gt;&amp;lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&amp;gt;#FF4682B4&amp;lt;/SolidColorBrush&amp;gt;&lt;/MaxBackgroundColorSerialize&gt;
+  &lt;MinForegroundColorSerialize&gt;DEFAULT&lt;/MinForegroundColorSerialize&gt;
+  &lt;MaxForegroundColorSerialize&gt;DEFAULT&lt;/MaxForegroundColorSerialize&gt;
+  &lt;BarColorSerializable&gt;&amp;lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&amp;gt;#FF00FF00&amp;lt;/SolidColorBrush&amp;gt;&lt;/BarColorSerializable&gt;
+  &lt;CellConditionsSerialize&gt;
+    &lt;CellCondition&gt;
+      &lt;ApplyTo&gt;All&lt;/ApplyTo&gt;
+      &lt;ConditionSerialize&gt;LessEqual&lt;/ConditionSerialize&gt;
+      &lt;Value&gt;-3&lt;/Value&gt;
+      &lt;BackgroundSerialize&gt;&amp;lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&amp;gt;#00FFFFFF&amp;lt;/SolidColorBrush&amp;gt;&lt;/BackgroundSerialize&gt;
+      &lt;ForegroundSerialize&gt;&amp;lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&amp;gt;#FFFFFF00&amp;lt;/SolidColorBrush&amp;gt;&lt;/ForegroundSerialize&gt;
+      &lt;Text&gt;OSold&lt;/Text&gt;
+    &lt;/CellCondition&gt;
+    &lt;CellCondition&gt;
+      &lt;ApplyTo&gt;All&lt;/ApplyTo&gt;
+      &lt;ConditionSerialize&gt;GreaterEqual&lt;/ConditionSerialize&gt;
+      &lt;Value&gt;3&lt;/Value&gt;
+      &lt;BackgroundSerialize&gt;&amp;lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&amp;gt;#00FFFFFF&amp;lt;/SolidColorBrush&amp;gt;&lt;/BackgroundSerialize&gt;
+      &lt;ForegroundSerialize&gt;&amp;lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&amp;gt;#FFFF0000&amp;lt;/SolidColorBrush&amp;gt;&lt;/ForegroundSerialize&gt;
+      &lt;Text&gt;OBought&lt;/Text&gt;
+    &lt;/CellCondition&gt;
+    &lt;CellCondition&gt;
+      &lt;ApplyTo&gt;All&lt;/ApplyTo&gt;
+      &lt;ConditionSerialize&gt;Equals&lt;/ConditionSerialize&gt;
+      &lt;Value&gt;-2&lt;/Value&gt;
+      &lt;BackgroundSerialize&gt;&amp;lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&amp;gt;#00FFFFFF&amp;lt;/SolidColorBrush&amp;gt;&lt;/BackgroundSerialize&gt;
+      &lt;ForegroundSerialize&gt;&amp;lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&amp;gt;#FF808000&amp;lt;/SolidColorBrush&amp;gt;&lt;/ForegroundSerialize&gt;
+      &lt;Text&gt;mild OS&lt;/Text&gt;
+    &lt;/CellCondition&gt;
+    &lt;CellCondition&gt;
+      &lt;ApplyTo&gt;All&lt;/ApplyTo&gt;
+      &lt;ConditionSerialize&gt;Equals&lt;/ConditionSerialize&gt;
+      &lt;Value&gt;2&lt;/Value&gt;
+      &lt;BackgroundSerialize&gt;&amp;lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&amp;gt;#00FFFFFF&amp;lt;/SolidColorBrush&amp;gt;&lt;/BackgroundSerialize&gt;
+      &lt;ForegroundSerialize&gt;&amp;lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&amp;gt;#FFF08080&amp;lt;/SolidColorBrush&amp;gt;&lt;/ForegroundSerialize&gt;
+      &lt;Text&gt;mild OB&lt;/Text&gt;
+    &lt;/CellCondition&gt;
+    &lt;CellCondition&gt;
+      &lt;ApplyTo&gt;All&lt;/ApplyTo&gt;
+      &lt;ConditionSerialize&gt;Equals&lt;/ConditionSerialize&gt;
+      &lt;Value&gt;1&lt;/Value&gt;
+      &lt;BackgroundSerialize&gt;&amp;lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&amp;gt;#00FFFFFF&amp;lt;/SolidColorBrush&amp;gt;&lt;/BackgroundSerialize&gt;
+      &lt;ForegroundSerialize&gt;&amp;lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&amp;gt;#FF808080&amp;lt;/SolidColorBrush&amp;gt;&lt;/ForegroundSerialize&gt;
+      &lt;Text&gt;over vwap&lt;/Text&gt;
+    &lt;/CellCondition&gt;
+    &lt;CellCondition&gt;
+      &lt;ApplyTo&gt;All&lt;/ApplyTo&gt;
+      &lt;ConditionSerialize&gt;Equals&lt;/ConditionSerialize&gt;
+      &lt;Value&gt;-1&lt;/Value&gt;
+      &lt;BackgroundSerialize&gt;&amp;lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&amp;gt;#00FFFFFF&amp;lt;/SolidColorBrush&amp;gt;&lt;/BackgroundSerialize&gt;
+      &lt;ForegroundSerialize&gt;&amp;lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&amp;gt;#FF808080&amp;lt;/SolidColorBrush&amp;gt;&lt;/ForegroundSerialize&gt;
+      &lt;Text&gt;under vwap&lt;/Text&gt;
+    &lt;/CellCondition&gt;
+    &lt;CellCondition&gt;
+      &lt;ApplyTo&gt;All&lt;/ApplyTo&gt;
+      &lt;ConditionSerialize&gt;Equals&lt;/ConditionSerialize&gt;
+      &lt;Value&gt;0&lt;/Value&gt;
+      &lt;BackgroundSerialize&gt;&amp;lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&amp;gt;#00FFFFFF&amp;lt;/SolidColorBrush&amp;gt;&lt;/BackgroundSerialize&gt;
+      &lt;ForegroundSerialize&gt;&amp;lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&amp;gt;#FFEEE8AA&amp;lt;/SolidColorBrush&amp;gt;&lt;/ForegroundSerialize&gt;
+      &lt;Text&gt;zero&lt;/Text&gt;
+    &lt;/CellCondition&gt;
+  &lt;/CellConditionsSerialize&gt;
+  &lt;DataTypeSerialize&gt;double&lt;/DataTypeSerialize&gt;
+  &lt;DaysBack&gt;3&lt;/DaysBack&gt;
+  &lt;FilterConditionsSerialize&gt;
+    &lt;FilterCondition&gt;
+      &lt;ApplyTo&gt;All&lt;/ApplyTo&gt;
+      &lt;ConditionSerialize&gt;Equals&lt;/ConditionSerialize&gt;
+      &lt;Value&gt;0&lt;/Value&gt;
+    &lt;/FilterCondition&gt;
+    &lt;FilterCondition&gt;
+      &lt;ApplyTo&gt;All&lt;/ApplyTo&gt;
+      &lt;ConditionSerialize&gt;Equals&lt;/ConditionSerialize&gt;
+      &lt;Value&gt;1&lt;/Value&gt;
+    &lt;/FilterCondition&gt;
+    &lt;FilterCondition&gt;
+      &lt;ApplyTo&gt;All&lt;/ApplyTo&gt;
+      &lt;ConditionSerialize&gt;Equals&lt;/ConditionSerialize&gt;
+      &lt;Value&gt;-1&lt;/Value&gt;
+    &lt;/FilterCondition&gt;
+  &lt;/FilterConditionsSerialize&gt;
+  &lt;ForeColorSerialize&gt;DEFAULT&lt;/ForeColorSerialize&gt;
+  &lt;IsStableSession&gt;true&lt;/IsStableSession&gt;
+  &lt;TradingHoursSerializable&gt;Default 24 x 5&lt;/TradingHoursSerializable&gt;
+  &lt;StartDate&gt;2020-12-08T17:14:45.241662&lt;/StartDate&gt;
+  &lt;IsColorDistributionEnabled&gt;false&lt;/IsColorDistributionEnabled&gt;
+  &lt;ColorDistribution&gt;Automatic&lt;/ColorDistribution&gt;
+  &lt;MaxValueRange&gt;100&lt;/MaxValueRange&gt;
+  &lt;MinValueRange&gt;0&lt;/MinValueRange&gt;
+  &lt;BarGraphGrowthType&gt;Center&lt;/BarGraphGrowthType&gt;
+  &lt;BarGraphGrowthMaxValue&gt;1000&lt;/BarGraphGrowthMaxValue&gt;
+  &lt;BarGraphReferenceValue&gt;0&lt;/BarGraphReferenceValue&gt;
+  &lt;ColumnType&gt;Regular&lt;/ColumnType&gt;
+  &lt;RangeType&gt;Days&lt;/RangeType&gt;
+  &lt;ShowInTotalRow&gt;false&lt;/ShowInTotalRow&gt;
+  &lt;Indicator&gt;VWAPTrend&lt;/Indicator&gt;
+  &lt;PlotIndex&gt;8&lt;/PlotIndex&gt;
+  &lt;UseDefaultNameLogic&gt;false&lt;/UseDefaultNameLogic&gt;
+&lt;/IndicatorMarketAnalyzerColumn&gt;</Column>
+        <TypeName>NinjaTrader.NinjaScript.MarketAnalyzerColumns.IndicatorMarketAnalyzerColumn</TypeName>
+        <ColumnWidth>271.790894450949</ColumnWidth>
+        <IndicatorInstance>&lt;VWAPTrend xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
+  &lt;IsVisible&gt;true&lt;/IsVisible&gt;
+  &lt;AreLinesConfigurable&gt;true&lt;/AreLinesConfigurable&gt;
+  &lt;ArePlotsConfigurable&gt;true&lt;/ArePlotsConfigurable&gt;
+  &lt;BarsToLoad&gt;0&lt;/BarsToLoad&gt;
+  &lt;DisplayInDataBox&gt;true&lt;/DisplayInDataBox&gt;
+  &lt;From&gt;2099-12-01T00:00:00&lt;/From&gt;
+  &lt;Panel&gt;0&lt;/Panel&gt;
+  &lt;ScaleJustification&gt;Right&lt;/ScaleJustification&gt;
+  &lt;ShowTransparentPlotsInDataBox&gt;false&lt;/ShowTransparentPlotsInDataBox&gt;
+  &lt;To&gt;1800-01-01T00:00:00&lt;/To&gt;
+  &lt;Calculate&gt;OnPriceChange&lt;/Calculate&gt;
+  &lt;Displacement&gt;0&lt;/Displacement&gt;
+  &lt;IsAutoScale&gt;false&lt;/IsAutoScale&gt;
+  &lt;IsDataSeriesRequired&gt;true&lt;/IsDataSeriesRequired&gt;
+  &lt;IsOverlay&gt;true&lt;/IsOverlay&gt;
+  &lt;Lines /&gt;
+  &lt;MaximumBarsLookBack&gt;Infinite&lt;/MaximumBarsLookBack&gt;
+  &lt;Name&gt;VWAP Trend on 2 Min&lt;/Name&gt;
+  &lt;Plots&gt;
+    &lt;Plot&gt;
+      &lt;IsOpacityVisible&gt;false&lt;/IsOpacityVisible&gt;
+      &lt;BrushSerialize&gt;&amp;lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&amp;gt;#FF00FFFF&amp;lt;/SolidColorBrush&amp;gt;&lt;/BrushSerialize&gt;
+      &lt;DashStyleHelper&gt;Solid&lt;/DashStyleHelper&gt;
+      &lt;Opacity&gt;100&lt;/Opacity&gt;
+      &lt;Width&gt;1&lt;/Width&gt;
+      &lt;AutoWidth&gt;false&lt;/AutoWidth&gt;
+      &lt;Max&gt;1.7976931348623157E+308&lt;/Max&gt;
+      &lt;Min&gt;-1.7976931348623157E+308&lt;/Min&gt;
+      &lt;Name&gt;PlotVWAP&lt;/Name&gt;
+      &lt;PlotStyle&gt;Line&lt;/PlotStyle&gt;
+    &lt;/Plot&gt;
+    &lt;Plot&gt;
+      &lt;IsOpacityVisible&gt;false&lt;/IsOpacityVisible&gt;
+      &lt;BrushSerialize&gt;&amp;lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&amp;gt;#00FFFFFF&amp;lt;/SolidColorBrush&amp;gt;&lt;/BrushSerialize&gt;
+      &lt;DashStyleHelper&gt;Solid&lt;/DashStyleHelper&gt;
+      &lt;Opacity&gt;100&lt;/Opacity&gt;
+      &lt;Width&gt;1&lt;/Width&gt;
+      &lt;AutoWidth&gt;false&lt;/AutoWidth&gt;
+      &lt;Max&gt;1.7976931348623157E+308&lt;/Max&gt;
+      &lt;Min&gt;-1.7976931348623157E+308&lt;/Min&gt;
+      &lt;Name&gt;Upper&lt;/Name&gt;
+      &lt;PlotStyle&gt;Line&lt;/PlotStyle&gt;
+    &lt;/Plot&gt;
+    &lt;Plot&gt;
+      &lt;IsOpacityVisible&gt;false&lt;/IsOpacityVisible&gt;
+      &lt;BrushSerialize&gt;&amp;lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&amp;gt;#00FFFFFF&amp;lt;/SolidColorBrush&amp;gt;&lt;/BrushSerialize&gt;
+      &lt;DashStyleHelper&gt;Solid&lt;/DashStyleHelper&gt;
+      &lt;Opacity&gt;100&lt;/Opacity&gt;
+      &lt;Width&gt;1&lt;/Width&gt;
+      &lt;AutoWidth&gt;false&lt;/AutoWidth&gt;
+      &lt;Max&gt;1.7976931348623157E+308&lt;/Max&gt;
+      &lt;Min&gt;-1.7976931348623157E+308&lt;/Min&gt;
+      &lt;Name&gt;Lower&lt;/Name&gt;
+      &lt;PlotStyle&gt;Line&lt;/PlotStyle&gt;
+    &lt;/Plot&gt;
+    &lt;Plot&gt;
+      &lt;IsOpacityVisible&gt;false&lt;/IsOpacityVisible&gt;
+      &lt;BrushSerialize&gt;&amp;lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&amp;gt;#00FFFFFF&amp;lt;/SolidColorBrush&amp;gt;&lt;/BrushSerialize&gt;
+      &lt;DashStyleHelper&gt;Solid&lt;/DashStyleHelper&gt;
+      &lt;Opacity&gt;100&lt;/Opacity&gt;
+      &lt;Width&gt;1&lt;/Width&gt;
+      &lt;AutoWidth&gt;false&lt;/AutoWidth&gt;
+      &lt;Max&gt;1.7976931348623157E+308&lt;/Max&gt;
+      &lt;Min&gt;-1.7976931348623157E+308&lt;/Min&gt;
+      &lt;Name&gt;Upper2&lt;/Name&gt;
+      &lt;PlotStyle&gt;Line&lt;/PlotStyle&gt;
+    &lt;/Plot&gt;
+    &lt;Plot&gt;
+      &lt;IsOpacityVisible&gt;false&lt;/IsOpacityVisible&gt;
+      &lt;BrushSerialize&gt;&amp;lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&amp;gt;#00FFFFFF&amp;lt;/SolidColorBrush&amp;gt;&lt;/BrushSerialize&gt;
+      &lt;DashStyleHelper&gt;Solid&lt;/DashStyleHelper&gt;
+      &lt;Opacity&gt;100&lt;/Opacity&gt;
+      &lt;Width&gt;1&lt;/Width&gt;
+      &lt;AutoWidth&gt;false&lt;/AutoWidth&gt;
+      &lt;Max&gt;1.7976931348623157E+308&lt;/Max&gt;
+      &lt;Min&gt;-1.7976931348623157E+308&lt;/Min&gt;
+      &lt;Name&gt;Lower2&lt;/Name&gt;
+      &lt;PlotStyle&gt;Line&lt;/PlotStyle&gt;
+    &lt;/Plot&gt;
+    &lt;Plot&gt;
+      &lt;IsOpacityVisible&gt;false&lt;/IsOpacityVisible&gt;
+      &lt;BrushSerialize&gt;&amp;lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&amp;gt;#FF0000FF&amp;lt;/SolidColorBrush&amp;gt;&lt;/BrushSerialize&gt;
+      &lt;DashStyleHelper&gt;Solid&lt;/DashStyleHelper&gt;
+      &lt;Opacity&gt;100&lt;/Opacity&gt;
+      &lt;Width&gt;1&lt;/Width&gt;
+      &lt;AutoWidth&gt;false&lt;/AutoWidth&gt;
+      &lt;Max&gt;1.7976931348623157E+308&lt;/Max&gt;
+      &lt;Min&gt;-1.7976931348623157E+308&lt;/Min&gt;
+      &lt;Name&gt;Upper3&lt;/Name&gt;
+      &lt;PlotStyle&gt;Line&lt;/PlotStyle&gt;
+    &lt;/Plot&gt;
+    &lt;Plot&gt;
+      &lt;IsOpacityVisible&gt;false&lt;/IsOpacityVisible&gt;
+      &lt;BrushSerialize&gt;&amp;lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&amp;gt;#FF0000FF&amp;lt;/SolidColorBrush&amp;gt;&lt;/BrushSerialize&gt;
+      &lt;DashStyleHelper&gt;Solid&lt;/DashStyleHelper&gt;
+      &lt;Opacity&gt;100&lt;/Opacity&gt;
+      &lt;Width&gt;1&lt;/Width&gt;
+      &lt;AutoWidth&gt;false&lt;/AutoWidth&gt;
+      &lt;Max&gt;1.7976931348623157E+308&lt;/Max&gt;
+      &lt;Min&gt;-1.7976931348623157E+308&lt;/Min&gt;
+      &lt;Name&gt;Lower3&lt;/Name&gt;
+      &lt;PlotStyle&gt;Line&lt;/PlotStyle&gt;
+    &lt;/Plot&gt;
+    &lt;Plot&gt;
+      &lt;IsOpacityVisible&gt;false&lt;/IsOpacityVisible&gt;
+      &lt;BrushSerialize&gt;&amp;lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&amp;gt;#FFFFFF00&amp;lt;/SolidColorBrush&amp;gt;&lt;/BrushSerialize&gt;
+      &lt;DashStyleHelper&gt;Solid&lt;/DashStyleHelper&gt;
+      &lt;Opacity&gt;100&lt;/Opacity&gt;
+      &lt;Width&gt;1&lt;/Width&gt;
+      &lt;AutoWidth&gt;false&lt;/AutoWidth&gt;
+      &lt;Max&gt;1.7976931348623157E+308&lt;/Max&gt;
+      &lt;Min&gt;-1.7976931348623157E+308&lt;/Min&gt;
+      &lt;Name&gt;Trend&lt;/Name&gt;
+      &lt;PlotStyle&gt;Line&lt;/PlotStyle&gt;
+    &lt;/Plot&gt;
+    &lt;Plot&gt;
+      &lt;IsOpacityVisible&gt;false&lt;/IsOpacityVisible&gt;
+      &lt;BrushSerialize&gt;&amp;lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&amp;gt;#00FFFFFF&amp;lt;/SolidColorBrush&amp;gt;&lt;/BrushSerialize&gt;
+      &lt;DashStyleHelper&gt;Solid&lt;/DashStyleHelper&gt;
+      &lt;Opacity&gt;100&lt;/Opacity&gt;
+      &lt;Width&gt;1&lt;/Width&gt;
+      &lt;AutoWidth&gt;false&lt;/AutoWidth&gt;
+      &lt;Max&gt;1.7976931348623157E+308&lt;/Max&gt;
+      &lt;Min&gt;-1.7976931348623157E+308&lt;/Min&gt;
+      &lt;Name&gt;ZoneId&lt;/Name&gt;
+      &lt;PlotStyle&gt;Line&lt;/PlotStyle&gt;
+    &lt;/Plot&gt;
+  &lt;/Plots&gt;
+  &lt;SelectedValueSeries&gt;0&lt;/SelectedValueSeries&gt;
+  &lt;InputPlot&gt;0&lt;/InputPlot&gt;
+  &lt;IsTradingHoursBreakLineVisible&gt;true&lt;/IsTradingHoursBreakLineVisible&gt;
+  &lt;DrawHorizontalGridLines&gt;true&lt;/DrawHorizontalGridLines&gt;
+  &lt;DrawVerticalGridLines&gt;true&lt;/DrawVerticalGridLines&gt;
+  &lt;DrawOnPricePanel&gt;true&lt;/DrawOnPricePanel&gt;
+  &lt;PaintPriceMarkers&gt;true&lt;/PaintPriceMarkers&gt;
+  &lt;ChartHashCodeDeserialized&gt;0&lt;/ChartHashCodeDeserialized&gt;
+  &lt;IndicatorId&gt;2203&lt;/IndicatorId&gt;
+  &lt;MaxSerialized&gt;0&lt;/MaxSerialized&gt;
+  &lt;MinSerialized&gt;0&lt;/MinSerialized&gt;
+  &lt;ZOrder&gt;-2147483648&lt;/ZOrder&gt;
+  &lt;Zone1ColorSerialize&gt;&amp;lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&amp;gt;#FF008000&amp;lt;/SolidColorBrush&amp;gt;&lt;/Zone1ColorSerialize&gt;
+  &lt;Zone1OpacityBkg&gt;10&lt;/Zone1OpacityBkg&gt;
+  &lt;pBandMult1&gt;1&lt;/pBandMult1&gt;
+  &lt;Zone2ColorSerialize&gt;&amp;lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&amp;gt;#FFFF0000&amp;lt;/SolidColorBrush&amp;gt;&lt;/Zone2ColorSerialize&gt;
+  &lt;Zone2OpacityBkg&gt;10&lt;/Zone2OpacityBkg&gt;
+  &lt;pBandMult2&gt;2&lt;/pBandMult2&gt;
+  &lt;Zone3ColorSerialize&gt;&amp;lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&amp;gt;#FF0000FF&amp;lt;/SolidColorBrush&amp;gt;&lt;/Zone3ColorSerialize&gt;
+  &lt;Zone3OpacityBkg&gt;10&lt;/Zone3OpacityBkg&gt;
+  &lt;pBandMult3&gt;3&lt;/pBandMult3&gt;
+  &lt;pDayWeekMonth&gt;Day&lt;/pDayWeekMonth&gt;
+  &lt;pSessionStartTime&gt;2300&lt;/pSessionStartTime&gt;
+  &lt;pBandPeriod&gt;20&lt;/pBandPeriod&gt;
+  &lt;pTrendPeriod&gt;12&lt;/pTrendPeriod&gt;
+&lt;/VWAPTrend&gt;</IndicatorInstance>
+        <IndicatorClassName>NinjaTrader.NinjaScript.Indicators.VWAPTrend</IndicatorClassName>
+        <IndicatorInputs>&lt;Input /&gt;</IndicatorInputs>
+        <IsCustomName>true</IsCustomName>
+      </MarketAnalyzerColumnSerialize>
+      <MarketAnalyzerColumnSerialize>
+        <Column>&lt;LastPrice xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
+  &lt;IsVisible&gt;true&lt;/IsVisible&gt;
+  &lt;AreLinesConfigurable&gt;true&lt;/AreLinesConfigurable&gt;
+  &lt;ArePlotsConfigurable&gt;true&lt;/ArePlotsConfigurable&gt;
+  &lt;BarsPeriodSerializable&gt;
+    &lt;BarsPeriodTypeSerialize&gt;4&lt;/BarsPeriodTypeSerialize&gt;
+    &lt;BaseBarsPeriodType&gt;Minute&lt;/BaseBarsPeriodType&gt;
+    &lt;BaseBarsPeriodValue&gt;1&lt;/BaseBarsPeriodValue&gt;
+    &lt;VolumetricDeltaType&gt;BidAsk&lt;/VolumetricDeltaType&gt;
+    &lt;MarketDataType&gt;Last&lt;/MarketDataType&gt;
+    &lt;PointAndFigurePriceType&gt;Close&lt;/PointAndFigurePriceType&gt;
+    &lt;ReversalType&gt;Tick&lt;/ReversalType&gt;
+    &lt;Value&gt;1&lt;/Value&gt;
+    &lt;Value2&gt;1&lt;/Value2&gt;
+  &lt;/BarsPeriodSerializable&gt;
+  &lt;BarsToLoad&gt;50&lt;/BarsToLoad&gt;
+  &lt;DisplayInDataBox&gt;true&lt;/DisplayInDataBox&gt;
+  &lt;From&gt;2099-12-01T00:00:00&lt;/From&gt;
+  &lt;Panel&gt;0&lt;/Panel&gt;
+  &lt;ScaleJustification&gt;Right&lt;/ScaleJustification&gt;
+  &lt;ShowTransparentPlotsInDataBox&gt;false&lt;/ShowTransparentPlotsInDataBox&gt;
+  &lt;To&gt;1800-01-01T00:00:00&lt;/To&gt;
+  &lt;Calculate&gt;OnBarClose&lt;/Calculate&gt;
+  &lt;Displacement&gt;0&lt;/Displacement&gt;
+  &lt;IsAutoScale&gt;true&lt;/IsAutoScale&gt;
+  &lt;IsDataSeriesRequired&gt;false&lt;/IsDataSeriesRequired&gt;
+  &lt;IsOverlay&gt;false&lt;/IsOverlay&gt;
+  &lt;Lines /&gt;
+  &lt;MaximumBarsLookBack&gt;TwoHundredFiftySix&lt;/MaximumBarsLookBack&gt;
+  &lt;Plots /&gt;
+  &lt;SelectedValueSeries&gt;0&lt;/SelectedValueSeries&gt;
+  &lt;AltBarColorSerialize&gt;&amp;lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&amp;gt;#FFFF0000&amp;lt;/SolidColorBrush&amp;gt;&lt;/AltBarColorSerialize&gt;
+  &lt;BackColorSerialize&gt;&amp;lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&amp;gt;#00FFFFFF&amp;lt;/SolidColorBrush&amp;gt;&lt;/BackColorSerialize&gt;
+  &lt;MinBackgroundColorSerialize&gt;&amp;lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&amp;gt;#00FFFFFF&amp;lt;/SolidColorBrush&amp;gt;&lt;/MinBackgroundColorSerialize&gt;
+  &lt;MaxBackgroundColorSerialize&gt;&amp;lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&amp;gt;#FF4682B4&amp;lt;/SolidColorBrush&amp;gt;&lt;/MaxBackgroundColorSerialize&gt;
+  &lt;MinForegroundColorSerialize&gt;DEFAULT&lt;/MinForegroundColorSerialize&gt;
+  &lt;MaxForegroundColorSerialize&gt;DEFAULT&lt;/MaxForegroundColorSerialize&gt;
+  &lt;BarColorSerializable&gt;&amp;lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&amp;gt;#FF00FF00&amp;lt;/SolidColorBrush&amp;gt;&lt;/BarColorSerializable&gt;
+  &lt;CellConditionsSerialize /&gt;
+  &lt;DataTypeSerialize&gt;double&lt;/DataTypeSerialize&gt;
+  &lt;DaysBack&gt;5&lt;/DaysBack&gt;
+  &lt;FilterConditionsSerialize /&gt;
+  &lt;ForeColorSerialize&gt;DEFAULT&lt;/ForeColorSerialize&gt;
+  &lt;IsStableSession&gt;true&lt;/IsStableSession&gt;
+  &lt;TradingHoursSerializable /&gt;
+  &lt;StartDate&gt;2020-12-05T16:57:36.0297094&lt;/StartDate&gt;
+  &lt;IsColorDistributionEnabled&gt;false&lt;/IsColorDistributionEnabled&gt;
+  &lt;ColorDistribution&gt;Automatic&lt;/ColorDistribution&gt;
+  &lt;MaxValueRange&gt;100&lt;/MaxValueRange&gt;
+  &lt;MinValueRange&gt;0&lt;/MinValueRange&gt;
+  &lt;BarGraphGrowthType&gt;Center&lt;/BarGraphGrowthType&gt;
+  &lt;BarGraphGrowthMaxValue&gt;1000&lt;/BarGraphGrowthMaxValue&gt;
+  &lt;BarGraphReferenceValue&gt;0&lt;/BarGraphReferenceValue&gt;
+  &lt;ColumnType&gt;Regular&lt;/ColumnType&gt;
+  &lt;RangeType&gt;Bars&lt;/RangeType&gt;
+  &lt;ShowInTotalRow&gt;false&lt;/ShowInTotalRow&gt;
+&lt;/LastPrice&gt;</Column>
+        <TypeName>NinjaTrader.NinjaScript.MarketAnalyzerColumns.LastPrice</TypeName>
+        <ColumnInput>&lt;Input /&gt;</ColumnInput>
+        <ColumnWidth>176.45</ColumnWidth>
+        <IsCustomName>false</IsCustomName>
+      </MarketAnalyzerColumnSerialize>
+    </ArrayOfMarketAnalyzerColumnSerialize>
+  </Columns>
+  <LastSortedField>VWAP Trend on 2 Min</LastSortedField>
+  <SortDirection>Descending</SortDirection>
+  <Rows>
+    <Row>
+      <RowType>Normal</RowType>
+      <Instrument>NG 01-21 Nymex</Instrument>
+    </Row>
+    <Row>
+      <RowType>Normal</RowType>
+      <Instrument>ZW 03-21 Globex</Instrument>
+    </Row>
+    <Row>
+      <RowType>Normal</RowType>
+      <Instrument>GC 02-21 Nymex</Instrument>
+    </Row>
+    <Row>
+      <RowType>Normal</RowType>
+      <Instrument>ZC 03-21 Globex</Instrument>
+    </Row>
+    <Row>
+      <RowType>Normal</RowType>
+      <Instrument>ZM 01-21 Globex</Instrument>
+    </Row>
+    <Row>
+      <RowType>Normal</RowType>
+      <Instrument>ZS 01-21 Globex</Instrument>
+    </Row>
+    <Row>
+      <RowType>Normal</RowType>
+      <Instrument>6E 12-20 Globex</Instrument>
+    </Row>
+    <Row>
+      <RowType>Normal</RowType>
+      <Instrument>HO 01-21 Globex</Instrument>
+    </Row>
+    <Row>
+      <RowType>Normal</RowType>
+      <Instrument>PA 03-21 Nymex</Instrument>
+    </Row>
+    <Row>
+      <RowType>Normal</RowType>
+      <Instrument>RB 01-21 Globex</Instrument>
+    </Row>
+    <Row>
+      <RowType>Normal</RowType>
+      <Instrument>SI 03-21 Nymex</Instrument>
+    </Row>
+    <Row>
+      <RowType>Normal</RowType>
+      <Instrument>ZL 01-21 Globex</Instrument>
+    </Row>
+    <Row>
+      <RowType>Normal</RowType>
+      <Instrument>6A 12-20 Globex</Instrument>
+    </Row>
+    <Row>
+      <RowType>Normal</RowType>
+      <Instrument>6B 12-20 Globex</Instrument>
+    </Row>
+    <Row>
+      <RowType>Normal</RowType>
+      <Instrument>6C 12-20 Globex</Instrument>
+    </Row>
+    <Row>
+      <RowType>Normal</RowType>
+      <Instrument>6J 12-20 Globex</Instrument>
+    </Row>
+    <Row>
+      <RowType>Normal</RowType>
+      <Instrument>6S 12-20 Globex</Instrument>
+    </Row>
+    <Row>
+      <RowType>Normal</RowType>
+      <Instrument>CL 01-21 Nymex</Instrument>
+    </Row>
+    <Row>
+      <RowType>Normal</RowType>
+      <Instrument>ES 03-21 Globex</Instrument>
+    </Row>
+    <Row>
+      <RowType>Normal</RowType>
+      <Instrument>HG 03-21 Nymex</Instrument>
+    </Row>
+    <Row>
+      <RowType>Normal</RowType>
+      <Instrument>NQ 03-21 Globex</Instrument>
+    </Row>
+    <Row>
+      <RowType>Normal</RowType>
+      <Instrument>PL 01-21 Nymex</Instrument>
+    </Row>
+    <Row>
+      <RowType>Normal</RowType>
+      <Instrument>RTY 03-21 Globex</Instrument>
+    </Row>
+    <Row>
+      <RowType>Normal</RowType>
+      <Instrument>YM 03-21 Globex</Instrument>
+    </Row>
+    <Row>
+      <RowType>Normal</RowType>
+      <Instrument>6R 12-20 Globex</Instrument>
+    </Row>
+  </Rows>
+</NinjaTrader>

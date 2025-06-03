@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NinjaTrader>
+  <RulerDollars xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <IsAutoScale>false</IsAutoScale>
+    <MaxValue>-1.7976931348623157E+308</MaxValue>
+    <MinValue>1.7976931348623157E+308</MinValue>
+    <DisplayOnChartsMenus>true</DisplayOnChartsMenus>
+    <GlobalLastSeenSerialize>0</GlobalLastSeenSerialize>
+    <GlobalWorkspace>Untitled 9</GlobalWorkspace>
+    <IsLocked>false</IsLocked>
+    <PanelIndex>0</PanelIndex>
+    <ZOrderType>Normal</ZOrderType>
+    <StartAnchor>
+      <SlotIndex>9396</SlotIndex>
+      <DisplayName>Start</DisplayName>
+      <IsBrowsable>true</IsBrowsable>
+      <Time>2022-08-03T13:52:02.824</Time>
+      <Price>91.696402466091243</Price>
+    </StartAnchor>
+    <EndAnchor>
+      <SlotIndex>9412</SlotIndex>
+      <DisplayName>End</DisplayName>
+      <IsBrowsable>true</IsBrowsable>
+      <Time>2022-08-03T14:26:33.388</Time>
+      <Price>91.196807891491986</Price>
+    </EndAnchor>
+    <TextAnchor>
+      <SlotIndex>9420</SlotIndex>
+      <DisplayName>Text</DisplayName>
+      <IsBrowsable>true</IsBrowsable>
+      <Time>2022-08-03T14:29:13.808</Time>
+      <Price>92.0546643649815</Price>
+    </TextAnchor>
+    <LineColor>
+      <IsOpacityVisible>true</IsOpacityVisible>
+      <BrushSerialize>&lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;#FF00FF00&lt;/SolidColorBrush&gt;</BrushSerialize>
+      <DashStyleHelper>Solid</DashStyleHelper>
+      <Opacity>100</Opacity>
+      <Width>5</Width>
+    </LineColor>
+    <TextColorSerialize>&lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;#FFFFFFFF&lt;/SolidColorBrush&gt;</TextColorSerialize>
+    <YValueDisplayUnit>Currency</YValueDisplayUnit>
+    <FullTypeName>NinjaTrader.NinjaScript.DrawingTools.RulerDollars</FullTypeName>
+    <IsGlobalDrawingObjectDefault>false</IsGlobalDrawingObjectDefault>
+    <IsOwnerVisible>true</IsOwnerVisible>
+  </RulerDollars>
+</NinjaTrader>

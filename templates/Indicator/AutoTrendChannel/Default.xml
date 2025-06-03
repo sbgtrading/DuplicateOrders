@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NinjaTrader>
+  <AutoTrendChannel>
+    <AutoTrendChannel xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <IsVisible>true</IsVisible>
+      <AreLinesConfigurable>true</AreLinesConfigurable>
+      <ArePlotsConfigurable>true</ArePlotsConfigurable>
+      <BarsPeriodSerializable>
+        <BarsPeriodTypeSerialize>0</BarsPeriodTypeSerialize>
+        <BaseBarsPeriodType>Minute</BaseBarsPeriodType>
+        <BaseBarsPeriodValue>1</BaseBarsPeriodValue>
+        <VolumetricDeltaType>BidAsk</VolumetricDeltaType>
+        <MarketDataType>Last</MarketDataType>
+        <PointAndFigurePriceType>Close</PointAndFigurePriceType>
+        <ReversalType>Tick</ReversalType>
+        <Value>100</Value>
+        <Value2>1</Value2>
+      </BarsPeriodSerializable>
+      <BarsToLoad>0</BarsToLoad>
+      <DisplayInDataBox>true</DisplayInDataBox>
+      <From>2099-12-01T00:00:00</From>
+      <Panel>-1</Panel>
+      <ScaleJustification>Right</ScaleJustification>
+      <ShowTransparentPlotsInDataBox>false</ShowTransparentPlotsInDataBox>
+      <To>1800-01-01T00:00:00</To>
+      <Calculate>OnBarClose</Calculate>
+      <Displacement>0</Displacement>
+      <IsAutoScale>false</IsAutoScale>
+      <IsDataSeriesRequired>true</IsDataSeriesRequired>
+      <IsOverlay>true</IsOverlay>
+      <Lines />
+      <MaximumBarsLookBack>TwoHundredFiftySix</MaximumBarsLookBack>
+      <Name>iw AutoTrendChannel v5.7</Name>
+      <Plots>
+        <Plot>
+          <IsOpacityVisible>false</IsOpacityVisible>
+          <BrushSerialize>&lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;#FF0000CD&lt;/SolidColorBrush&gt;</BrushSerialize>
+          <DashStyleHelper>Solid</DashStyleHelper>
+          <Opacity>100</Opacity>
+          <Width>2</Width>
+          <AutoWidth>false</AutoWidth>
+          <Max>1.7976931348623157E+308</Max>
+          <Min>-1.7976931348623157E+308</Min>
+          <Name>UpTrendlinePrice</Name>
+          <PlotStyle>Dot</PlotStyle>
+        </Plot>
+        <Plot>
+          <IsOpacityVisible>false</IsOpacityVisible>
+          <BrushSerialize>&lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;#FFFF0000&lt;/SolidColorBrush&gt;</BrushSerialize>
+          <DashStyleHelper>Solid</DashStyleHelper>
+          <Opacity>100</Opacity>
+          <Width>2</Width>
+          <AutoWidth>false</AutoWidth>
+          <Max>1.7976931348623157E+308</Max>
+          <Min>-1.7976931348623157E+308</Min>
+          <Name>DownTrendlinePrice</Name>
+          <PlotStyle>Dot</PlotStyle>
+        </Plot>
+        <Plot>
+          <IsOpacityVisible>false</IsOpacityVisible>
+          <BrushSerialize>&lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;#FF1E90FF&lt;/SolidColorBrush&gt;</BrushSerialize>
+          <DashStyleHelper>Solid</DashStyleHelper>
+          <Opacity>100</Opacity>
+          <Width>1</Width>
+          <AutoWidth>false</AutoWidth>
+          <Max>1.7976931348623157E+308</Max>
+          <Min>-1.7976931348623157E+308</Min>
+          <Name>UpChannellinePrice</Name>
+          <PlotStyle>Block</PlotStyle>
+        </Plot>
+        <Plot>
+          <IsOpacityVisible>false</IsOpacityVisible>
+          <BrushSerialize>&lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;#FFFF00FF&lt;/SolidColorBrush&gt;</BrushSerialize>
+          <DashStyleHelper>Solid</DashStyleHelper>
+          <Opacity>100</Opacity>
+          <Width>1</Width>
+          <AutoWidth>false</AutoWidth>
+          <Max>1.7976931348623157E+308</Max>
+          <Min>-1.7976931348623157E+308</Min>
+          <Name>DownChannellinePrice</Name>
+          <PlotStyle>Block</PlotStyle>
+        </Plot>
+        <Plot>
+          <IsOpacityVisible>false</IsOpacityVisible>
+          <BrushSerialize>&lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;#00FFFFFF&lt;/SolidColorBrush&gt;</BrushSerialize>
+          <DashStyleHelper>Solid</DashStyleHelper>
+          <Opacity>100</Opacity>
+          <Width>1</Width>
+          <AutoWidth>false</AutoWidth>
+          <Max>1.7976931348623157E+308</Max>
+          <Min>-1.7976931348623157E+308</Min>
+          <Name>TrendlineSignal</Name>
+          <PlotStyle>Dot</PlotStyle>
+        </Plot>
+        <Plot>
+          <IsOpacityVisible>false</IsOpacityVisible>
+          <BrushSerialize>&lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;#00FFFFFF&lt;/SolidColorBrush&gt;</BrushSerialize>
+          <DashStyleHelper>Solid</DashStyleHelper>
+          <Opacity>100</Opacity>
+          <Width>1</Width>
+          <AutoWidth>false</AutoWidth>
+          <Max>1.7976931348623157E+308</Max>
+          <Min>-1.7976931348623157E+308</Min>
+          <Name>ChannellineSignal</Name>
+          <PlotStyle>Dot</PlotStyle>
+        </Plot>
+      </Plots>
+      <SelectedValueSeries>0</SelectedValueSeries>
+      <InputPlot>0</InputPlot>
+      <IsTradingHoursBreakLineVisible>true</IsTradingHoursBreakLineVisible>
+      <DrawHorizontalGridLines>true</DrawHorizontalGridLines>
+      <DrawVerticalGridLines>true</DrawVerticalGridLines>
+      <DrawOnPricePanel>true</DrawOnPricePanel>
+      <PaintPriceMarkers>true</PaintPriceMarkers>
+      <ChartHashCodeDeserialized>0</ChartHashCodeDeserialized>
+      <IndicatorId>2616</IndicatorId>
+      <MaxSerialized>0</MaxSerialized>
+      <MinSerialized>0</MinSerialized>
+      <ZOrder>-2147483648</ZOrder>
+      <ShowChannels>false</ShowChannels>
+      <ChannelBasis>HighsLows</ChannelBasis>
+      <ChannelDashStyle>Dash</ChannelDashStyle>
+      <ChannelLineWidth>2</ChannelLineWidth>
+      <ChannelDownTrendColorSerialize>&lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;#FFFF00FF&lt;/SolidColorBrush&gt;</ChannelDownTrendColorSerialize>
+      <ChannelUpTrendColorSerialize>&lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;#FF00FF00&lt;/SolidColorBrush&gt;</ChannelUpTrendColorSerialize>
+      <DownArrowColorSerialize>&lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;#FFFF0000&lt;/SolidColorBrush&gt;</DownArrowColorSerialize>
+      <UpArrowColorSerialize>&lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;#FF0000FF&lt;/SolidColorBrush&gt;</UpArrowColorSerialize>
+      <SoundFileNameTopLine>Silent</SoundFileNameTopLine>
+      <SoundFileNameBottomLine>Silent</SoundFileNameBottomLine>
+      <EmailEnabledTL>false</EmailEnabledTL>
+      <EmailAddressTL />
+      <MaxArrowsShown>100</MaxArrowsShown>
+      <NewTL_EnableAudibleAlert>false</NewTL_EnableAudibleAlert>
+      <NewTL_WAV>Silent</NewTL_WAV>
+      <EnableAudibleAlertTL>true</EnableAudibleAlertTL>
+      <ShowArrows>true</ShowArrows>
+      <TouchZoneSizeTL>1</TouchZoneSizeTL>
+      <AlertMsgLabel>AutoTL &amp; Channel</AlertMsgLabel>
+      <VerboseAlertLogMessage>true</VerboseAlertLogMessage>
+      <Email_SubjectContent>Verbose</Email_SubjectContent>
+      <Email_BodyContent>Verbose</Email_BodyContent>
+      <DownDiamondColorSerialize>&lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;#FFFF0000&lt;/SolidColorBrush&gt;</DownDiamondColorSerialize>
+      <UpDiamondColorSerialize>&lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;#FF0000FF&lt;/SolidColorBrush&gt;</UpDiamondColorSerialize>
+      <SoundFileNameTopCL>Silent</SoundFileNameTopCL>
+      <SoundFileNameBottomCL>Silent</SoundFileNameBottomCL>
+      <MaxDiamondsPerChannel>5</MaxDiamondsPerChannel>
+      <ConservativeEntry>true</ConservativeEntry>
+      <EmailEnabledCL>false</EmailEnabledCL>
+      <EmailAddressCL />
+      <MaxDiamondsShown>100</MaxDiamondsShown>
+      <EnableAudibleAlertCL>true</EnableAudibleAlertCL>
+      <ShowDiamonds>false</ShowDiamonds>
+      <TouchZoneSizeCL>1</TouchZoneSizeCL>
+      <BackBrushForNewTLSerialize>&lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;#00FFFFFF&lt;/SolidColorBrush&gt;</BackBrushForNewTLSerialize>
+      <TrendlineType>Either</TrendlineType>
+      <SignalType>Break</SignalType>
+      <Strength>6</Strength>
+      <MaximumLines>2</MaximumLines>
+      <LineWidth>2</LineWidth>
+      <RemoveHistoricalDots>true</RemoveHistoricalDots>
+      <DownTrendColorSerialize>&lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;#FFFF0000&lt;/SolidColorBrush&gt;</DownTrendColorSerialize>
+      <UpTrendColorSerialize>&lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;#FF008000&lt;/SolidColorBrush&gt;</UpTrendColorSerialize>
+      <LineDashStyle>Solid</LineDashStyle>
+    </AutoTrendChannel>
+  </AutoTrendChannel>
+</NinjaTrader>

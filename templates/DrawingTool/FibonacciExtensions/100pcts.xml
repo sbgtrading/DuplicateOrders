@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NinjaTrader>
+  <FibonacciExtensions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <IsAutoScale>false</IsAutoScale>
+    <MaxValue>-1.7976931348623157E+308</MaxValue>
+    <MinValue>1.7976931348623157E+308</MinValue>
+    <DisplayOnChartsMenus>true</DisplayOnChartsMenus>
+    <GlobalLastSeenSerialize>0</GlobalLastSeenSerialize>
+    <GlobalWorkspace>Untitled</GlobalWorkspace>
+    <IsLocked>false</IsLocked>
+    <PanelIndex>0</PanelIndex>
+    <ZOrderType>Normal</ZOrderType>
+    <PriceLevels>
+      <PriceLevel>
+        <IsVisible>true</IsVisible>
+        <Stroke>
+          <IsOpacityVisible>true</IsOpacityVisible>
+          <BrushSerialize>&lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;#FFA9A9A9&lt;/SolidColorBrush&gt;</BrushSerialize>
+          <DashStyleHelper>Solid</DashStyleHelper>
+          <Opacity>100</Opacity>
+          <Width>2</Width>
+        </Stroke>
+        <Value>0</Value>
+        <Name>0.00%</Name>
+      </PriceLevel>
+      <PriceLevel>
+        <IsVisible>true</IsVisible>
+        <Stroke>
+          <IsOpacityVisible>true</IsOpacityVisible>
+          <BrushSerialize>&lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;#FF1E90FF&lt;/SolidColorBrush&gt;</BrushSerialize>
+          <DashStyleHelper>Solid</DashStyleHelper>
+          <Opacity>100</Opacity>
+          <Width>2</Width>
+        </Stroke>
+        <Value>100</Value>
+        <Name>100.00%</Name>
+      </PriceLevel>
+      <PriceLevel>
+        <IsVisible>true</IsVisible>
+        <Stroke>
+          <IsOpacityVisible>true</IsOpacityVisible>
+          <BrushSerialize>&lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;#FF6495ED&lt;/SolidColorBrush&gt;</BrushSerialize>
+          <DashStyleHelper>Solid</DashStyleHelper>
+          <Opacity>100</Opacity>
+          <Width>2</Width>
+        </Stroke>
+        <Value>200</Value>
+        <Name>200.00%</Name>
+      </PriceLevel>
+      <PriceLevel>
+        <IsVisible>true</IsVisible>
+        <Stroke>
+          <IsOpacityVisible>true</IsOpacityVisible>
+          <BrushSerialize>&lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;#FF4682B4&lt;/SolidColorBrush&gt;</BrushSerialize>
+          <DashStyleHelper>Solid</DashStyleHelper>
+          <Opacity>100</Opacity>
+          <Width>2</Width>
+        </Stroke>
+        <Value>300</Value>
+        <Name>300.00%</Name>
+      </PriceLevel>
+      <PriceLevel>
+        <IsVisible>true</IsVisible>
+        <Stroke>
+          <IsOpacityVisible>true</IsOpacityVisible>
+          <BrushSerialize>&lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;#FF008B8B&lt;/SolidColorBrush&gt;</BrushSerialize>
+          <DashStyleHelper>Solid</DashStyleHelper>
+          <Opacity>100</Opacity>
+          <Width>2</Width>
+        </Stroke>
+        <Value>400</Value>
+        <Name>400.00%</Name>
+      </PriceLevel>
+      <PriceLevel>
+        <IsVisible>true</IsVisible>
+        <Stroke>
+          <IsOpacityVisible>true</IsOpacityVisible>
+          <BrushSerialize>&lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;#FF2E8B57&lt;/SolidColorBrush&gt;</BrushSerialize>
+          <DashStyleHelper>Solid</DashStyleHelper>
+          <Opacity>100</Opacity>
+          <Width>2</Width>
+        </Stroke>
+        <Value>500</Value>
+        <Name>500.00%</Name>
+      </PriceLevel>
+      <PriceLevel>
+        <IsVisible>true</IsVisible>
+        <Stroke>
+          <IsOpacityVisible>true</IsOpacityVisible>
+          <BrushSerialize>&lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;#FFA9A9A9&lt;/SolidColorBrush&gt;</BrushSerialize>
+          <DashStyleHelper>Solid</DashStyleHelper>
+          <Opacity>100</Opacity>
+          <Width>2</Width>
+        </Stroke>
+        <Value>600</Value>
+        <Name>600.00%</Name>
+      </PriceLevel>
+    </PriceLevels>
+    <AnchorLineStroke>
+      <IsOpacityVisible>true</IsOpacityVisible>
+      <BrushSerialize>&lt;SolidColorBrush Color="#FFA9A9A9" Opacity="0.5" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" /&gt;</BrushSerialize>
+      <DashStyleHelper>Solid</DashStyleHelper>
+      <Opacity>50</Opacity>
+      <Width>1</Width>
+    </AnchorLineStroke>
+    <StartAnchor>
+      <SlotIndex>7051</SlotIndex>
+      <DisplayName>Start</DisplayName>
+      <IsBrowsable>true</IsBrowsable>
+      <Time>2021-04-23T05:55:00</Time>
+      <Price>58.52808226950355</Price>
+    </StartAnchor>
+    <EndAnchor>
+      <SlotIndex>7053</SlotIndex>
+      <DisplayName>End</DisplayName>
+      <IsBrowsable>true</IsBrowsable>
+      <Time>2021-04-23T06:05:00</Time>
+      <Price>58.677796879432627</Price>
+    </EndAnchor>
+    <PriceLevelOpacity>5</PriceLevelOpacity>
+    <IsExtendedLinesRight>false</IsExtendedLinesRight>
+    <IsExtendedLinesLeft>false</IsExtendedLinesLeft>
+    <TextLocation>InsideLeft</TextLocation>
+    <ExtensionAnchor>
+      <SlotIndex>7060</SlotIndex>
+      <DisplayName>Extension </DisplayName>
+      <IsBrowsable>true</IsBrowsable>
+      <Time>2021-04-23T06:40:00</Time>
+      <Price>58.68173673758865</Price>
+    </ExtensionAnchor>
+    <FullTypeName>NinjaTrader.NinjaScript.DrawingTools.FibonacciExtensions</FullTypeName>
+    <IsGlobalDrawingObjectDefault>false</IsGlobalDrawingObjectDefault>
+    <IsOwnerVisible>true</IsOwnerVisible>
+  </FibonacciExtensions>
+</NinjaTrader>
